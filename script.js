@@ -35,9 +35,11 @@ const translations = {
     drawAgain: "再次抽取",
     scoreUnit: "分",
     skinLabel: "皮肤切换",
-    themeBlush: "柔粉",
-    themeChampagne: "香槟",
-    themeMint: "薄荷",
+    themePink: "粉色",
+    themeOrange: "苹果17橙",
+    themeBlue: "苹果17蓝",
+    themeSilver: "特斯拉银灰",
+    themeSpace: "SpaceX 黑科技",
     footerMadeBy: "价直互联价直互联（深圳）展览科技有限公司",
   },
   en: {
@@ -76,10 +78,55 @@ const translations = {
     drawAgain: "Spin Again",
     scoreUnit: "pts",
     skinLabel: "Theme Switch",
-    themeBlush: "Blush",
-    themeChampagne: "Champagne",
-    themeMint: "Mint",
+    themePink: "Pink",
+    themeOrange: "iPhone 17 Orange",
+    themeBlue: "iPhone 17 Blue",
+    themeSilver: "Tesla Silver",
+    themeSpace: "SpaceX Dark",
     footerMadeBy: "JiaZhi Interconnect JiaZhi Interconnect (Shenzhen) Exhibition Technology Co., Ltd.",
+  },
+};
+
+const themePalettes = {
+  pink: {
+    slices: ["#f3a6c9", "#ffd07d", "#96e5d2", "#ffd6a5", "#bca9ff", "#f28ab8"],
+    label: "#4e2740",
+    subLabel: "rgba(78,39,64,0.72)",
+    centerOuter: "#fff6fb",
+    centerInner: "#ef5da8",
+    wheelGlow: "rgba(239, 93, 168, 0.16)",
+  },
+  orange: {
+    slices: ["#ff9f45", "#ffd166", "#ffb86b", "#ff8f70", "#ffc857", "#ffb347"],
+    label: "#5e3212",
+    subLabel: "rgba(94,50,18,0.7)",
+    centerOuter: "#fff7ef",
+    centerInner: "#ff8a2a",
+    wheelGlow: "rgba(255, 138, 42, 0.16)",
+  },
+  blue: {
+    slices: ["#7ec8ff", "#65b4ff", "#93d5ff", "#69a8ff", "#89c3ff", "#72d8f8"],
+    label: "#173b67",
+    subLabel: "rgba(23,59,103,0.68)",
+    centerOuter: "#f4faff",
+    centerInner: "#2a7fff",
+    wheelGlow: "rgba(42, 127, 255, 0.16)",
+  },
+  silver: {
+    slices: ["#d9dde3", "#b8c0cb", "#e5e8ed", "#aeb6c1", "#cfd5dc", "#edf1f4"],
+    label: "#2a313b",
+    subLabel: "rgba(42,49,59,0.66)",
+    centerOuter: "#f7f8fa",
+    centerInner: "#7f8b9b",
+    wheelGlow: "rgba(127, 139, 155, 0.15)",
+  },
+  space: {
+    slices: ["#222831", "#2d3642", "#1b212b", "#323c4d", "#0f141b", "#3d495d"],
+    label: "#eef4ff",
+    subLabel: "rgba(226,235,247,0.72)",
+    centerOuter: "#1d2530",
+    centerInner: "#5ea6ff",
+    wheelGlow: "rgba(94, 166, 255, 0.16)",
   },
 };
 
@@ -123,7 +170,7 @@ let currentLang = "zh";
 let items = structuredClone(defaultItemsByLang.zh);
 let rotation = 0;
 let isSpinning = false;
-let currentTheme = "blush";
+let currentTheme = "pink";
 
 function getScoreText(score) {
   return `${score}${currentLang === "zh" ? "分" : " pts"}`;
@@ -139,6 +186,7 @@ function getFocusedIndex() {
 function drawWheel() {
   const center = canvas.width / 2;
   const radius = center - 18;
+  const themePalette = themePalettes[currentTheme] || themePalettes.pink;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   const gradient = ctx.createRadialGradient(center, center, 30, center, center, radius);
@@ -158,25 +206,25 @@ function drawWheel() {
     ctx.moveTo(center, center);
     ctx.arc(center, center, radius - 8, start, end);
     ctx.closePath();
-    ctx.fillStyle = item.color;
+    ctx.fillStyle = themePalette.slices[index % themePalette.slices.length];
     ctx.fill();
 
     ctx.save();
     ctx.translate(center, center);
     ctx.rotate(start + slice / 2);
     ctx.textAlign = "right";
-    ctx.fillStyle = "#4e2740";
+    ctx.fillStyle = themePalette.label;
     ctx.font = "700 25px 'PingFang SC'";
     ctx.fillText(item.label, radius - 72, -8);
     ctx.font = "600 21px 'PingFang SC'";
-    ctx.fillStyle = "rgba(78,39,64,0.72)";
+    ctx.fillStyle = themePalette.subLabel;
     ctx.fillText(getScoreText(item.score), radius - 72, 28);
     ctx.restore();
   });
 
   ctx.beginPath();
   ctx.arc(center, center, 58, 0, Math.PI * 2);
-  ctx.fillStyle = "#fff6fb";
+  ctx.fillStyle = themePalette.centerOuter;
   ctx.fill();
   ctx.lineWidth = 12;
   ctx.strokeStyle = "rgba(255,255,255,0.7)";
@@ -184,7 +232,7 @@ function drawWheel() {
 
   ctx.beginPath();
   ctx.arc(center, center, 24, 0, Math.PI * 2);
-  ctx.fillStyle = "#ef5da8";
+  ctx.fillStyle = themePalette.centerInner;
   ctx.fill();
 
   const focused = items[getFocusedIndex()];
@@ -234,7 +282,7 @@ function renderList() {
 }
 
 function randomColor() {
-  const palette = ["#f6a6c6", "#ffcb77", "#98ead8", "#ffd8a8", "#c8b6ff", "#f9d2e5"];
+  const palette = (themePalettes[currentTheme] || themePalettes.pink).slices;
   return palette[Math.floor(Math.random() * palette.length)];
 }
 

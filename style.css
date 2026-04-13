@@ -1,6 +1,7 @@
 :root {
   --bg: #fff8fd;
   --bg-accent: #ffe7f4;
+  --bg-accent-2: #ffe4b8;
   --panel: rgba(255, 255, 255, 0.68);
   --panel-strong: rgba(255, 255, 255, 0.82);
   --text: #40293b;
@@ -11,36 +12,85 @@
   --gold: #ffcb77;
   --mint: #98ead8;
   --shadow: 0 28px 60px rgba(214, 115, 160, 0.18);
+  --surface-1: rgba(255, 255, 255, 0.78);
+  --surface-2: rgba(255, 255, 255, 0.56);
+  --surface-3: rgba(255, 255, 255, 0.92);
 }
 
-body[data-theme="champagne"] {
-  --bg: #fffaf3;
-  --bg-accent: #ffe5cc;
-  --panel: rgba(255, 252, 246, 0.72);
-  --panel-strong: rgba(255, 248, 238, 0.86);
-  --text: #4a3524;
-  --muted: #8a6d57;
-  --line: rgba(136, 98, 64, 0.14);
-  --primary: #d89a57;
-  --secondary: #f2c58e;
-  --gold: #efc87c;
-  --mint: #d8dfb4;
-  --shadow: 0 28px 60px rgba(174, 129, 86, 0.18);
+body[data-theme="orange"] {
+  --bg: #fff7f0;
+  --bg-accent: #ffd3ad;
+  --bg-accent-2: #ffb560;
+  --panel: rgba(255, 249, 242, 0.72);
+  --panel-strong: rgba(255, 248, 238, 0.9);
+  --text: #4e2f18;
+  --muted: #90664a;
+  --line: rgba(144, 102, 74, 0.16);
+  --primary: #ff8c3a;
+  --secondary: #ffb36a;
+  --gold: #ffd166;
+  --mint: #ffc08b;
+  --shadow: 0 28px 60px rgba(217, 124, 43, 0.18);
+  --surface-1: rgba(255, 252, 247, 0.82);
+  --surface-2: rgba(255, 248, 240, 0.62);
+  --surface-3: rgba(255, 252, 248, 0.94);
 }
 
-body[data-theme="mint"] {
-  --bg: #f5fffb;
-  --bg-accent: #dff8ef;
-  --panel: rgba(248, 255, 252, 0.72);
-  --panel-strong: rgba(248, 255, 252, 0.88);
-  --text: #234439;
-  --muted: #557a6d;
-  --line: rgba(65, 110, 95, 0.14);
-  --primary: #49b999;
-  --secondary: #88dbc1;
-  --gold: #ffd78d;
-  --mint: #9ae4d2;
-  --shadow: 0 28px 60px rgba(87, 180, 151, 0.16);
+body[data-theme="blue"] {
+  --bg: #f4f9ff;
+  --bg-accent: #d8ebff;
+  --bg-accent-2: #8dc3ff;
+  --panel: rgba(248, 252, 255, 0.74);
+  --panel-strong: rgba(249, 252, 255, 0.9);
+  --text: #1f3b63;
+  --muted: #5e7da7;
+  --line: rgba(94, 125, 167, 0.18);
+  --primary: #4b8fff;
+  --secondary: #84bbff;
+  --gold: #b4d7ff;
+  --mint: #7ec8ff;
+  --shadow: 0 28px 60px rgba(75, 143, 255, 0.15);
+  --surface-1: rgba(250, 253, 255, 0.82);
+  --surface-2: rgba(244, 249, 255, 0.64);
+  --surface-3: rgba(250, 253, 255, 0.94);
+}
+
+body[data-theme="silver"] {
+  --bg: #f5f7fa;
+  --bg-accent: #dee3ea;
+  --bg-accent-2: #b8c1cd;
+  --panel: rgba(249, 250, 252, 0.74);
+  --panel-strong: rgba(250, 251, 253, 0.9);
+  --text: #2f3742;
+  --muted: #687384;
+  --line: rgba(104, 115, 132, 0.18);
+  --primary: #7b8798;
+  --secondary: #b3bdca;
+  --gold: #d8dfe8;
+  --mint: #c3ccd7;
+  --shadow: 0 28px 60px rgba(123, 135, 152, 0.14);
+  --surface-1: rgba(252, 253, 254, 0.82);
+  --surface-2: rgba(246, 248, 251, 0.66);
+  --surface-3: rgba(252, 253, 254, 0.95);
+}
+
+body[data-theme="space"] {
+  --bg: #0a1017;
+  --bg-accent: #0f1f34;
+  --bg-accent-2: #1a3f6b;
+  --panel: rgba(13, 18, 28, 0.78);
+  --panel-strong: rgba(17, 24, 36, 0.92);
+  --text: #ebf2ff;
+  --muted: #93a8c3;
+  --line: rgba(92, 122, 162, 0.22);
+  --primary: #4f9cff;
+  --secondary: #89b8ff;
+  --gold: #96b6db;
+  --mint: #6fd3ff;
+  --shadow: 0 28px 60px rgba(0, 0, 0, 0.42);
+  --surface-1: rgba(20, 28, 42, 0.82);
+  --surface-2: rgba(17, 24, 36, 0.72);
+  --surface-3: rgba(22, 31, 47, 0.94);
 }
 
 * {
@@ -53,9 +103,9 @@ body {
   font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at top left, rgba(255, 215, 234, 0.9), transparent 28%),
-    radial-gradient(circle at right center, rgba(255, 213, 153, 0.45), transparent 26%),
-    linear-gradient(135deg, #fff8fd 0%, #fff4fb 45%, #fffdf6 100%);
+    radial-gradient(circle at top left, var(--bg-accent), transparent 28%),
+    radial-gradient(circle at right center, color-mix(in srgb, var(--bg-accent-2) 52%, transparent), transparent 26%),
+    linear-gradient(135deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 75%, var(--bg-accent)) 45%, color-mix(in srgb, var(--bg) 84%, white) 100%);
 }
 
 body::before,
@@ -73,13 +123,13 @@ body::after {
 body::before {
   top: -6rem;
   right: -6rem;
-  background: rgba(255, 196, 222, 0.45);
+  background: color-mix(in srgb, var(--bg-accent) 72%, transparent);
 }
 
 body::after {
   bottom: -8rem;
   left: -6rem;
-  background: rgba(255, 226, 160, 0.34);
+  background: color-mix(in srgb, var(--bg-accent-2) 50%, transparent);
 }
 
 .page-shell {
@@ -162,12 +212,12 @@ body::after {
   align-items: center;
   gap: 8px;
   padding: 6px 12px;
-  border-radius: 999px;
+  border-radius: 18px;
   font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(239, 93, 168, 0.15);
+  background: var(--surface-1);
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
 }
 
 h1,
@@ -235,7 +285,7 @@ p {
   border: 0;
   padding: 9px 14px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.78);
+  background: var(--surface-1);
   color: var(--text);
   cursor: pointer;
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
@@ -294,7 +344,7 @@ p {
   align-items: center;
   gap: 14px;
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--surface-1);
   color: var(--text);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
 }
@@ -308,9 +358,9 @@ p {
 }
 
 .activity-card.active {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 235, 246, 0.88));
+  background: linear-gradient(135deg, var(--surface-3), color-mix(in srgb, var(--primary) 10%, var(--surface-1)));
   transform: translateY(-2px);
-  box-shadow: 0 18px 30px rgba(223, 126, 169, 0.18);
+  box-shadow: 0 18px 30px color-mix(in srgb, var(--primary) 18%, transparent);
 }
 
 .activity-icon {
@@ -319,7 +369,7 @@ p {
   display: grid;
   place-items: center;
   border-radius: 14px;
-  background: linear-gradient(180deg, #fff, #ffe5f2);
+  background: linear-gradient(180deg, color-mix(in srgb, white 90%, var(--bg-accent)), color-mix(in srgb, white 70%, var(--primary)));
   font-size: 1.3rem;
 }
 
@@ -374,12 +424,12 @@ p {
   padding: 24px;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.95), rgba(255, 244, 250, 0.6) 45%, rgba(255, 212, 232, 0.25) 80%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 228, 241, 0.7));
+    radial-gradient(circle at 30% 30%, color-mix(in srgb, white 95%, var(--bg-accent)), color-mix(in srgb, white 72%, var(--bg-accent)) 45%, color-mix(in srgb, var(--primary) 18%, transparent) 80%),
+    linear-gradient(135deg, color-mix(in srgb, white 82%, var(--bg-accent)), color-mix(in srgb, white 72%, var(--primary)));
   box-shadow:
     inset 0 0 0 18px rgba(255, 255, 255, 0.42),
-    inset 0 0 0 24px rgba(252, 191, 222, 0.28),
-    0 30px 60px rgba(217, 120, 162, 0.28);
+    inset 0 0 0 24px color-mix(in srgb, var(--primary) 18%, white),
+    0 30px 60px color-mix(in srgb, var(--primary) 22%, transparent);
 }
 
 #wheelCanvas {
@@ -387,7 +437,7 @@ p {
   height: auto;
   display: block;
   border-radius: 50%;
-  background: radial-gradient(circle at center, #fffdfd, #fff4fa);
+  background: radial-gradient(circle at center, color-mix(in srgb, white 96%, var(--bg-accent)), color-mix(in srgb, white 80%, var(--bg-accent)));
   cursor: pointer;
 }
 
@@ -399,7 +449,7 @@ p {
   margin-top: 14px;
   padding: 16px 18px;
   border-radius: 22px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.62));
+  background: linear-gradient(180deg, var(--surface-1), var(--surface-2));
   border: 1px solid rgba(255, 255, 255, 0.58);
 }
 
@@ -418,7 +468,7 @@ p {
   padding: 14px 16px;
   margin-top: 16px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.56);
+  background: var(--surface-2);
   color: var(--muted);
   font-size: 0.92rem;
 }
@@ -441,7 +491,7 @@ p {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.74));
+  background: linear-gradient(180deg, var(--surface-3), var(--surface-1));
   padding: 14px 16px;
   font: inherit;
   color: var(--text);
@@ -457,15 +507,15 @@ p {
 .ghost-button {
   padding: 10px 16px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.78);
+  background: var(--surface-1);
   color: var(--text);
 }
 
 .ghost-chip.active,
 .primary-button {
   color: white;
-  background: linear-gradient(135deg, #ef5da8, #f58bb8, #f9a86f);
-  box-shadow: 0 16px 30px rgba(239, 93, 168, 0.24);
+  background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 64%, var(--secondary)), color-mix(in srgb, var(--primary) 48%, var(--gold)));
+  box-shadow: 0 16px 30px color-mix(in srgb, var(--primary) 24%, transparent);
 }
 
 .primary-button,
@@ -483,7 +533,7 @@ p {
   width: 44px;
   height: 44px;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.78);
+  background: var(--surface-1);
   color: var(--primary);
   font-size: 1.3rem;
 }
