@@ -1,25 +1,12 @@
 const translations = {
   zh: {
-    brandTitle: "展会互动引流平台",
-    brandSubtitle: "面向参展商的高颜值互动活动系统，让驻足、拍照、传播与留资自然发生。",
-    activityLabel: "活动矩阵",
-    wheelTitle: "幸运轮盘",
-    wheelDesc: "礼品、积分、折扣券即时抽取",
-    blindTitle: "抽盲盒",
-    blindDesc: "惊喜揭晓式奖励互动",
-    rouletteTitle: "左轮轮盘赌",
-    rouletteDesc: "戏剧化停顿与刺激感氛围",
-    memoryTitle: "九宫格记忆力",
-    memoryDesc: "短时挑战，适合排队与围观",
-    comingSoon: "即将上线",
-    positioningLabel: "产品定位",
-    positioningCopy: "不做广告流量位，以企业付费交付为前提，页面保持纯净、结构清晰，活动体验更像品牌装置。",
-    eyebrow: "For Booth Attraction",
-    heroTitle: "把普通抽奖工具，升级成让人想围观、想拍照、想分享的展会互动主角。",
-    heroText: "视觉语言更轻盈、更精致，兼顾企业场景的可信度与女性向审美；适合礼品抽奖、积分玩法、品牌互动与现场导流。",
+    brandTitle: "幸运轮盘",
+    brandSubtitle: "为线下活动与品牌互动设计的高颜值抽奖页面。",
+    eyebrow: "Lucky Wheel",
+    heroTitle: "把抽奖这件事，做得更漂亮一点。",
+    heroText: "支持自定义奖项名称与分值，转盘动画和中奖弹窗更有仪式感，适合现场互动、礼品抽奖与品牌活动。",
     metricOne: "支持自定义奖项名称与分值",
     metricTwo: "旋转动效与结果弹窗更具仪式感",
-    metricThree: "后续可横向扩展多种互动活动",
     livePreview: "现场预览",
     stageTitle: "幸运轮盘",
     spinNow: "开始抽奖",
@@ -37,26 +24,13 @@ const translations = {
     scoreUnit: "分",
   },
   en: {
-    brandTitle: "Expo Engagement Studio",
-    brandSubtitle: "A premium activity platform for exhibitors that turns stopping, sharing, photo-taking, and lead capture into one elegant flow.",
-    activityLabel: "Activity Menu",
-    wheelTitle: "Lucky Wheel",
-    wheelDesc: "Spin for gifts, credits, and coupons",
-    blindTitle: "Blind Box",
-    blindDesc: "Surprise reveal interaction",
-    rouletteTitle: "Roulette Challenge",
-    rouletteDesc: "Dramatic suspense and stage energy",
-    memoryTitle: "Memory Grid",
-    memoryDesc: "Fast challenge for queue-time engagement",
-    comingSoon: "Coming Soon",
-    positioningLabel: "Positioning",
-    positioningCopy: "No ad-driven clutter. The product is designed for enterprise buyers: clean pages, clear structure, and event experiences that feel like branded installations.",
-    eyebrow: "For Booth Attraction",
-    heroTitle: "Turn a generic spin tool into the visual centerpiece that visitors want to gather around, photograph, and share.",
-    heroText: "The interface feels softer and more elevated while staying professional enough for enterprise use, with a stronger appeal to a female-oriented aesthetic.",
+    brandTitle: "Lucky Wheel",
+    brandSubtitle: "A polished lucky wheel page for offline events and brand activations.",
+    eyebrow: "Lucky Wheel",
+    heroTitle: "Make the spin feel a little more beautiful.",
+    heroText: "Customize prize labels and scores, then present them with more ceremonial motion and a result popup that feels worth photographing.",
     metricOne: "Custom prize labels and scores",
     metricTwo: "More ceremonial spin and result motion",
-    metricThree: "Expandable menu for future mini-games",
     livePreview: "Live Preview",
     stageTitle: "Lucky Wheel",
     spinNow: "Spin Now",
@@ -108,7 +82,6 @@ const resultTitle = document.querySelector("#resultTitle");
 const resultMeta = document.querySelector("#resultMeta");
 const closeDialogButton = document.querySelector("#closeDialogButton");
 const langButtons = document.querySelectorAll("[data-lang]");
-const activityCards = document.querySelectorAll(".activity-card");
 
 let currentLang = "zh";
 let items = structuredClone(defaultItemsByLang.zh);
@@ -312,13 +285,6 @@ function applyLanguage(lang) {
   renderList();
   drawWheel();
 }
-
-activityCards.forEach((card) => {
-  card.addEventListener("click", () => {
-    activityCards.forEach((item) => item.classList.remove("active"));
-    card.classList.add("active");
-  });
-});
 
 langButtons.forEach((button) => {
   button.addEventListener("click", () => applyLanguage(button.dataset.lang));
