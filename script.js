@@ -1,7 +1,7 @@
 const translations = {
   zh: {
     brandTitle: "幸运轮盘",
-    brandSubtitle: "为线下活动与品牌互动设计的高颜值抽奖页面。",
+    brandSubtitle: "适用于线下活动、品牌互动与礼品抽奖。",
     activityLabel: "游戏列表",
     wheelTitle: "幸运轮盘",
     wheelDesc: "礼品、积分、折扣券即时抽取",
@@ -12,15 +12,11 @@ const translations = {
     memoryTitle: "九宫格记忆力",
     memoryDesc: "短时挑战，适合排队与围观",
     comingSoon: "即将上线",
-    eyebrow: "Lucky Wheel",
-    heroTitle: "把抽奖这件事，做得更漂亮一点。",
     livePreview: "现场预览",
-    stageTitle: "幸运轮盘",
     spinNow: "开始抽奖",
     nextPrize: "当前焦点奖项",
     shuffleOrder: "随机排序",
     editorLabel: "玩法编辑",
-    editorTitle: "奖项配置",
     addItem: "新增奖项",
     prizeName: "奖项名称",
     prizeScore: "分值",
@@ -29,10 +25,15 @@ const translations = {
     resultCopy: "恭喜抽中高人气奖励，现场视觉会更适合用户举起手机拍照分享。",
     drawAgain: "再次抽取",
     scoreUnit: "分",
+    skinLabel: "皮肤",
+    themeBlush: "柔粉",
+    themeChampagne: "香槟",
+    themeMint: "薄荷",
+    footerMadeBy: "本产品由 价直互联（深圳）展览科技有限公司 提供",
   },
   en: {
     brandTitle: "Lucky Wheel",
-    brandSubtitle: "A polished lucky wheel page for offline events and brand activations.",
+    brandSubtitle: "For offline campaigns, brand activations, and giveaway draws.",
     activityLabel: "Game List",
     wheelTitle: "Lucky Wheel",
     wheelDesc: "Spin for gifts, credits, and coupons",
@@ -43,15 +44,11 @@ const translations = {
     memoryTitle: "Memory Grid",
     memoryDesc: "Fast challenge for queue-time engagement",
     comingSoon: "Coming Soon",
-    eyebrow: "Lucky Wheel",
-    heroTitle: "Make the spin feel a little more beautiful.",
     livePreview: "Live Preview",
-    stageTitle: "Lucky Wheel",
     spinNow: "Spin Now",
     nextPrize: "Current Focus",
     shuffleOrder: "Shuffle",
     editorLabel: "Editor",
-    editorTitle: "Prize Setup",
     addItem: "Add Prize",
     prizeName: "Prize Name",
     prizeScore: "Score",
@@ -60,6 +57,11 @@ const translations = {
     resultCopy: "The reward reveal is designed to feel social-first, with enough ceremony to invite photos and booth-side sharing.",
     drawAgain: "Spin Again",
     scoreUnit: "pts",
+    skinLabel: "Theme",
+    themeBlush: "Blush",
+    themeChampagne: "Champagne",
+    themeMint: "Mint",
+    footerMadeBy: "Presented by Value Link Interconnect (Shenzhen) Exhibition Technology Co., Ltd.",
   },
 };
 
@@ -97,11 +99,13 @@ const resultMeta = document.querySelector("#resultMeta");
 const closeDialogButton = document.querySelector("#closeDialogButton");
 const langButtons = document.querySelectorAll("[data-lang]");
 const activityCards = document.querySelectorAll(".activity-card");
+const themeButtons = document.querySelectorAll("[data-theme]");
 
 let currentLang = "zh";
 let items = structuredClone(defaultItemsByLang.zh);
 let rotation = 0;
 let isSpinning = false;
+let currentTheme = "blush";
 
 function getScoreText(score) {
   return `${score}${currentLang === "zh" ? "分" : " pts"}`;
@@ -169,6 +173,14 @@ function drawWheel() {
   if (focused) {
     focusedLabel.textContent = `${focused.label} · ${getScoreText(focused.score)}`;
   }
+}
+
+function applyTheme(theme) {
+  currentTheme = theme;
+  document.body.dataset.theme = theme;
+  themeButtons.forEach((button) => {
+    button.classList.toggle("active", button.dataset.theme === theme);
+  });
 }
 
 function renderList() {
@@ -308,11 +320,29 @@ activityCards.forEach((card) => {
   });
 });
 
+themeButtons.forEach((button) => {
+  button.addEventListener("click", () => applyTheme(button.dataset.theme));
+});
+
 langButtons.forEach((button) => {
   button.addEventListener("click", () => applyLanguage(button.dataset.lang));
 });
 
 spinButton.addEventListener("click", spin);
+canvas.addEventListener("click", (event) => {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  const x = (event.clientX - rect.left) * scaleX;
+  const y = (event.clientY - rect.top) * scaleY;
+  const center = canvas.width / 2;
+  const distance = Math.hypot(x - center, y - center);
+
+  if (distance <= 62) {
+    spin();
+  }
+});
+
 shuffleButton.addEventListener("click", shuffleItems);
 addItemButton.addEventListener("click", addItem);
 resetButton.addEventListener("click", resetItems);
@@ -328,4 +358,5 @@ resultDialog.addEventListener("click", (event) => {
 });
 
 renderList();
+applyTheme(currentTheme);
 drawWheel();

@@ -10,15 +10,22 @@
     <div class="page-shell">
       <header class="topbar">
         <div class="brand-block">
-          <div class="brand-badge">LUCKY SPIN</div>
           <div>
             <h1 data-i18n="brandTitle">幸运轮盘</h1>
             <p data-i18n="brandSubtitle">
-              为线下活动与品牌互动设计的高颜值抽奖页面。
+              适用于线下活动、品牌互动与礼品抽奖。
             </p>
           </div>
         </div>
         <div class="toolbar">
+          <div class="skin-switcher">
+            <span class="toolbar-label" data-i18n="skinLabel">皮肤</span>
+            <div class="skin-options">
+              <button class="skin-chip active" data-theme="blush" data-i18n="themeBlush">柔粉</button>
+              <button class="skin-chip" data-theme="champagne" data-i18n="themeChampagne">香槟</button>
+              <button class="skin-chip" data-theme="mint" data-i18n="themeMint">薄荷</button>
+            </div>
+          </div>
           <button class="ghost-chip active" data-lang="zh">中文</button>
           <button class="ghost-chip" data-lang="en">EN</button>
         </div>
@@ -63,25 +70,17 @@
         </aside>
 
         <section class="hero-panel">
-          <div class="hero-copy">
-            <div class="eyebrow" data-i18n="eyebrow">Lucky Wheel</div>
-            <h2 data-i18n="heroTitle">把抽奖这件事，做得更漂亮一点。</h2>
-          </div>
-
           <div class="content-grid">
             <section class="wheel-stage glass-panel">
-              <div class="panel-header">
-                <div>
-                  <div class="section-label" data-i18n="livePreview">现场预览</div>
-                  <h3 data-i18n="stageTitle">幸运轮盘</h3>
-                </div>
+              <div class="panel-header panel-header-inline">
+                <div class="section-label" data-i18n="livePreview">现场预览</div>
                 <button id="spinButton" class="primary-button" data-i18n="spinNow">开始抽奖</button>
               </div>
 
               <div class="wheel-stack">
                 <div class="wheel-pointer"></div>
                 <div class="wheel-frame">
-                  <canvas id="wheelCanvas" width="640" height="640" aria-label="Lucky wheel"></canvas>
+                  <canvas id="wheelCanvas" width="720" height="720" aria-label="Lucky wheel"></canvas>
                 </div>
               </div>
 
@@ -95,11 +94,8 @@
             </section>
 
             <section class="editor-panel glass-panel">
-              <div class="panel-header">
-                <div>
-                  <div class="section-label" data-i18n="editorLabel">玩法编辑</div>
-                  <h3 data-i18n="editorTitle">奖项配置</h3>
-                </div>
+              <div class="panel-header panel-header-inline">
+                <div class="section-label" data-i18n="editorLabel">玩法编辑</div>
                 <button id="addItemButton" class="secondary-button" data-i18n="addItem">新增奖项</button>
               </div>
 
@@ -116,6 +112,10 @@
           </div>
         </section>
       </main>
+
+      <footer class="site-footer">
+        <span data-i18n="footerMadeBy">本产品由 价直互联（深圳）展览科技有限公司 提供</span>
+      </footer>
     </div>
 
     <dialog id="resultDialog" class="result-dialog">
