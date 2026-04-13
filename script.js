@@ -2,11 +2,18 @@ const translations = {
   zh: {
     brandTitle: "幸运轮盘",
     brandSubtitle: "为线下活动与品牌互动设计的高颜值抽奖页面。",
+    activityLabel: "游戏列表",
+    wheelTitle: "幸运轮盘",
+    wheelDesc: "礼品、积分、折扣券即时抽取",
+    blindTitle: "抽盲盒",
+    blindDesc: "惊喜揭晓式奖励互动",
+    rouletteTitle: "左轮轮盘赌",
+    rouletteDesc: "戏剧化停顿与刺激感氛围",
+    memoryTitle: "九宫格记忆力",
+    memoryDesc: "短时挑战，适合排队与围观",
+    comingSoon: "即将上线",
     eyebrow: "Lucky Wheel",
     heroTitle: "把抽奖这件事，做得更漂亮一点。",
-    heroText: "支持自定义奖项名称与分值，转盘动画和中奖弹窗更有仪式感，适合现场互动、礼品抽奖与品牌活动。",
-    metricOne: "支持自定义奖项名称与分值",
-    metricTwo: "旋转动效与结果弹窗更具仪式感",
     livePreview: "现场预览",
     stageTitle: "幸运轮盘",
     spinNow: "开始抽奖",
@@ -26,11 +33,18 @@ const translations = {
   en: {
     brandTitle: "Lucky Wheel",
     brandSubtitle: "A polished lucky wheel page for offline events and brand activations.",
+    activityLabel: "Game List",
+    wheelTitle: "Lucky Wheel",
+    wheelDesc: "Spin for gifts, credits, and coupons",
+    blindTitle: "Blind Box",
+    blindDesc: "Surprise reveal interaction",
+    rouletteTitle: "Roulette Challenge",
+    rouletteDesc: "Dramatic suspense and stage energy",
+    memoryTitle: "Memory Grid",
+    memoryDesc: "Fast challenge for queue-time engagement",
+    comingSoon: "Coming Soon",
     eyebrow: "Lucky Wheel",
     heroTitle: "Make the spin feel a little more beautiful.",
-    heroText: "Customize prize labels and scores, then present them with more ceremonial motion and a result popup that feels worth photographing.",
-    metricOne: "Custom prize labels and scores",
-    metricTwo: "More ceremonial spin and result motion",
     livePreview: "Live Preview",
     stageTitle: "Lucky Wheel",
     spinNow: "Spin Now",
@@ -82,6 +96,7 @@ const resultTitle = document.querySelector("#resultTitle");
 const resultMeta = document.querySelector("#resultMeta");
 const closeDialogButton = document.querySelector("#closeDialogButton");
 const langButtons = document.querySelectorAll("[data-lang]");
+const activityCards = document.querySelectorAll(".activity-card");
 
 let currentLang = "zh";
 let items = structuredClone(defaultItemsByLang.zh);
@@ -285,6 +300,13 @@ function applyLanguage(lang) {
   renderList();
   drawWheel();
 }
+
+activityCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    activityCards.forEach((item) => item.classList.remove("active"));
+    card.classList.add("active");
+  });
+});
 
 langButtons.forEach((button) => {
   button.addEventListener("click", () => applyLanguage(button.dataset.lang));
