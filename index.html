@@ -9,27 +9,33 @@
   <body>
     <div class="page-shell">
       <header class="topbar">
-        <div class="brand-block">
+        <div class="brand-block brand-panel glass-panel">
+          <div class="brand-mark">
+            <span class="brand-mark-ring"></span>
+            <span class="brand-mark-core"></span>
+          </div>
           <div>
+            <div class="brand-kicker" data-i18n="brandKicker">EXHIBITION GAME STUDIO</div>
             <h1 data-i18n="brandTitle">幸运轮盘</h1>
-            <p data-i18n="brandSubtitle">
-              适用于线下活动、品牌互动与礼品抽奖。
-            </p>
+            <p data-i18n="brandSubtitle">适用于线下活动、品牌互动与礼品抽奖。</p>
           </div>
         </div>
-        <div class="toolbar">
-          <div class="skin-switcher">
-            <span class="toolbar-label" data-i18n="skinLabel">皮肤</span>
-            <div class="skin-options">
-              <button class="skin-chip active" data-theme="blush" data-i18n="themeBlush">柔粉</button>
-              <button class="skin-chip" data-theme="champagne" data-i18n="themeChampagne">香槟</button>
-              <button class="skin-chip" data-theme="mint" data-i18n="themeMint">薄荷</button>
-            </div>
-          </div>
+        <div class="toolbar lang-toolbar">
           <button class="ghost-chip active" data-lang="zh">中文</button>
           <button class="ghost-chip" data-lang="en">EN</button>
         </div>
       </header>
+
+      <section class="skin-bar">
+        <div class="skin-switcher glass-panel">
+          <span class="toolbar-label" data-i18n="skinLabel">皮肤切换</span>
+          <div class="skin-options">
+            <button class="skin-chip active" data-theme="blush" data-i18n="themeBlush">柔粉</button>
+            <button class="skin-chip" data-theme="champagne" data-i18n="themeChampagne">香槟</button>
+            <button class="skin-chip" data-theme="mint" data-i18n="themeMint">薄荷</button>
+          </div>
+        </div>
+      </section>
 
       <main class="layout">
         <aside class="activity-sidebar glass-panel">
@@ -66,6 +72,30 @@
               </span>
               <em data-i18n="comingSoon">即将上线</em>
             </button>
+            <button class="activity-card" data-activity="pachinko">
+              <span class="activity-icon">◉</span>
+              <span>
+                <strong data-i18n="pachinkoTitle">幸运弹珠</strong>
+                <small data-i18n="pachinkoDesc">适合人流停留的掉落式抽奖</small>
+              </span>
+              <em data-i18n="comingSoon">即将上线</em>
+            </button>
+            <button class="activity-card" data-activity="giftwall">
+              <span class="activity-icon">▣</span>
+              <span>
+                <strong data-i18n="giftWallTitle">礼盒翻牌墙</strong>
+                <small data-i18n="giftWallDesc">适合多人围观的翻牌揭晓</small>
+              </span>
+              <em data-i18n="comingSoon">即将上线</em>
+            </button>
+            <button class="activity-card" data-activity="timer">
+              <span class="activity-icon">◌</span>
+              <span>
+                <strong data-i18n="timerTitle">秒杀倒计时</strong>
+                <small data-i18n="timerDesc">适合整点冲刺和限量奖励</small>
+              </span>
+              <em data-i18n="comingSoon">即将上线</em>
+            </button>
           </nav>
         </aside>
 
@@ -99,6 +129,11 @@
                 <button id="addItemButton" class="secondary-button" data-i18n="addItem">新增奖项</button>
               </div>
 
+              <div class="editor-note">
+                <strong data-i18n="editorHintTitle">配置建议</strong>
+                <p data-i18n="editorHintText">奖项名称尽量短一些，现场展示会更利落；分值可以用于积分制兑换或内部统计。</p>
+              </div>
+
               <div class="editor-head">
                 <span data-i18n="prizeName">奖项名称</span>
                 <span data-i18n="prizeScore">分值</span>
@@ -114,7 +149,7 @@
       </main>
 
       <footer class="site-footer">
-        <span data-i18n="footerMadeBy">本产品由 价直互联（深圳）展览科技有限公司 提供</span>
+        <span data-i18n="footerMadeBy">价直互联价直互联（深圳）展览科技有限公司</span>
       </footer>
     </div>
 
