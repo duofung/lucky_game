@@ -93,6 +93,25 @@ body[data-theme="space"] {
   --surface-3: rgba(22, 31, 47, 0.94);
 }
 
+body[data-theme="klein"] {
+  --bg: #eef3ff;
+  --bg-accent: #9db8ff;
+  --bg-accent-2: #0047ff;
+  --panel: rgba(245, 248, 255, 0.76);
+  --panel-strong: rgba(248, 250, 255, 0.92);
+  --text: #0d2b73;
+  --muted: #4b68a9;
+  --line: rgba(13, 43, 115, 0.16);
+  --primary: #0047ff;
+  --secondary: #4f7fff;
+  --gold: #86a9ff;
+  --mint: #9cb8ff;
+  --shadow: 0 28px 60px rgba(0, 71, 255, 0.18);
+  --surface-1: rgba(248, 250, 255, 0.84);
+  --surface-2: rgba(241, 246, 255, 0.68);
+  --surface-3: rgba(251, 252, 255, 0.96);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -178,16 +197,37 @@ body::after {
   width: 68px;
   height: 68px;
   flex: 0 0 auto;
+  animation: orbit-spin 14s linear infinite;
 }
 
+.brand-mark::before,
+.brand-mark::after,
 .brand-mark-ring,
 .brand-mark-core {
   position: absolute;
-  inset: 0;
+  content: "";
   border-radius: 24px;
 }
 
+.brand-mark::before {
+  inset: -6px;
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, transparent);
+  border-radius: 28px;
+  animation: orbit-spin 18s linear infinite reverse;
+}
+
+.brand-mark::after {
+  inset: 6px;
+  border-top: 3px solid color-mix(in srgb, var(--gold) 82%, white);
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-left: 3px solid transparent;
+  border-radius: 24px;
+  animation: orbit-spin 5.2s linear infinite;
+}
+
 .brand-mark-ring {
+  inset: 0;
   background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 76%, white), color-mix(in srgb, var(--gold) 78%, white));
   box-shadow: var(--shadow);
   transform: rotate(-10deg);
@@ -197,6 +237,28 @@ body::after {
   inset: 12px;
   background: rgba(255, 255, 255, 0.86);
   border: 1px solid rgba(255, 255, 255, 0.72);
+}
+
+.brand-mark-core::before,
+.brand-mark-core::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  inset: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.brand-mark-core::before {
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--secondary) 70%, white));
+  box-shadow: 0 0 24px color-mix(in srgb, var(--primary) 28%, transparent);
+}
+
+.brand-mark-core::after {
+  width: 32px;
+  height: 32px;
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
 }
 
 .brand-kicker {
@@ -326,7 +388,7 @@ p {
   padding: 22px;
   position: sticky;
   top: 20px;
-  margin-top: 34px;
+  margin-top: 0;
 }
 
 .activity-nav {
@@ -399,6 +461,10 @@ p {
   flex-direction: column;
 }
 
+.editor-panel .panel-header-inline {
+  margin-bottom: 2px;
+}
+
 .wheel-stack {
   position: relative;
   padding: 8px 0 0;
@@ -451,6 +517,7 @@ p {
   border-radius: 22px;
   background: linear-gradient(180deg, var(--surface-1), var(--surface-2));
   border: 1px solid rgba(255, 255, 255, 0.58);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
 }
 
 .editor-note strong {
@@ -495,6 +562,7 @@ p {
   padding: 14px 16px;
   font: inherit;
   color: var(--text);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
 }
 
 .item-row input:focus {
@@ -536,6 +604,16 @@ p {
   background: var(--surface-1);
   color: var(--primary);
   font-size: 1.3rem;
+}
+
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .activity-card:hover,
