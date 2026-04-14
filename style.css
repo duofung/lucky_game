@@ -475,8 +475,8 @@ p {
 
 .blindbox-grid {
   display: grid;
-  grid-template-columns: repeat(11, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 8px;
   align-content: start;
 }
 
@@ -508,7 +508,6 @@ p {
 .blindbox-cell-ribbon,
 .blindbox-cell-bow-knot,
 .blindbox-cell-bow-loop,
-.blindbox-cell-index,
 .blindbox-cell-name {
   position: absolute;
   pointer-events: none;
@@ -517,18 +516,16 @@ p {
 .blindbox-cell-glow {
   inset: 10% 12% 8%;
   border-radius: 24px;
-  background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--primary) 30%, white), transparent 68%);
+  background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--primary) 22%, white), transparent 68%);
   filter: blur(12px);
-  opacity: 0.7;
+  opacity: 0.55;
   z-index: 0;
 }
 
 .blindbox-cell-box {
   inset: 14% 10% 10%;
   border-radius: 18px;
-  background:
-    linear-gradient(180deg, color-mix(in srgb, white 94%, var(--secondary)), color-mix(in srgb, white 72%, var(--primary)) 60%, color-mix(in srgb, var(--primary) 70%, #d94b8c)),
-    linear-gradient(135deg, color-mix(in srgb, white 92%, var(--gold)), color-mix(in srgb, white 74%, var(--primary)));
+  background: color-mix(in srgb, white 28%, var(--primary));
   border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
   box-shadow:
     0 14px 26px color-mix(in srgb, var(--primary) 14%, transparent),
@@ -541,8 +538,7 @@ p {
   inset: 8% 8% auto;
   height: 28%;
   border-radius: 18px 18px 14px 14px;
-  background:
-    linear-gradient(180deg, color-mix(in srgb, white 98%, var(--secondary)), color-mix(in srgb, white 80%, var(--primary)) 68%, color-mix(in srgb, var(--primary) 48%, #e46ca6));
+  background: color-mix(in srgb, white 14%, var(--primary));
   border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
   box-shadow:
     0 12px 20px rgba(0, 0, 0, 0.08),
@@ -552,7 +548,7 @@ p {
 }
 
 .blindbox-cell-ribbon {
-  background: linear-gradient(180deg, color-mix(in srgb, white 24%, var(--gold)), color-mix(in srgb, var(--gold) 82%, #f1ae4a));
+  background: color-mix(in srgb, white 8%, var(--gold));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
   z-index: 5;
 }
@@ -579,7 +575,7 @@ p {
   top: 26%;
   transform: translate(-50%, -50%);
   border-radius: 999px;
-  background: linear-gradient(180deg, color-mix(in srgb, white 18%, var(--gold)), color-mix(in srgb, var(--gold) 82%, #e5a645));
+  background: color-mix(in srgb, white 8%, var(--gold));
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
   z-index: 6;
 }
@@ -589,7 +585,7 @@ p {
   height: 18px;
   top: 18%;
   border-radius: 18px 18px 8px 18px;
-  background: linear-gradient(180deg, color-mix(in srgb, white 20%, var(--gold)), color-mix(in srgb, var(--gold) 84%, #efb457));
+  background: color-mix(in srgb, white 8%, var(--gold));
   z-index: 5;
 }
 
@@ -601,20 +597,6 @@ p {
 .blindbox-cell-bow-right {
   right: calc(50% - 20px);
   transform: scaleX(-1) rotate(28deg);
-}
-
-.blindbox-cell-index {
-  top: 12px;
-  left: 12px;
-  min-width: 28px;
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
-  color: var(--muted);
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-align: center;
-  z-index: 7;
 }
 
 .blindbox-cell-name {
@@ -632,9 +614,7 @@ p {
 }
 
 .blindbox-cell.opened .blindbox-cell-box {
-  background:
-    linear-gradient(180deg, color-mix(in srgb, white 96%, var(--gold)), color-mix(in srgb, white 76%, var(--gold)) 60%, color-mix(in srgb, var(--gold) 58%, var(--primary))),
-    linear-gradient(135deg, color-mix(in srgb, white 96%, var(--gold)), color-mix(in srgb, white 78%, var(--primary)));
+  background: color-mix(in srgb, white 32%, var(--gold));
 }
 
 .blindbox-cell.opened .blindbox-cell-lid {
@@ -645,36 +625,6 @@ p {
 .blindbox-cell.opened .blindbox-cell-bow-knot,
 .blindbox-cell.opened .blindbox-cell-bow-loop {
   opacity: 0.2;
-}
-
-.blindbox-cell.opening {
-  transform: translateY(-6px) scale(1.04);
-}
-
-.blindbox-cell.opening .blindbox-cell-glow {
-  opacity: 1;
-  animation: blindbox-pulse 1s ease forwards;
-}
-
-.blindbox-cell.opening .blindbox-cell-lid {
-  animation: blindbox-open-lid 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-
-.blindbox-cell.opening .blindbox-cell-box {
-  animation: blindbox-box-pop 1s ease forwards;
-}
-
-.blindbox-cell.opening .blindbox-cell-bow-knot,
-.blindbox-cell.opening .blindbox-cell-bow-loop {
-  animation: blindbox-bow-fade 1s ease forwards;
-}
-
-.blindbox-cell.opening .blindbox-cell-name {
-  animation: blindbox-name-rise 1s ease forwards;
-}
-
-.blindbox-cell.opening .blindbox-cell-index {
-  opacity: 0.35;
 }
 
 .blindbox-summary {
@@ -1030,6 +980,124 @@ p {
 .result-card h3 {
   margin-top: 18px;
   font-size: 2rem;
+}
+
+.result-visual[hidden] {
+  display: none;
+}
+
+.result-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 180px;
+  margin-top: 12px;
+}
+
+.result-giftbox,
+.result-giftbox-box,
+.result-giftbox-lid,
+.result-giftbox-ribbon,
+.result-giftbox-bow-knot,
+.result-giftbox-bow-loop {
+  position: absolute;
+}
+
+.result-giftbox {
+  position: relative;
+  width: 148px;
+  height: 148px;
+}
+
+.result-giftbox-box {
+  inset: 20% 10% 10%;
+  border-radius: 28px;
+  background: color-mix(in srgb, white 30%, var(--primary));
+  box-shadow:
+    0 22px 40px color-mix(in srgb, var(--primary) 18%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.58);
+}
+
+.result-giftbox-lid {
+  inset: 8% 8% auto;
+  height: 28%;
+  border-radius: 28px 28px 20px 20px;
+  background: color-mix(in srgb, white 16%, var(--primary));
+  box-shadow: 0 14px 20px rgba(0, 0, 0, 0.08);
+  transform-origin: center top;
+}
+
+.result-giftbox-ribbon {
+  background: color-mix(in srgb, white 8%, var(--gold));
+  z-index: 2;
+}
+
+.result-giftbox-ribbon-vertical {
+  width: 16px;
+  top: 14%;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.result-giftbox-ribbon-horizontal {
+  height: 16px;
+  left: 12%;
+  right: 12%;
+  top: 30%;
+}
+
+.result-giftbox-bow-knot {
+  width: 22px;
+  height: 22px;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: color-mix(in srgb, white 8%, var(--gold));
+  z-index: 3;
+}
+
+.result-giftbox-bow-loop {
+  width: 32px;
+  height: 24px;
+  top: 21%;
+  border-radius: 24px 24px 10px 24px;
+  background: color-mix(in srgb, white 8%, var(--gold));
+  z-index: 2;
+}
+
+.result-giftbox-bow-left {
+  left: calc(50% - 28px);
+  transform: rotate(28deg);
+}
+
+.result-giftbox-bow-right {
+  right: calc(50% - 28px);
+  transform: scaleX(-1) rotate(28deg);
+}
+
+.result-card[data-state="opening"] .result-giftbox-lid {
+  animation: blindbox-open-lid 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.result-card[data-state="opening"] .result-giftbox-box {
+  animation: blindbox-box-pop 1s ease forwards;
+}
+
+.result-card[data-state="opening"] .result-giftbox-bow-knot,
+.result-card[data-state="opening"] .result-giftbox-bow-loop {
+  animation: blindbox-bow-fade 1s ease forwards;
+}
+
+.result-card[data-state="revealed"] .result-giftbox-lid {
+  transform: translateY(-58%) rotateX(72deg) scale(0.94);
+  opacity: 0.18;
+}
+
+.result-card[data-state="revealed"] .result-giftbox-bow-knot,
+.result-card[data-state="revealed"] .result-giftbox-bow-loop {
+  opacity: 0.18;
 }
 
 .result-card p + p {

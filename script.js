@@ -200,9 +200,11 @@ const addItemButton = document.querySelector("#addItemButton");
 const resetButton = document.querySelector("#resetButton");
 const toggleChanceButton = document.querySelector("#toggleChanceButton");
 const resultDialog = document.querySelector("#resultDialog");
+const resultCard = document.querySelector(".result-card");
 const resultTitle = document.querySelector("#resultTitle");
 const resultMeta = document.querySelector("#resultMeta");
 const closeDialogButton = document.querySelector("#closeDialogButton");
+const resultVisual = document.querySelector("#resultVisual");
 const langButtons = document.querySelectorAll("[data-lang]");
 const activityCards = document.querySelectorAll(".activity-card");
 const themeButtons = document.querySelectorAll("[data-theme]");
@@ -507,19 +509,14 @@ function renderBlindboxGrid() {
     if (!cellTemplate) return;
     const button = cellTemplate.cloneNode(true);
     const name = button.querySelector(".blindbox-cell-name");
-    const badge = button.querySelector(".blindbox-cell-index");
-    if (!name || !badge) return;
-    badge.textContent = String(index + 1).padStart(2, "0");
+    if (!name) return;
     if (cell.opened) {
       name.textContent = cell.label;
-    } else if (cell.opening) {
-      name.textContent = currentLang === "zh" ? "开启中" : "Opening";
     } else {
       name.textContent = "";
     }
     if (cell.opened) button.classList.add("opened");
-    if (cell.opening) button.classList.add("opening");
-    if (blindboxOpening && !cell.opening && !cell.opened) button.disabled = true;
+    if (blindboxOpening && !cell.opened) button.disabled = true;
     button.addEventListener("click", () => openBlindbox(index));
     blindboxGrid.appendChild(button);
   });
@@ -558,19 +555,24 @@ function resetBlindboxConfig() {
 
 function openBlindbox(index) {
   const cell = blindboxCells[index];
-  if (!cell || cell.opened || cell.opening || blindboxOpening) return;
+  if (!cell || cell.opened || blindboxOpening) return;
   blindboxOpening = true;
-  cell.opening = true;
-  renderBlindboxGrid();
+  resultDialog.dataset.mode = "blindbox";
+  resultCard.dataset.state = "opening";
+  resultVisual.hidden = false;
+  resultTitle.textContent = currentLang === "zh" ? "开启盲盒中..." : "Opening blind box...";
+  resultMeta.textContent = currentLang === "zh" ? "请稍候" : "Please wait";
+  closeDialogButton.disabled = true;
+  resultDialog.showModal();
 
   window.setTimeout(() => {
-    cell.opening = false;
     cell.opened = true;
     blindboxOpening = false;
     renderBlindboxGrid();
+    resultCard.dataset.state = "revealed";
     resultTitle.textContent = cell.label;
     resultMeta.textContent = currentLang === "zh" ? "恭喜开出礼物" : "You opened a reward";
-    resultDialog.showModal();
+    closeDialogButton.disabled = false;
   }, 1000);
 }
 
@@ -680,6 +682,13 @@ resultDialog.addEventListener("click", (event) => {
     event.clientY < bounds.top ||
     event.clientY > bounds.bottom;
   if (isOutside) resultDialog.close();
+});
+
+resultDialog.addEventListener("close", () => {
+  resultDialog.dataset.mode = "";
+  resultCard.dataset.state = "";
+  resultVisual.hidden = true;
+  closeDialogButton.disabled = false;
 });
 
 renderWheelEditor();
