@@ -7,9 +7,9 @@ const translations = {
     wheelTitle: "幸运轮盘",
     wheelDesc: "礼品、积分、折扣券即时抽取",
     blindTitle: "抽盲盒",
-    blindDesc: "66 个礼盒随机揭晓，人人有奖",
+    blindDesc: "78 个礼盒随机揭晓，人人有奖",
     blindPreview: "盲盒礼物墙",
-    blindStatsDefault: "已开启 0 / 66",
+    blindStatsDefault: "已开启 0 / 78",
     blindEditorLabel: "盲盒配置",
     boxTotal: "总盒子数",
     assignedCount: "已分配",
@@ -64,9 +64,9 @@ const translations = {
     wheelTitle: "Lucky Wheel",
     wheelDesc: "Spin for gifts, credits, and coupons",
     blindTitle: "Blind Box",
-    blindDesc: "A 66-box reward wall with guaranteed prizes",
+    blindDesc: "A 78-box reward wall with guaranteed prizes",
     blindPreview: "Blind Box Wall",
-    blindStatsDefault: "Opened 0 / 66",
+    blindStatsDefault: "Opened 0 / 78",
     blindEditorLabel: "Blind Box Setup",
     boxTotal: "Total Boxes",
     assignedCount: "Assigned",
@@ -167,7 +167,7 @@ const defaultWheelItemsByLang = {
   ],
 };
 
-const blindboxBoxCount = 66;
+const blindboxBoxCount = 78;
 const defaultBlindboxPrizesByLang = {
   zh: [
     { label: "典藏礼盒", qty: 2 },
@@ -175,7 +175,7 @@ const defaultBlindboxPrizesByLang = {
     { label: "联名香薰卡", qty: 6 },
     { label: "定制笔记本", qty: 8 },
     { label: "新品试用装", qty: 10 },
-    { label: "品牌手提袋", qty: 36 },
+    { label: "品牌手提袋", qty: 48 },
   ],
   en: [
     { label: "Collector Box", qty: 2 },
@@ -183,7 +183,7 @@ const defaultBlindboxPrizesByLang = {
     { label: "Scent Card", qty: 6 },
     { label: "Notebook", qty: 8 },
     { label: "Sample Kit", qty: 10 },
-    { label: "Carry Bag", qty: 36 },
+    { label: "Carry Bag", qty: 48 },
   ],
 };
 
