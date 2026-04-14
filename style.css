@@ -424,10 +424,13 @@ p {
 .content-grid {
   align-items: stretch;
   gap: 18px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(380px, 460px);
 }
 
 .wheel-stage,
-.editor-panel {
+.editor-panel,
+.blindbox-stage {
   padding: 24px;
 }
 
@@ -440,6 +443,185 @@ p {
   width: min(460px, 100%);
   display: flex;
   flex-direction: column;
+}
+
+.activity-panel {
+  display: none;
+}
+
+.activity-panel.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.blindbox-stage {
+  min-width: 0;
+}
+
+.blindbox-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.blindbox-grid-shell {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 28px;
+  background: linear-gradient(180deg, var(--surface-3), var(--surface-1));
+  border: 1px solid rgba(255, 255, 255, 0.52);
+  min-height: 720px;
+}
+
+.blindbox-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.blindbox-cell {
+  position: relative;
+  min-height: 92px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, white 90%, var(--primary)), color-mix(in srgb, white 78%, var(--secondary))),
+    linear-gradient(135deg, var(--surface-3), var(--surface-1));
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
+  box-shadow: 0 14px 28px color-mix(in srgb, var(--primary) 14%, transparent);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.blindbox-cell:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 34px color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+.blindbox-cell.opened {
+  background: linear-gradient(180deg, color-mix(in srgb, white 94%, var(--gold)), color-mix(in srgb, white 84%, var(--primary)));
+}
+
+.blindbox-cell-lid,
+.blindbox-cell-ribbon {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.blindbox-cell-lid {
+  height: 32%;
+  background: linear-gradient(180deg, color-mix(in srgb, white 82%, var(--primary)), color-mix(in srgb, white 62%, var(--primary)));
+  border-bottom: 1px solid color-mix(in srgb, var(--primary) 22%, transparent);
+}
+
+.blindbox-cell-ribbon::before,
+.blindbox-cell-ribbon::after {
+  content: "";
+  position: absolute;
+  background: color-mix(in srgb, white 40%, var(--gold));
+}
+
+.blindbox-cell-ribbon::before {
+  width: 14px;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.blindbox-cell-ribbon::after {
+  height: 14px;
+  left: 0;
+  right: 0;
+  top: 26%;
+}
+
+.blindbox-cell-label {
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 20px);
+  text-align: center;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.blindbox-cell.opened .blindbox-cell-label {
+  font-size: 0.88rem;
+}
+
+.blindbox-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.blindbox-summary article {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: var(--surface-1);
+}
+
+.blindbox-summary strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 1.1rem;
+}
+
+.blindbox-editor-head {
+  grid-template-columns: minmax(0, 1.4fr) 70px 76px 72px 36px;
+}
+
+.blindbox-prize-list {
+  margin-top: 14px;
+}
+
+.blindbox-prize-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) 70px 76px 72px 36px;
+  gap: 10px;
+  align-items: center;
+}
+
+.blindbox-prize-name,
+.blindbox-prize-qty {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(180deg, var(--surface-3), var(--surface-1));
+  padding: 12px 14px;
+  font: inherit;
+  color: var(--text);
+}
+
+.blindbox-prize-share,
+.blindbox-prize-rare {
+  color: var(--muted);
+  font-weight: 700;
+  text-align: center;
+}
+
+.blindbox-validation {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: var(--surface-1);
+}
+
+.blindbox-validation[data-state="warn"] {
+  color: #c24b6a;
+}
+
+.blindbox-validation[data-state="ready"] {
+  color: #4f8c67;
+}
+
+.blindbox-actions {
+  margin-top: auto;
 }
 
 .editor-panel .panel-header-inline {
@@ -708,6 +890,10 @@ p {
     width: 100%;
     position: static;
   }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 720px) {
@@ -749,6 +935,16 @@ p {
   }
 
   .item-row {
+    grid-template-columns: 1fr;
+  }
+
+  .blindbox-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .blindbox-summary,
+  .blindbox-prize-row,
+  .blindbox-editor-head {
     grid-template-columns: 1fr;
   }
 

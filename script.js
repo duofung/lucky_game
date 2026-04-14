@@ -7,7 +7,22 @@ const translations = {
     wheelTitle: "幸运轮盘",
     wheelDesc: "礼品、积分、折扣券即时抽取",
     blindTitle: "抽盲盒",
-    blindDesc: "惊喜揭晓式奖励互动",
+    blindDesc: "66 个礼盒随机揭晓，人人有奖",
+    blindPreview: "盲盒礼物墙",
+    blindStatsDefault: "已开启 0 / 66",
+    blindEditorLabel: "盲盒配置",
+    boxTotal: "总盒子数",
+    assignedCount: "已分配",
+    remainingCount: "剩余",
+    blindboxQty: "数量",
+    prizeRare: "稀有度",
+    generateBlindbox: "生成盲盒",
+    shuffleBlindbox: "重新打乱",
+    resetBlindboxConfig: "恢复盲盒默认",
+    resetRound: "重置本轮",
+    blindboxReady: "已达到可生成状态",
+    blindboxNeedFill: "还差 {count} 个盒子未分配",
+    blindboxOverfill: "超出 {count} 个盒子，请减少数量",
     rouletteTitle: "左轮轮盘赌",
     rouletteDesc: "戏剧化停顿与刺激感氛围",
     memoryTitle: "九宫格记忆力",
@@ -27,10 +42,10 @@ const translations = {
     addItem: "新增奖项",
     prizeName: "奖项名称",
     prizeWeight: "权重",
-    showChance: "显示几率",
-    hideChance: "隐藏几率",
     prizeChance: "几率",
     resetDefault: "恢复默认",
+    showChance: "显示几率",
+    hideChance: "隐藏几率",
     congratsTag: "抽奖结果",
     resultCopy: "恭喜抽中高人气奖励，现场视觉会更适合用户举起手机拍照分享。",
     drawAgain: "再次抽取",
@@ -50,7 +65,22 @@ const translations = {
     wheelTitle: "Lucky Wheel",
     wheelDesc: "Spin for gifts, credits, and coupons",
     blindTitle: "Blind Box",
-    blindDesc: "Surprise reveal interaction",
+    blindDesc: "A 66-box reward wall with guaranteed prizes",
+    blindPreview: "Blind Box Wall",
+    blindStatsDefault: "Opened 0 / 66",
+    blindEditorLabel: "Blind Box Setup",
+    boxTotal: "Total Boxes",
+    assignedCount: "Assigned",
+    remainingCount: "Remaining",
+    blindboxQty: "Qty",
+    prizeRare: "Tier",
+    generateBlindbox: "Generate Boxes",
+    shuffleBlindbox: "Shuffle Layout",
+    resetBlindboxConfig: "Reset Blind Box",
+    resetRound: "Reset Round",
+    blindboxReady: "Ready to generate",
+    blindboxNeedFill: "{count} boxes still need prizes",
+    blindboxOverfill: "Over by {count} boxes, reduce the quantities",
     rouletteTitle: "Roulette Challenge",
     rouletteDesc: "Dramatic suspense and stage energy",
     memoryTitle: "Memory Grid",
@@ -70,13 +100,13 @@ const translations = {
     addItem: "Add Prize",
     prizeName: "Prize Name",
     prizeWeight: "Weight",
+    prizeChance: "Chance",
     resetDefault: "Reset",
     showChance: "Show Chance",
     hideChance: "Hide Chance",
-    prizeChance: "Chance",
     congratsTag: "Result",
     resultCopy: "The reward reveal is designed to feel social-first, with enough ceremony to invite photos and booth-side sharing.",
-    drawAgain: "Spin Again",
+    drawAgain: "Draw Again",
     skinLabel: "Theme Switch",
     themePink: "Blush Pink",
     themeOrange: "Sunny Orange",
@@ -91,61 +121,71 @@ const themePalettes = {
   pink: {
     slices: ["#f3a6c9", "#ffd07d", "#96e5d2", "#ffd6a5", "#bca9ff", "#f28ab8"],
     label: "#4e2740",
-    subLabel: "rgba(78,39,64,0.72)",
     centerOuter: "#fff6fb",
     centerInner: "#ef5da8",
-    wheelGlow: "rgba(239, 93, 168, 0.16)",
   },
   orange: {
     slices: ["#ff9f45", "#ffd166", "#ffb86b", "#ff8f70", "#ffc857", "#ffb347"],
     label: "#5e3212",
-    subLabel: "rgba(94,50,18,0.7)",
     centerOuter: "#fff7ef",
     centerInner: "#ff8a2a",
-    wheelGlow: "rgba(255, 138, 42, 0.16)",
   },
   blue: {
     slices: ["#7ec8ff", "#65b4ff", "#93d5ff", "#69a8ff", "#89c3ff", "#72d8f8"],
     label: "#173b67",
-    subLabel: "rgba(23,59,103,0.68)",
     centerOuter: "#f4faff",
     centerInner: "#2a7fff",
-    wheelGlow: "rgba(42, 127, 255, 0.16)",
   },
   space: {
     slices: ["#222831", "#2d3642", "#1b212b", "#323c4d", "#0f141b", "#3d495d"],
     label: "#eef4ff",
-    subLabel: "rgba(226,235,247,0.72)",
     centerOuter: "#1d2530",
     centerInner: "#5ea6ff",
-    wheelGlow: "rgba(94, 166, 255, 0.16)",
   },
   klein: {
     slices: ["#0047ff", "#1557ff", "#2f63ff", "#0d52ff", "#366dff", "#0036d6"],
     label: "#f6f9ff",
-    subLabel: "rgba(232,240,255,0.8)",
     centerOuter: "#e8f0ff",
     centerInner: "#003cff",
-    wheelGlow: "rgba(0, 71, 255, 0.2)",
   },
 };
 
-const defaultItemsByLang = {
+const defaultWheelItemsByLang = {
   zh: [
-    { label: "限定礼盒", score: 30, weight: 16, color: "#f6a6c6" },
-    { label: "品牌香氛卡", score: 15, weight: 24, color: "#ffcb77" },
-    { label: "新品试用装", score: 25, weight: 20, color: "#98ead8" },
-    { label: "午后甜点券", score: 20, weight: 18, color: "#ffd8a8" },
-    { label: "专属折扣码", score: 35, weight: 14, color: "#f8bfd7" },
-    { label: "隐藏惊喜奖", score: 50, weight: 8, color: "#c8b6ff" },
+    { label: "限定礼盒", weight: 16 },
+    { label: "品牌香氛卡", weight: 24 },
+    { label: "新品试用装", weight: 20 },
+    { label: "午后甜点券", weight: 18 },
+    { label: "专属折扣码", weight: 14 },
+    { label: "隐藏惊喜奖", weight: 8 },
   ],
   en: [
-    { label: "Gift Box", score: 30, weight: 16, color: "#f6a6c6" },
-    { label: "Scent Card", score: 15, weight: 24, color: "#ffcb77" },
-    { label: "Sample Kit", score: 25, weight: 20, color: "#98ead8" },
-    { label: "Dessert Pass", score: 20, weight: 18, color: "#ffd8a8" },
-    { label: "Promo Code", score: 35, weight: 14, color: "#f8bfd7" },
-    { label: "Secret Prize", score: 50, weight: 8, color: "#c8b6ff" },
+    { label: "Gift Box", weight: 16 },
+    { label: "Scent Card", weight: 24 },
+    { label: "Sample Kit", weight: 20 },
+    { label: "Dessert Pass", weight: 18 },
+    { label: "Promo Code", weight: 14 },
+    { label: "Secret Prize", weight: 8 },
+  ],
+};
+
+const blindboxBoxCount = 66;
+const defaultBlindboxPrizesByLang = {
+  zh: [
+    { label: "典藏礼盒", qty: 2, rarity: "超稀有" },
+    { label: "品牌水杯", qty: 4, rarity: "稀有" },
+    { label: "联名香薰卡", qty: 6, rarity: "稀有" },
+    { label: "定制笔记本", qty: 8, rarity: "精选" },
+    { label: "新品试用装", qty: 10, rarity: "精选" },
+    { label: "品牌手提袋", qty: 36, rarity: "基础" },
+  ],
+  en: [
+    { label: "Collector Box", qty: 2, rarity: "Ultra" },
+    { label: "Branded Tumbler", qty: 4, rarity: "Rare" },
+    { label: "Scent Card", qty: 6, rarity: "Rare" },
+    { label: "Notebook", qty: 8, rarity: "Select" },
+    { label: "Sample Kit", qty: 10, rarity: "Select" },
+    { label: "Carry Bag", qty: 36, rarity: "Base" },
   ],
 };
 
@@ -153,6 +193,8 @@ const canvas = document.querySelector("#wheelCanvas");
 const ctx = canvas.getContext("2d");
 const itemList = document.querySelector("#itemList");
 const itemTemplate = document.querySelector("#itemTemplate");
+const blindboxPrizeTemplate = document.querySelector("#blindboxPrizeTemplate");
+const blindboxCellTemplate = document.querySelector("#blindboxCellTemplate");
 const focusedLabel = document.querySelector("#focusedLabel");
 const spinButton = document.querySelector("#spinButton");
 const shuffleButton = document.querySelector("#shuffleButton");
@@ -166,29 +208,48 @@ const closeDialogButton = document.querySelector("#closeDialogButton");
 const langButtons = document.querySelectorAll("[data-lang]");
 const activityCards = document.querySelectorAll(".activity-card");
 const themeButtons = document.querySelectorAll("[data-theme]");
+const activityPanels = document.querySelectorAll(".activity-panel");
+const blindboxPrizeList = document.querySelector("#blindboxPrizeList");
+const blindboxGrid = document.querySelector("#blindboxGrid");
+const generateBlindboxButton = document.querySelector("#generateBlindboxButton");
+const shuffleBlindboxButton = document.querySelector("#shuffleBlindboxButton");
+const resetBlindboxConfigButton = document.querySelector("#resetBlindboxConfigButton");
+const resetBlindboxBoardButton = document.querySelector("#resetBlindboxBoardButton");
+const blindboxStats = document.querySelector("#blindboxStats");
+const boxTotalValue = document.querySelector("#boxTotalValue");
+const assignedCountValue = document.querySelector("#assignedCountValue");
+const remainingCountValue = document.querySelector("#remainingCountValue");
+const blindboxValidation = document.querySelector("#blindboxValidation");
 
 let currentLang = "zh";
-let items = structuredClone(defaultItemsByLang.zh);
+let currentTheme = "pink";
+let currentActivity = "wheel";
+let showChanceInfo = false;
+let wheelItems = structuredClone(defaultWheelItemsByLang.zh);
+let blindboxPrizes = structuredClone(defaultBlindboxPrizesByLang.zh);
+let blindboxCells = [];
 let rotation = 0;
 let isSpinning = false;
-let currentTheme = "pink";
-let showChanceInfo = false;
 
-function getFocusedIndex() {
-  if (!items.length) return 0;
-  const slice = (Math.PI * 2) / items.length;
-  const normalized = ((-rotation % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
-  return Math.round(normalized / slice) % items.length;
+function translateWithCount(template, count) {
+  return template.replace("{count}", String(count));
 }
 
-function getWeightShares() {
-  const totalWeight = items.reduce((sum, item) => sum + Math.max(0, Number(item.weight) || 0), 0);
-  if (totalWeight <= 0) return items.map(() => 0);
-  return items.map((item) => (Math.max(0, Number(item.weight) || 0) / totalWeight) * 100);
+function getWheelShares() {
+  const totalWeight = wheelItems.reduce((sum, item) => sum + Math.max(0, Number(item.weight) || 0), 0);
+  if (totalWeight <= 0) return wheelItems.map(() => 0);
+  return wheelItems.map((item) => (Math.max(0, Number(item.weight) || 0) / totalWeight) * 100);
 }
 
 function getShareText(value) {
   return `${value.toFixed(1)}%`;
+}
+
+function getFocusedIndex() {
+  if (!wheelItems.length) return 0;
+  const slice = (Math.PI * 2) / wheelItems.length;
+  const normalized = ((-rotation % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+  return Math.round(normalized / slice) % wheelItems.length;
 }
 
 function drawWheel() {
@@ -205,11 +266,10 @@ function drawWheel() {
   ctx.arc(center, center, radius, 0, Math.PI * 2);
   ctx.fill();
 
-  const slice = (Math.PI * 2) / Math.max(items.length, 1);
-  items.forEach((item, index) => {
+  const slice = (Math.PI * 2) / Math.max(wheelItems.length, 1);
+  wheelItems.forEach((item, index) => {
     const start = rotation - Math.PI / 2 - slice / 2 + index * slice;
     const end = start + slice;
-
     ctx.beginPath();
     ctx.moveTo(center, center);
     ctx.arc(center, center, radius - 8, start, end);
@@ -240,24 +300,15 @@ function drawWheel() {
   ctx.fillStyle = themePalette.centerInner;
   ctx.fill();
 
-  const focused = items[getFocusedIndex()];
-  if (focused) {
-    focusedLabel.textContent = focused.label;
-  }
+  const focused = wheelItems[getFocusedIndex()];
+  if (focused) focusedLabel.textContent = focused.label;
 }
 
-function applyTheme(theme) {
-  currentTheme = theme;
-  document.body.dataset.theme = theme;
-  themeButtons.forEach((button) => {
-    button.classList.toggle("active", button.dataset.theme === theme);
-  });
-}
-
-function renderList() {
+function renderWheelEditor() {
   itemList.innerHTML = "";
-  const shares = getWeightShares();
-  items.forEach((item, index) => {
+  const shares = getWheelShares();
+
+  wheelItems.forEach((item, index) => {
     const row = itemTemplate.content.firstElementChild.cloneNode(true);
     const nameDisplay = row.querySelector(".item-name-display");
     const weightInput = row.querySelector(".item-weight");
@@ -265,75 +316,52 @@ function renderList() {
     const removeButton = row.querySelector(".remove-button");
 
     nameDisplay.textContent = item.label;
-    weightInput.value = item.weight ?? 1;
-    shareDisplay.textContent = showChanceInfo ? getShareText(shares[index] ?? 0) : "--";
+    weightInput.value = item.weight;
+    shareDisplay.textContent = showChanceInfo ? getShareText(shares[index] || 0) : "--";
 
     weightInput.addEventListener("input", (event) => {
-      items[index].weight = Math.max(0, Number(event.target.value) || 0);
-      renderList();
-      drawWheel();
+      wheelItems[index].weight = Math.max(0, Number(event.target.value) || 0);
+      renderWheelEditor();
     });
 
     removeButton.addEventListener("click", () => {
-      if (items.length <= 2) return;
-      items.splice(index, 1);
-      renderList();
+      if (wheelItems.length <= 2) return;
+      wheelItems.splice(index, 1);
+      renderWheelEditor();
       drawWheel();
     });
 
     itemList.appendChild(row);
   });
-}
 
-function randomColor() {
-  const palette = (themePalettes[currentTheme] || themePalettes.pink).slices;
-  return palette[Math.floor(Math.random() * palette.length)];
-}
-
-function addItem() {
-  items.push({
-    label: currentLang === "zh" ? `新奖项 ${items.length + 1}` : `Prize ${items.length + 1}`,
-    weight: 10,
-    color: randomColor(),
-  });
-  renderList();
   drawWheel();
+}
+
+function addWheelItem() {
+  wheelItems.push({
+    label: currentLang === "zh" ? `新奖项 ${wheelItems.length + 1}` : `Prize ${wheelItems.length + 1}`,
+    weight: 10,
+  });
+  renderWheelEditor();
+}
+
+function resetWheelItems() {
+  wheelItems = structuredClone(defaultWheelItemsByLang[currentLang]);
+  rotation = 0;
+  renderWheelEditor();
 }
 
 function pickWeightedWinnerIndex() {
-  const normalizedWeights = items.map((item) => Math.max(0, Number(item.weight) || 0));
-  const totalWeight = normalizedWeights.reduce((sum, weight) => sum + weight, 0);
+  const weights = wheelItems.map((item) => Math.max(0, Number(item.weight) || 0));
+  const total = weights.reduce((sum, weight) => sum + weight, 0);
+  if (total <= 0) return Math.floor(Math.random() * wheelItems.length);
 
-  if (totalWeight <= 0) {
-    return Math.floor(Math.random() * items.length);
+  let threshold = Math.random() * total;
+  for (let index = 0; index < weights.length; index += 1) {
+    threshold -= weights[index];
+    if (threshold < 0) return index;
   }
-
-  let threshold = Math.random() * totalWeight;
-
-  for (let index = 0; index < normalizedWeights.length; index += 1) {
-    threshold -= normalizedWeights[index];
-    if (threshold < 0) {
-      return index;
-    }
-  }
-
-  return normalizedWeights.length - 1;
-}
-
-function shuffleItems() {
-  items = items
-    .map((item) => ({ key: Math.random(), value: item }))
-    .sort((a, b) => a.key - b.key)
-    .map(({ value }) => value);
-  renderList();
-  drawWheel();
-}
-
-function resetItems() {
-  items = structuredClone(defaultItemsByLang[currentLang]);
-  rotation = 0;
-  renderList();
-  drawWheel();
+  return weights.length - 1;
 }
 
 function easeOutCubic(value) {
@@ -341,12 +369,12 @@ function easeOutCubic(value) {
 }
 
 function spin() {
-  if (isSpinning || items.length < 2) return;
+  if (isSpinning || wheelItems.length < 2) return;
   isSpinning = true;
   spinButton.disabled = true;
 
   const winnerIndex = pickWeightedWinnerIndex();
-  const slice = (Math.PI * 2) / items.length;
+  const slice = (Math.PI * 2) / wheelItems.length;
   const currentNormalized = ((rotation % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
   const targetRotation = ((-winnerIndex * slice) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
   const extraTurns = Math.PI * 2 * 6;
@@ -371,8 +399,7 @@ function spin() {
     drawWheel();
     isSpinning = false;
     spinButton.disabled = false;
-
-    const focused = items[getFocusedIndex()];
+    const focused = wheelItems[getFocusedIndex()];
     resultTitle.textContent = focused.label;
     resultMeta.textContent = currentLang === "zh" ? "恭喜抽中" : "Congratulations";
     resultDialog.showModal();
@@ -381,9 +408,171 @@ function spin() {
   requestAnimationFrame(animate);
 }
 
+function updateBlindboxSummary() {
+  const assigned = blindboxPrizes.reduce((sum, prize) => sum + (Number(prize.qty) || 0), 0);
+  const remaining = blindboxBoxCount - assigned;
+
+  boxTotalValue.textContent = String(blindboxBoxCount);
+  assignedCountValue.textContent = `${assigned} / ${blindboxBoxCount}`;
+  remainingCountValue.textContent = String(remaining);
+
+  if (remaining === 0) {
+    blindboxValidation.textContent = translations[currentLang].blindboxReady;
+    blindboxValidation.dataset.state = "ready";
+    generateBlindboxButton.disabled = false;
+  } else if (remaining > 0) {
+    blindboxValidation.textContent = translateWithCount(translations[currentLang].blindboxNeedFill, remaining);
+    blindboxValidation.dataset.state = "warn";
+    generateBlindboxButton.disabled = true;
+  } else {
+    blindboxValidation.textContent = translateWithCount(translations[currentLang].blindboxOverfill, Math.abs(remaining));
+    blindboxValidation.dataset.state = "warn";
+    generateBlindboxButton.disabled = true;
+  }
+}
+
+function getBlindboxShares() {
+  const total = blindboxPrizes.reduce((sum, prize) => sum + (Number(prize.qty) || 0), 0);
+  if (total <= 0) return blindboxPrizes.map(() => 0);
+  return blindboxPrizes.map((prize) => ((Number(prize.qty) || 0) / total) * 100);
+}
+
+function renderBlindboxPrizeList() {
+  blindboxPrizeList.innerHTML = "";
+  const shares = getBlindboxShares();
+
+  blindboxPrizes.forEach((prize, index) => {
+    const row = blindboxPrizeTemplate.content.firstElementChild.cloneNode(true);
+    const nameInput = row.querySelector(".blindbox-prize-name");
+    const qtyInput = row.querySelector(".blindbox-prize-qty");
+    const share = row.querySelector(".blindbox-prize-share");
+    const rarity = row.querySelector(".blindbox-prize-rare");
+    const remove = row.querySelector(".blindbox-remove");
+
+    nameInput.value = prize.label;
+    qtyInput.value = prize.qty;
+    share.textContent = getShareText(shares[index] || 0);
+    rarity.textContent = prize.rarity;
+
+    nameInput.addEventListener("input", (event) => {
+      blindboxPrizes[index].label = event.target.value.trim() || (currentLang === "zh" ? "未命名礼物" : "Untitled");
+      if (blindboxCells.length) renderBlindboxGrid();
+    });
+
+    qtyInput.addEventListener("input", (event) => {
+      blindboxPrizes[index].qty = Math.max(0, Number(event.target.value) || 0);
+      renderBlindboxPrizeList();
+    });
+
+    remove.addEventListener("click", () => {
+      if (blindboxPrizes.length <= 2) return;
+      blindboxPrizes.splice(index, 1);
+      renderBlindboxPrizeList();
+    });
+
+    blindboxPrizeList.appendChild(row);
+  });
+
+  updateBlindboxSummary();
+}
+
+function buildBlindboxPool() {
+  const pool = [];
+  blindboxPrizes.forEach((prize) => {
+    for (let index = 0; index < prize.qty; index += 1) {
+      pool.push({ label: prize.label, rarity: prize.rarity, opened: false });
+    }
+  });
+  return pool;
+}
+
+function shuffleArray(list) {
+  return [...list]
+    .map((value) => ({ key: Math.random(), value }))
+    .sort((a, b) => a.key - b.key)
+    .map(({ value }) => value);
+}
+
+function updateBlindboxStats() {
+  const opened = blindboxCells.filter((cell) => cell.opened).length;
+  blindboxStats.textContent =
+    currentLang === "zh" ? `已开启 ${opened} / ${blindboxBoxCount}` : `Opened ${opened} / ${blindboxBoxCount}`;
+}
+
+function renderBlindboxGrid() {
+  blindboxGrid.innerHTML = "";
+  blindboxCells.forEach((cell, index) => {
+    const button = blindboxCellTemplate.content.firstElementChild.cloneNode(true);
+    const label = button.querySelector(".blindbox-cell-label");
+    button.dataset.rarity = cell.rarity;
+    label.textContent = cell.opened ? cell.label : String(index + 1).padStart(2, "0");
+    if (cell.opened) button.classList.add("opened");
+    button.addEventListener("click", () => openBlindbox(index));
+    blindboxGrid.appendChild(button);
+  });
+  updateBlindboxStats();
+}
+
+function generateBlindboxBoard() {
+  const assigned = blindboxPrizes.reduce((sum, prize) => sum + (Number(prize.qty) || 0), 0);
+  if (assigned !== blindboxBoxCount) return;
+  blindboxCells = shuffleArray(buildBlindboxPool());
+  renderBlindboxGrid();
+}
+
+function resetBlindboxBoard() {
+  if (!blindboxCells.length) return;
+  blindboxCells = blindboxCells.map((cell) => ({ ...cell, opened: false }));
+  renderBlindboxGrid();
+}
+
+function resetBlindboxConfig() {
+  blindboxPrizes = structuredClone(defaultBlindboxPrizesByLang[currentLang]);
+  renderBlindboxPrizeList();
+  blindboxCells = [];
+  blindboxGrid.innerHTML = "";
+  blindboxStats.textContent = translations[currentLang].blindStatsDefault;
+}
+
+function openBlindbox(index) {
+  const cell = blindboxCells[index];
+  if (!cell || cell.opened) return;
+  cell.opened = true;
+  renderBlindboxGrid();
+  resultTitle.textContent = cell.label;
+  resultMeta.textContent = currentLang === "zh" ? `${cell.rarity} 礼物` : `${cell.rarity} reward`;
+  resultDialog.showModal();
+}
+
+function applyTheme(theme) {
+  currentTheme = theme;
+  document.body.dataset.theme = theme;
+  themeButtons.forEach((button) => {
+    button.classList.toggle("active", button.dataset.theme === theme);
+  });
+  drawWheel();
+  if (blindboxCells.length) renderBlindboxGrid();
+}
+
+function setActiveActivity(activity) {
+  currentActivity = activity;
+  activityCards.forEach((card) => {
+    card.classList.toggle("active", card.dataset.activity === activity);
+  });
+
+  activityPanels.forEach((panel) => {
+    const panelName = panel.dataset.panel;
+    const show =
+      (activity === "wheel" && (panelName === "wheel" || panelName === "wheel-editor")) ||
+      (activity === "blindbox" && (panelName === "blindbox" || panelName === "blindbox-editor"));
+    panel.classList.toggle("active", show);
+  });
+}
+
 function applyLanguage(lang) {
   currentLang = lang;
   document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+
   document.querySelectorAll("[data-i18n]").forEach((element) => {
     const key = element.dataset.i18n;
     if (translations[lang][key]) {
@@ -396,19 +585,21 @@ function applyLanguage(lang) {
   });
 
   toggleChanceButton.textContent = translations[lang][showChanceInfo ? "hideChance" : "showChance"];
-
-  if (JSON.stringify(items) === JSON.stringify(defaultItemsByLang.zh) || JSON.stringify(items) === JSON.stringify(defaultItemsByLang.en)) {
-    items = structuredClone(defaultItemsByLang[lang]);
-  }
-
-  renderList();
+  blindboxStats.textContent = translations[lang].blindStatsDefault;
+  wheelItems = structuredClone(defaultWheelItemsByLang[lang]);
+  blindboxPrizes = structuredClone(defaultBlindboxPrizesByLang[lang]);
+  blindboxCells = [];
+  blindboxGrid.innerHTML = "";
+  renderWheelEditor();
+  renderBlindboxPrizeList();
   drawWheel();
 }
 
 activityCards.forEach((card) => {
   card.addEventListener("click", () => {
-    activityCards.forEach((item) => item.classList.remove("active"));
-    card.classList.add("active");
+    if (card.dataset.activity === "wheel" || card.dataset.activity === "blindbox") {
+      setActiveActivity(card.dataset.activity);
+    }
   });
 });
 
@@ -429,20 +620,26 @@ canvas.addEventListener("click", (event) => {
   const y = (event.clientY - rect.top) * scaleY;
   const center = canvas.width / 2;
   const distance = Math.hypot(x - center, y - center);
-
-  if (distance <= 62) {
-    spin();
-  }
+  if (distance <= 62) spin();
 });
 
-shuffleButton.addEventListener("click", shuffleItems);
-addItemButton.addEventListener("click", addItem);
-resetButton.addEventListener("click", resetItems);
+shuffleButton.addEventListener("click", () => {
+  wheelItems = shuffleArray(wheelItems);
+  renderWheelEditor();
+});
+addItemButton.addEventListener("click", addWheelItem);
+resetButton.addEventListener("click", resetWheelItems);
 toggleChanceButton.addEventListener("click", () => {
   showChanceInfo = !showChanceInfo;
   toggleChanceButton.textContent = translations[currentLang][showChanceInfo ? "hideChance" : "showChance"];
-  renderList();
+  renderWheelEditor();
 });
+
+generateBlindboxButton.addEventListener("click", generateBlindboxBoard);
+shuffleBlindboxButton.addEventListener("click", generateBlindboxBoard);
+resetBlindboxConfigButton.addEventListener("click", resetBlindboxConfig);
+resetBlindboxBoardButton.addEventListener("click", resetBlindboxBoard);
+
 closeDialogButton.addEventListener("click", () => resultDialog.close());
 resultDialog.addEventListener("click", (event) => {
   const bounds = resultDialog.getBoundingClientRect();
@@ -454,7 +651,9 @@ resultDialog.addEventListener("click", (event) => {
   if (isOutside) resultDialog.close();
 });
 
-renderList();
+renderWheelEditor();
+renderBlindboxPrizeList();
 applyTheme(currentTheme);
 toggleChanceButton.textContent = translations[currentLang].showChance;
+setActiveActivity("wheel");
 drawWheel();

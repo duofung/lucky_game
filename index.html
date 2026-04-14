@@ -56,7 +56,6 @@
                 <strong data-i18n="blindTitle">抽盲盒</strong>
                 <small data-i18n="blindDesc">惊喜揭晓式奖励互动</small>
               </span>
-              <em data-i18n="comingSoon">即将上线</em>
             </button>
             <button class="activity-card" data-activity="roulette">
               <span class="activity-icon">✦</span>
@@ -103,7 +102,7 @@
 
         <section class="hero-panel">
           <div class="content-grid">
-            <section class="wheel-stage glass-panel">
+            <section class="wheel-stage glass-panel activity-panel active" data-panel="wheel">
               <div class="panel-header panel-header-inline">
                 <div class="section-label" data-i18n="livePreview">现场预览</div>
                 <button id="spinButton" class="primary-button" data-i18n="spinNow">开始抽奖</button>
@@ -125,7 +124,21 @@
               </div>
             </section>
 
-            <section class="editor-panel glass-panel">
+            <section class="blindbox-stage glass-panel activity-panel" data-panel="blindbox">
+              <div class="panel-header panel-header-inline">
+                <div class="section-label" data-i18n="blindPreview">盲盒礼物墙</div>
+                <div class="blindbox-stats">
+                  <span id="blindboxStats" data-i18n="blindStatsDefault">已开启 0 / 66</span>
+                  <button id="resetBlindboxBoardButton" class="secondary-button" data-i18n="resetRound">重置本轮</button>
+                </div>
+              </div>
+
+              <div class="blindbox-grid-shell">
+                <div id="blindboxGrid" class="blindbox-grid"></div>
+              </div>
+            </section>
+
+            <section class="editor-panel glass-panel activity-panel active" data-panel="wheel-editor">
               <div class="panel-header panel-header-inline">
                 <div class="section-label" data-i18n="editorLabel">玩法编辑</div>
                 <button id="addItemButton" class="secondary-button" data-i18n="addItem">新增奖项</button>
@@ -141,6 +154,44 @@
               <div class="editor-actions">
                 <button id="toggleChanceButton" class="secondary-button" data-i18n="showChance">显示几率</button>
                 <button id="resetButton" class="ghost-button" data-i18n="resetDefault">恢复默认</button>
+              </div>
+            </section>
+
+            <section class="editor-panel glass-panel activity-panel blindbox-editor" data-panel="blindbox-editor">
+              <div class="panel-header panel-header-inline">
+                <div class="section-label" data-i18n="blindEditorLabel">盲盒配置</div>
+                <button id="generateBlindboxButton" class="primary-button" data-i18n="generateBlindbox">生成盲盒</button>
+              </div>
+
+              <div class="blindbox-summary">
+                <article>
+                  <span data-i18n="boxTotal">总盒子数</span>
+                  <strong id="boxTotalValue">66</strong>
+                </article>
+                <article>
+                  <span data-i18n="assignedCount">已分配</span>
+                  <strong id="assignedCountValue">66 / 66</strong>
+                </article>
+                <article>
+                  <span data-i18n="remainingCount">剩余</span>
+                  <strong id="remainingCountValue">0</strong>
+                </article>
+              </div>
+
+              <div class="editor-head blindbox-editor-head">
+                <span data-i18n="prizeName">奖项名称</span>
+                <span data-i18n="blindboxQty">数量</span>
+                <span data-i18n="prizeChance">几率</span>
+                <span data-i18n="prizeRare">稀有度</span>
+                <span></span>
+              </div>
+              <div id="blindboxPrizeList" class="item-list blindbox-prize-list"></div>
+
+              <p id="blindboxValidation" class="blindbox-validation" data-i18n="blindboxReady">已达到可生成状态</p>
+
+              <div class="editor-actions blindbox-actions">
+                <button id="shuffleBlindboxButton" class="secondary-button" data-i18n="shuffleBlindbox">重新打乱</button>
+                <button id="resetBlindboxConfigButton" class="ghost-button" data-i18n="resetBlindboxConfig">恢复盲盒默认</button>
               </div>
             </section>
           </div>
@@ -178,6 +229,30 @@
         <div class="item-share">0%</div>
         <button class="remove-button" type="button" aria-label="remove">×</button>
       </div>
+    </template>
+
+    <template id="blindboxPrizeTemplate">
+      <div class="blindbox-prize-row">
+        <label>
+          <span class="sr-only">prize</span>
+          <input class="blindbox-prize-name" type="text" maxlength="20" />
+        </label>
+        <label>
+          <span class="sr-only">quantity</span>
+          <input class="blindbox-prize-qty" type="number" min="0" max="999" />
+        </label>
+        <div class="blindbox-prize-share">0%</div>
+        <div class="blindbox-prize-rare"></div>
+        <button class="remove-button blindbox-remove" type="button" aria-label="remove">×</button>
+      </div>
+    </template>
+
+    <template id="blindboxCellTemplate">
+      <button class="blindbox-cell" type="button">
+        <span class="blindbox-cell-lid"></span>
+        <span class="blindbox-cell-ribbon"></span>
+        <span class="blindbox-cell-label"></span>
+      </button>
     </template>
 
     <script src="./script.js"></script>
