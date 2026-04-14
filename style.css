@@ -524,6 +524,18 @@ p {
   align-items: center;
 }
 
+.item-name-display {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, var(--surface-3), var(--surface-1));
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-weight: 600;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+}
+
 .item-share {
   padding: 0 4px;
   text-align: center;

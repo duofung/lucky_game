@@ -27,10 +27,10 @@ const translations = {
     addItem: "新增奖项",
     prizeName: "奖项名称",
     prizeWeight: "权重",
-    prizeShare: "占比",
-    resetDefault: "恢复默认",
     showChance: "显示占比",
     hideChance: "隐藏占比",
+    prizeChance: "几率",
+    resetDefault: "恢复默认",
     congratsTag: "抽奖结果",
     resultCopy: "恭喜抽中高人气奖励，现场视觉会更适合用户举起手机拍照分享。",
     drawAgain: "再次抽取",
@@ -40,7 +40,7 @@ const translations = {
     themeBlue: "天之蓝",
     themeSpace: "科技黑",
     themeKlein: "克莱因蓝",
-    footerMadeBy: "价直互联价直互联（深圳）展览科技有限公司",
+    footerMadeBy: "技术支持：价直互联（深圳）展览科技有限公司",
   },
   en: {
     brandKicker: "EXHIBITION GAME STUDIO",
@@ -70,10 +70,10 @@ const translations = {
     addItem: "Add Prize",
     prizeName: "Prize Name",
     prizeWeight: "Weight",
-    prizeShare: "Share",
     resetDefault: "Reset",
     showChance: "Show Share",
     hideChance: "Hide Share",
+    prizeChance: "Chance",
     congratsTag: "Result",
     resultCopy: "The reward reveal is designed to feel social-first, with enough ceremony to invite photos and booth-side sharing.",
     drawAgain: "Spin Again",
@@ -83,7 +83,7 @@ const translations = {
     themeBlue: "Sky Blue",
     themeSpace: "Tech Black",
     themeKlein: "Klein Blue",
-    footerMadeBy: "JiaZhi Interconnect JiaZhi Interconnect (Shenzhen) Exhibition Technology Co., Ltd.",
+    footerMadeBy: "Technical Support: Value Link Interconnect (Shenzhen) Exhibition Technology Co., Ltd.",
   },
 };
 
@@ -195,7 +195,6 @@ function drawWheel() {
   const center = canvas.width / 2;
   const radius = center - 18;
   const themePalette = themePalettes[currentTheme] || themePalettes.pink;
-  const shares = getWeightShares();
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   const gradient = ctx.createRadialGradient(center, center, 30, center, center, radius);
@@ -224,12 +223,7 @@ function drawWheel() {
     ctx.textAlign = "right";
     ctx.fillStyle = themePalette.label;
     ctx.font = "700 25px 'PingFang SC'";
-    ctx.fillText(item.label, radius - 72, showChanceInfo ? -12 : 10);
-    if (showChanceInfo) {
-      ctx.font = "600 21px 'PingFang SC'";
-      ctx.fillStyle = themePalette.subLabel;
-      ctx.fillText(getShareText(shares[index]), radius - 72, 26);
-    }
+    ctx.fillText(item.label, radius - 72, 10);
     ctx.restore();
   });
 
@@ -248,8 +242,7 @@ function drawWheel() {
 
   const focused = items[getFocusedIndex()];
   if (focused) {
-    const share = shares[getFocusedIndex()] ?? 0;
-    focusedLabel.textContent = showChanceInfo ? `${focused.label} · ${getShareText(share)}` : focused.label;
+    focusedLabel.textContent = focused.label;
   }
 }
 
@@ -266,19 +259,14 @@ function renderList() {
   const shares = getWeightShares();
   items.forEach((item, index) => {
     const row = itemTemplate.content.firstElementChild.cloneNode(true);
-    const nameInput = row.querySelector(".item-name");
+    const nameDisplay = row.querySelector(".item-name-display");
     const weightInput = row.querySelector(".item-weight");
     const shareDisplay = row.querySelector(".item-share");
     const removeButton = row.querySelector(".remove-button");
 
-    nameInput.value = item.label;
+    nameDisplay.textContent = item.label;
     weightInput.value = item.weight ?? 1;
-    shareDisplay.textContent = getShareText(shares[index] ?? 0);
-
-    nameInput.addEventListener("input", (event) => {
-      items[index].label = event.target.value.trim() || (currentLang === "zh" ? "未命名奖项" : "Untitled");
-      drawWheel();
-    });
+    shareDisplay.textContent = showChanceInfo ? getShareText(shares[index] ?? 0) : "--";
 
     weightInput.addEventListener("input", (event) => {
       items[index].weight = Math.max(0, Number(event.target.value) || 0);
@@ -386,9 +374,7 @@ function spin() {
 
     const focused = items[getFocusedIndex()];
     resultTitle.textContent = focused.label;
-    resultMeta.textContent = showChanceInfo
-      ? (currentLang === "zh" ? `当前占比 ${getShareText(getWeightShares()[getFocusedIndex()] ?? 0)}` : `Current share ${getShareText(getWeightShares()[getFocusedIndex()] ?? 0)}`)
-      : (currentLang === "zh" ? "恭喜抽中" : "Congratulations");
+    resultMeta.textContent = currentLang === "zh" ? "恭喜抽中" : "Congratulations";
     resultDialog.showModal();
   }
 
@@ -455,7 +441,7 @@ resetButton.addEventListener("click", resetItems);
 toggleChanceButton.addEventListener("click", () => {
   showChanceInfo = !showChanceInfo;
   toggleChanceButton.textContent = translations[currentLang][showChanceInfo ? "hideChance" : "showChance"];
-  drawWheel();
+  renderList();
 });
 closeDialogButton.addEventListener("click", () => resultDialog.close());
 resultDialog.addEventListener("click", (event) => {

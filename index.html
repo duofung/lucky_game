@@ -134,7 +134,7 @@
               <div class="editor-head">
                 <span data-i18n="prizeName">奖项名称</span>
                 <span data-i18n="prizeWeight">权重</span>
-                <span data-i18n="prizeShare">占比</span>
+                <span data-i18n="prizeChance">几率</span>
               </div>
               <div id="itemList" class="item-list"></div>
 
@@ -148,7 +148,7 @@
       </main>
 
       <footer class="site-footer">
-        <span data-i18n="footerMadeBy">价直互联价直互联（深圳）展览科技有限公司</span>
+        <span data-i18n="footerMadeBy">技术支持：价直互联（深圳）展览科技有限公司</span>
       </footer>
     </div>
 
@@ -170,10 +170,7 @@
 
     <template id="itemTemplate">
       <div class="item-row">
-        <label>
-          <span class="sr-only">label</span>
-          <input class="item-name" type="text" maxlength="20" />
-        </label>
+        <div class="item-name-display"></div>
         <label>
           <span class="sr-only">weight</span>
           <input class="item-weight" type="number" min="0" max="9999" />
