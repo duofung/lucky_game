@@ -55,25 +55,6 @@ body[data-theme="blue"] {
   --surface-3: rgba(250, 253, 255, 0.94);
 }
 
-body[data-theme="silver"] {
-  --bg: #f5f7fa;
-  --bg-accent: #dee3ea;
-  --bg-accent-2: #b8c1cd;
-  --panel: rgba(249, 250, 252, 0.74);
-  --panel-strong: rgba(250, 251, 253, 0.9);
-  --text: #2f3742;
-  --muted: #687384;
-  --line: rgba(104, 115, 132, 0.18);
-  --primary: #7b8798;
-  --secondary: #b3bdca;
-  --gold: #d8dfe8;
-  --mint: #c3ccd7;
-  --shadow: 0 28px 60px rgba(123, 135, 152, 0.14);
-  --surface-1: rgba(252, 253, 254, 0.82);
-  --surface-2: rgba(246, 248, 251, 0.66);
-  --surface-3: rgba(252, 253, 254, 0.95);
-}
-
 body[data-theme="space"] {
   --bg: #0a1017;
   --bg-accent: #0f1f34;
@@ -511,20 +492,6 @@ p {
   min-height: 44px;
 }
 
-.editor-note {
-  margin-top: 14px;
-  padding: 16px 18px;
-  border-radius: 22px;
-  background: linear-gradient(180deg, var(--surface-1), var(--surface-2));
-  border: 1px solid rgba(255, 255, 255, 0.58);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
-}
-
-.editor-note strong {
-  display: block;
-  margin-bottom: 6px;
-}
-
 .current-result strong {
   display: block;
   margin-top: 6px;
@@ -533,13 +500,13 @@ p {
 
 .editor-head {
   padding: 14px 16px;
-  margin-top: 16px;
+  margin-top: 12px;
   border-radius: 18px;
   background: var(--surface-2);
   color: var(--muted);
   font-size: 0.92rem;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 88px 88px 44px;
+  grid-template-columns: minmax(0, 1fr) 110px 84px 44px;
   gap: 10px;
 }
 
@@ -552,9 +519,17 @@ p {
 
 .item-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 110px 110px 48px;
+  grid-template-columns: minmax(0, 1fr) 110px 84px 48px;
   gap: 10px;
   align-items: center;
+}
+
+.item-share {
+  padding: 0 4px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 
 .item-row input {

@@ -26,20 +26,18 @@ const translations = {
     editorLabel: "玩法编辑",
     addItem: "新增奖项",
     prizeName: "奖项名称",
-    prizeScore: "分值",
     prizeWeight: "权重",
+    prizeShare: "占比",
     resetDefault: "恢复默认",
-    editorHintTitle: "配置建议",
-    editorHintText: "权重越高，中奖概率越大；奖项名称尽量短一些，现场展示会更利落。",
+    showChance: "显示占比",
+    hideChance: "隐藏占比",
     congratsTag: "抽奖结果",
     resultCopy: "恭喜抽中高人气奖励，现场视觉会更适合用户举起手机拍照分享。",
     drawAgain: "再次抽取",
-    scoreUnit: "分",
     skinLabel: "皮肤切换",
     themePink: "少女粉",
     themeOrange: "阳光橙",
     themeBlue: "天之蓝",
-    themeSilver: "高级灰",
     themeSpace: "科技黑",
     themeKlein: "克莱因蓝",
     footerMadeBy: "价直互联价直互联（深圳）展览科技有限公司",
@@ -71,20 +69,18 @@ const translations = {
     editorLabel: "Editor",
     addItem: "Add Prize",
     prizeName: "Prize Name",
-    prizeScore: "Score",
     prizeWeight: "Weight",
+    prizeShare: "Share",
     resetDefault: "Reset",
-    editorHintTitle: "Editing Hint",
-    editorHintText: "Higher weight means higher win probability. Shorter labels also read better from a distance.",
+    showChance: "Show Share",
+    hideChance: "Hide Share",
     congratsTag: "Result",
     resultCopy: "The reward reveal is designed to feel social-first, with enough ceremony to invite photos and booth-side sharing.",
     drawAgain: "Spin Again",
-    scoreUnit: "pts",
     skinLabel: "Theme Switch",
     themePink: "Blush Pink",
     themeOrange: "Sunny Orange",
     themeBlue: "Sky Blue",
-    themeSilver: "Premium Gray",
     themeSpace: "Tech Black",
     themeKlein: "Klein Blue",
     footerMadeBy: "JiaZhi Interconnect JiaZhi Interconnect (Shenzhen) Exhibition Technology Co., Ltd.",
@@ -115,14 +111,6 @@ const themePalettes = {
     centerOuter: "#f4faff",
     centerInner: "#2a7fff",
     wheelGlow: "rgba(42, 127, 255, 0.16)",
-  },
-  silver: {
-    slices: ["#d9dde3", "#b8c0cb", "#e5e8ed", "#aeb6c1", "#cfd5dc", "#edf1f4"],
-    label: "#2a313b",
-    subLabel: "rgba(42,49,59,0.66)",
-    centerOuter: "#f7f8fa",
-    centerInner: "#7f8b9b",
-    wheelGlow: "rgba(127, 139, 155, 0.15)",
   },
   space: {
     slices: ["#222831", "#2d3642", "#1b212b", "#323c4d", "#0f141b", "#3d495d"],
@@ -170,6 +158,7 @@ const spinButton = document.querySelector("#spinButton");
 const shuffleButton = document.querySelector("#shuffleButton");
 const addItemButton = document.querySelector("#addItemButton");
 const resetButton = document.querySelector("#resetButton");
+const toggleChanceButton = document.querySelector("#toggleChanceButton");
 const resultDialog = document.querySelector("#resultDialog");
 const resultTitle = document.querySelector("#resultTitle");
 const resultMeta = document.querySelector("#resultMeta");
@@ -183,10 +172,7 @@ let items = structuredClone(defaultItemsByLang.zh);
 let rotation = 0;
 let isSpinning = false;
 let currentTheme = "pink";
-
-function getScoreText(score) {
-  return `${score}${currentLang === "zh" ? "分" : " pts"}`;
-}
+let showChanceInfo = false;
 
 function getFocusedIndex() {
   if (!items.length) return 0;
@@ -195,10 +181,21 @@ function getFocusedIndex() {
   return Math.round(normalized / slice) % items.length;
 }
 
+function getWeightShares() {
+  const totalWeight = items.reduce((sum, item) => sum + Math.max(0, Number(item.weight) || 0), 0);
+  if (totalWeight <= 0) return items.map(() => 0);
+  return items.map((item) => (Math.max(0, Number(item.weight) || 0) / totalWeight) * 100);
+}
+
+function getShareText(value) {
+  return `${value.toFixed(1)}%`;
+}
+
 function drawWheel() {
   const center = canvas.width / 2;
   const radius = center - 18;
   const themePalette = themePalettes[currentTheme] || themePalettes.pink;
+  const shares = getWeightShares();
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   const gradient = ctx.createRadialGradient(center, center, 30, center, center, radius);
@@ -227,10 +224,12 @@ function drawWheel() {
     ctx.textAlign = "right";
     ctx.fillStyle = themePalette.label;
     ctx.font = "700 25px 'PingFang SC'";
-    ctx.fillText(item.label, radius - 72, -8);
-    ctx.font = "600 21px 'PingFang SC'";
-    ctx.fillStyle = themePalette.subLabel;
-    ctx.fillText(getScoreText(item.score), radius - 72, 28);
+    ctx.fillText(item.label, radius - 72, showChanceInfo ? -12 : 10);
+    if (showChanceInfo) {
+      ctx.font = "600 21px 'PingFang SC'";
+      ctx.fillStyle = themePalette.subLabel;
+      ctx.fillText(getShareText(shares[index]), radius - 72, 26);
+    }
     ctx.restore();
   });
 
@@ -249,7 +248,8 @@ function drawWheel() {
 
   const focused = items[getFocusedIndex()];
   if (focused) {
-    focusedLabel.textContent = `${focused.label} · ${getScoreText(focused.score)}`;
+    const share = shares[getFocusedIndex()] ?? 0;
+    focusedLabel.textContent = showChanceInfo ? `${focused.label} · ${getShareText(share)}` : focused.label;
   }
 }
 
@@ -263,29 +263,27 @@ function applyTheme(theme) {
 
 function renderList() {
   itemList.innerHTML = "";
+  const shares = getWeightShares();
   items.forEach((item, index) => {
     const row = itemTemplate.content.firstElementChild.cloneNode(true);
     const nameInput = row.querySelector(".item-name");
-    const scoreInput = row.querySelector(".item-score");
     const weightInput = row.querySelector(".item-weight");
+    const shareDisplay = row.querySelector(".item-share");
     const removeButton = row.querySelector(".remove-button");
 
     nameInput.value = item.label;
-    scoreInput.value = item.score;
     weightInput.value = item.weight ?? 1;
+    shareDisplay.textContent = getShareText(shares[index] ?? 0);
 
     nameInput.addEventListener("input", (event) => {
       items[index].label = event.target.value.trim() || (currentLang === "zh" ? "未命名奖项" : "Untitled");
       drawWheel();
     });
 
-    scoreInput.addEventListener("input", (event) => {
-      items[index].score = Number(event.target.value) || 0;
-      drawWheel();
-    });
-
     weightInput.addEventListener("input", (event) => {
       items[index].weight = Math.max(0, Number(event.target.value) || 0);
+      renderList();
+      drawWheel();
     });
 
     removeButton.addEventListener("click", () => {
@@ -307,7 +305,6 @@ function randomColor() {
 function addItem() {
   items.push({
     label: currentLang === "zh" ? `新奖项 ${items.length + 1}` : `Prize ${items.length + 1}`,
-    score: 10,
     weight: 10,
     color: randomColor(),
   });
@@ -389,7 +386,9 @@ function spin() {
 
     const focused = items[getFocusedIndex()];
     resultTitle.textContent = focused.label;
-    resultMeta.textContent = currentLang === "zh" ? `获得 ${focused.score} 分` : `Earned ${focused.score} pts`;
+    resultMeta.textContent = showChanceInfo
+      ? (currentLang === "zh" ? `当前占比 ${getShareText(getWeightShares()[getFocusedIndex()] ?? 0)}` : `Current share ${getShareText(getWeightShares()[getFocusedIndex()] ?? 0)}`)
+      : (currentLang === "zh" ? "恭喜抽中" : "Congratulations");
     resultDialog.showModal();
   }
 
@@ -409,6 +408,8 @@ function applyLanguage(lang) {
   langButtons.forEach((button) => {
     button.classList.toggle("active", button.dataset.lang === lang);
   });
+
+  toggleChanceButton.textContent = translations[lang][showChanceInfo ? "hideChance" : "showChance"];
 
   if (JSON.stringify(items) === JSON.stringify(defaultItemsByLang.zh) || JSON.stringify(items) === JSON.stringify(defaultItemsByLang.en)) {
     items = structuredClone(defaultItemsByLang[lang]);
@@ -451,6 +452,11 @@ canvas.addEventListener("click", (event) => {
 shuffleButton.addEventListener("click", shuffleItems);
 addItemButton.addEventListener("click", addItem);
 resetButton.addEventListener("click", resetItems);
+toggleChanceButton.addEventListener("click", () => {
+  showChanceInfo = !showChanceInfo;
+  toggleChanceButton.textContent = translations[currentLang][showChanceInfo ? "hideChance" : "showChance"];
+  drawWheel();
+});
 closeDialogButton.addEventListener("click", () => resultDialog.close());
 resultDialog.addEventListener("click", (event) => {
   const bounds = resultDialog.getBoundingClientRect();
@@ -464,4 +470,5 @@ resultDialog.addEventListener("click", (event) => {
 
 renderList();
 applyTheme(currentTheme);
+toggleChanceButton.textContent = translations[currentLang].showChance;
 drawWheel();

@@ -33,7 +33,6 @@
             <button class="skin-chip active" data-theme="pink" data-i18n="themePink">少女粉</button>
             <button class="skin-chip" data-theme="orange" data-i18n="themeOrange">阳光橙</button>
             <button class="skin-chip" data-theme="blue" data-i18n="themeBlue">天之蓝</button>
-            <button class="skin-chip" data-theme="silver" data-i18n="themeSilver">高级灰</button>
             <button class="skin-chip" data-theme="space" data-i18n="themeSpace">科技黑</button>
             <button class="skin-chip" data-theme="klein" data-i18n="themeKlein">克莱因蓝</button>
           </div>
@@ -120,7 +119,7 @@
               <div class="stage-footer">
                 <div class="current-result">
                   <span data-i18n="nextPrize">当前焦点奖项</span>
-                  <strong id="focusedLabel">限定礼盒 · 30分</strong>
+                  <strong id="focusedLabel">限定礼盒</strong>
                 </div>
                 <button id="shuffleButton" class="secondary-button" data-i18n="shuffleOrder">随机排序</button>
               </div>
@@ -132,19 +131,15 @@
                 <button id="addItemButton" class="secondary-button" data-i18n="addItem">新增奖项</button>
               </div>
 
-              <div class="editor-note">
-                <strong data-i18n="editorHintTitle">配置建议</strong>
-                <p data-i18n="editorHintText">奖项名称尽量短一些，现场展示会更利落；分值可以用于积分制兑换或内部统计。</p>
-              </div>
-
               <div class="editor-head">
                 <span data-i18n="prizeName">奖项名称</span>
-                <span data-i18n="prizeScore">分值</span>
                 <span data-i18n="prizeWeight">权重</span>
+                <span data-i18n="prizeShare">占比</span>
               </div>
               <div id="itemList" class="item-list"></div>
 
               <div class="editor-actions">
+                <button id="toggleChanceButton" class="secondary-button" data-i18n="showChance">显示占比</button>
                 <button id="resetButton" class="ghost-button" data-i18n="resetDefault">恢复默认</button>
               </div>
             </section>
@@ -163,7 +158,7 @@
         <div class="result-confetti confetti-right"></div>
         <p class="result-tag" data-i18n="congratsTag">抽奖结果</p>
         <h3 id="resultTitle">限定礼盒</h3>
-        <p id="resultMeta">获得 30 分</p>
+        <p id="resultMeta">恭喜抽中</p>
         <p class="result-copy" data-i18n="resultCopy">
           恭喜抽中高人气奖励，现场视觉会更适合用户举起手机拍照分享。
         </p>
@@ -180,13 +175,10 @@
           <input class="item-name" type="text" maxlength="20" />
         </label>
         <label>
-          <span class="sr-only">score</span>
-          <input class="item-score" type="number" min="0" max="9999" />
-        </label>
-        <label>
           <span class="sr-only">weight</span>
           <input class="item-weight" type="number" min="0" max="9999" />
         </label>
+        <div class="item-share">0%</div>
         <button class="remove-button" type="button" aria-label="remove">×</button>
       </div>
     </template>
