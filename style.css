@@ -341,7 +341,12 @@ p {
 }
 
 .glass-panel {
-  background: var(--panel);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, white 82%, var(--bg-accent)),
+      color-mix(in srgb, white 90%, var(--bg-accent-2))
+    );
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 24px;
   box-shadow: var(--shadow);
@@ -351,7 +356,12 @@ p {
 .layout {
   padding: 14px;
   border-radius: 30px;
-  background: rgba(255, 255, 255, 0.58);
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, white 76%, var(--bg-accent)),
+      color-mix(in srgb, white 88%, var(--bg-accent-2))
+    );
   border: 1px solid rgba(255, 255, 255, 0.8);
   box-shadow: 0 24px 60px rgba(15, 15, 20, 0.06);
   backdrop-filter: blur(28px) saturate(125%);
@@ -397,7 +407,7 @@ p {
   align-items: center;
   gap: 14px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.44);
+  background: color-mix(in srgb, white 80%, var(--bg-accent));
   color: var(--text);
   box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.04);
 }
@@ -411,7 +421,12 @@ p {
 }
 
 .activity-card.active {
-  background: rgba(255, 255, 255, 0.84);
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, white 74%, var(--primary)),
+      color-mix(in srgb, white 86%, var(--secondary))
+    );
   transform: translateY(-1px);
   box-shadow:
     0 8px 22px rgba(15, 15, 20, 0.05),
@@ -424,7 +439,7 @@ p {
   display: grid;
   place-items: center;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.72);
+  background: color-mix(in srgb, white 72%, var(--secondary));
   font-size: 1.1rem;
   box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.06);
 }
@@ -453,7 +468,12 @@ p {
 .blindbox-stage,
 .brand-panel,
 .skin-switcher {
-  background: rgba(255, 255, 255, 0.62);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, white 84%, var(--bg-accent)),
+      color-mix(in srgb, white 92%, var(--bg-accent-2))
+    );
 }
 
 .wheel-stage {
@@ -490,7 +510,12 @@ p {
   margin-top: 18px;
   padding: 14px;
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.64);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, white 88%, var(--bg-accent)),
+      color-mix(in srgb, white 94%, var(--bg-accent-2))
+    );
   border: 1px solid rgba(29, 29, 31, 0.04);
   min-height: 620px;
 }
@@ -659,7 +684,7 @@ p {
 .blindbox-summary article {
   padding: 14px 16px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.64);
+  background: color-mix(in srgb, white 84%, var(--bg-accent));
   box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.04);
 }
 
@@ -689,7 +714,7 @@ p {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.68);
+  background: color-mix(in srgb, white 90%, var(--bg-accent));
   padding: 12px 14px;
   font: inherit;
   color: var(--text);
@@ -705,7 +730,7 @@ p {
   margin-top: 14px;
   padding: 14px 16px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.64);
+  background: color-mix(in srgb, white 86%, var(--bg-accent));
   box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.04);
 }
 
@@ -780,7 +805,7 @@ p {
   padding: 14px 16px;
   margin-top: 12px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.52);
+  background: color-mix(in srgb, white 82%, var(--bg-accent));
   color: var(--muted);
   font-size: 0.92rem;
   display: grid;
@@ -805,7 +830,7 @@ p {
 .item-name-display {
   padding: 14px 16px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.68);
+  background: color-mix(in srgb, white 90%, var(--bg-accent));
   border: 1px solid var(--line);
   color: var(--text);
   font-weight: 600;
@@ -830,7 +855,7 @@ p {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.68);
+  background: color-mix(in srgb, white 90%, var(--bg-accent));
   padding: 14px 16px;
   font: inherit;
   color: var(--text);
@@ -847,7 +872,7 @@ p {
 .ghost-button {
   padding: 10px 15px;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.66);
+  background: color-mix(in srgb, white 82%, var(--bg-accent));
   color: var(--text);
   box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.05);
 }
@@ -874,7 +899,7 @@ p {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.66);
+  background: color-mix(in srgb, white 84%, var(--bg-accent));
   color: var(--primary);
   font-size: 1.3rem;
   box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.05);
