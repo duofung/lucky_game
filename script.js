@@ -24,6 +24,29 @@ const translations = {
     blindboxOverfill: "超出 {count} 个盒子，请减少数量",
     rouletteTitle: "左轮轮盘赌",
     rouletteDesc: "戏剧化停顿与刺激感氛围",
+    roulettePreview: "对弈现场",
+    rouletteEditorLabel: "对弈设置",
+    rouletteFire: "扣动扳机",
+    rouletteBulletCount: "当前子弹数",
+    rouletteHitChance: "中弹几率",
+    rouletteSafeChance: "脱险几率",
+    rouletteReward: "脱险奖励",
+    rouletteCurrentTier: "当前档位",
+    rouletteTierLabel: "子弹数量",
+    rouletteStatusLabel: "本轮状态",
+    rouletteRuleLabel: "奖励规则",
+    rouletteRuleCopy: "中弹无奖励，脱险则获得对应档位礼品",
+    rouletteCurrentTierValue: "{count} 颗子弹",
+    rouletteStatusIdle: "选择子弹数量，准备开始对弈",
+    rouletteStatusSpinning: "庄家装填完成，命运正在揭晓",
+    rouletteStatusSafe: "本轮脱险成功，奖励已锁定",
+    rouletteStatusHit: "本轮中弹，遗憾无奖励",
+    rouletteResultSafe: "脱险成功",
+    rouletteResultHit: "中弹出局",
+    rouletteResultSafeMeta: "成功脱险，奖励已锁定",
+    rouletteResultHitMeta: "本轮中弹，没有奖励",
+    rouletteResultSafeCopy: "子弹越多，风险越高，但一旦顺利脱险，现场奖励也会同步升级。",
+    rouletteResultHitCopy: "这一局没有奖励，重新选择子弹数量，再和庄家对一轮。",
     memoryTitle: "九宫格记忆力",
     memoryDesc: "短时挑战，适合排队与围观",
     pachinkoTitle: "幸运弹珠",
@@ -82,6 +105,29 @@ const translations = {
     blindboxOverfill: "Over by {count} boxes, reduce the quantities",
     rouletteTitle: "Roulette Challenge",
     rouletteDesc: "Dramatic suspense and stage energy",
+    roulettePreview: "Duel Preview",
+    rouletteEditorLabel: "Duel Setup",
+    rouletteFire: "Pull Trigger",
+    rouletteBulletCount: "Loaded Bullets",
+    rouletteHitChance: "Hit Chance",
+    rouletteSafeChance: "Safe Chance",
+    rouletteReward: "Safe Reward",
+    rouletteCurrentTier: "Current Tier",
+    rouletteTierLabel: "Bullet Count",
+    rouletteStatusLabel: "Round Status",
+    rouletteRuleLabel: "Rule",
+    rouletteRuleCopy: "A hit gives no reward. Survive the round to claim the matching prize tier.",
+    rouletteCurrentTierValue: "{count} bullets",
+    rouletteStatusIdle: "Choose the bullet count and prepare for the duel",
+    rouletteStatusSpinning: "The dealer has loaded the chamber. Fate is deciding",
+    rouletteStatusSafe: "Safe round. Reward secured.",
+    rouletteStatusHit: "Hit this round. No reward.",
+    rouletteResultSafe: "Safe Round",
+    rouletteResultHit: "Hit",
+    rouletteResultSafeMeta: "You made it through and locked the reward.",
+    rouletteResultHitMeta: "Hit this round. No reward earned.",
+    rouletteResultSafeCopy: "More bullets raise the risk, but surviving also upgrades the booth reward for this round.",
+    rouletteResultHitCopy: "No reward this time. Adjust the bullet count and challenge the dealer again.",
     memoryTitle: "Memory Grid",
     memoryDesc: "Fast challenge for queue-time engagement",
     pachinkoTitle: "Lucky Pachinko",
@@ -195,6 +241,23 @@ const defaultBlindboxPrizesByLang = {
   ],
 };
 
+const defaultRouletteRewardsByLang = {
+  zh: [
+    { bullets: 1, reward: "入场纪念贴纸" },
+    { bullets: 2, reward: "品牌香氛试香卡" },
+    { bullets: 3, reward: "限定饮品兑换券" },
+    { bullets: 4, reward: "联名礼盒体验装" },
+    { bullets: 5, reward: "当日头号大奖" },
+  ],
+  en: [
+    { bullets: 1, reward: "Welcome Sticker Pack" },
+    { bullets: 2, reward: "Brand Scent Card" },
+    { bullets: 3, reward: "Signature Drink Pass" },
+    { bullets: 4, reward: "Collab Gift Set" },
+    { bullets: 5, reward: "Grand Prize of the Day" },
+  ],
+};
+
 const canvas = document.querySelector("#wheelCanvas");
 const ctx = canvas.getContext("2d");
 const itemList = document.querySelector("#itemList");
@@ -211,6 +274,7 @@ const resultDialog = document.querySelector("#resultDialog");
 const resultCard = document.querySelector(".result-card");
 const resultTitle = document.querySelector("#resultTitle");
 const resultMeta = document.querySelector("#resultMeta");
+const resultCopy = document.querySelector(".result-copy");
 const closeDialogButton = document.querySelector("#closeDialogButton");
 const resultVisual = document.querySelector("#resultVisual");
 const langButtons = document.querySelectorAll("[data-lang]");
@@ -229,6 +293,20 @@ const boxTotalValue = document.querySelector("#boxTotalValue");
 const assignedCountValue = document.querySelector("#assignedCountValue");
 const remainingCountValue = document.querySelector("#remainingCountValue");
 const blindboxValidation = document.querySelector("#blindboxValidation");
+const rouletteFireButton = document.querySelector("#rouletteFireButton");
+const rouletteResetButton = document.querySelector("#rouletteResetButton");
+const rouletteRewardList = document.querySelector("#rouletteRewardList");
+const rouletteRewardTemplate = document.querySelector("#rouletteRewardTemplate");
+const rouletteBulletValue = document.querySelector("#rouletteBulletValue");
+const rouletteHitChanceValue = document.querySelector("#rouletteHitChanceValue");
+const rouletteSafeChanceValue = document.querySelector("#rouletteSafeChanceValue");
+const rouletteRewardValue = document.querySelector("#rouletteRewardValue");
+const rouletteCurrentTierValue = document.querySelector("#rouletteCurrentTierValue");
+const rouletteStatusText = document.querySelector("#rouletteStatusText");
+const rouletteBulletPicker = document.querySelector("#rouletteBulletPicker");
+const rouletteBulletButtons = document.querySelectorAll(".roulette-bullet-chip");
+const rouletteChambers = document.querySelectorAll(".roulette-chamber");
+const rouletteRevolver = document.querySelector("#rouletteRevolver");
 
 let currentLang = "zh";
 let currentTheme = "white";
@@ -237,8 +315,11 @@ let showChanceInfo = false;
 let showBlindboxChanceInfo = true;
 let wheelItems = structuredClone(defaultWheelItemsByLang.zh);
 let blindboxPrizes = structuredClone(defaultBlindboxPrizesByLang.zh);
+let rouletteRewards = structuredClone(defaultRouletteRewardsByLang.zh);
 let blindboxCells = [];
 let blindboxOpening = false;
+let selectedBullets = 1;
+let rouletteLocked = false;
 let rotation = 0;
 let isSpinning = false;
 
@@ -254,6 +335,114 @@ function getWheelShares() {
 
 function getShareText(value) {
   return `${value.toFixed(1)}%`;
+}
+
+function getRouletteHitChance(bullets) {
+  return (bullets / 6) * 100;
+}
+
+function getRouletteSafeChance(bullets) {
+  return 100 - getRouletteHitChance(bullets);
+}
+
+function getRouletteRewardEntry(bullets = selectedBullets) {
+  return rouletteRewards.find((entry) => entry.bullets === bullets) || rouletteRewards[0];
+}
+
+function renderRouletteSummary() {
+  const rewardEntry = getRouletteRewardEntry();
+  const hitChance = getRouletteHitChance(selectedBullets);
+  const safeChance = getRouletteSafeChance(selectedBullets);
+
+  rouletteBulletValue.textContent = `${selectedBullets} / 6`;
+  rouletteHitChanceValue.textContent = getShareText(hitChance);
+  rouletteSafeChanceValue.textContent = getShareText(safeChance);
+  rouletteRewardValue.textContent = rewardEntry.reward;
+  rouletteCurrentTierValue.textContent = translateWithCount(translations[currentLang].rouletteCurrentTierValue, selectedBullets);
+
+  rouletteBulletButtons.forEach((button) => {
+    button.classList.toggle("active", Number(button.dataset.bullets) === selectedBullets);
+  });
+
+  rouletteChambers.forEach((chamber, index) => {
+    chamber.classList.toggle("loaded", index < selectedBullets);
+  });
+}
+
+function renderRouletteRewardList() {
+  rouletteRewardList.innerHTML = "";
+  rouletteRewards.forEach((entry) => {
+    const rowTemplate = rouletteRewardTemplate.content.firstElementChild;
+    if (!rowTemplate) return;
+    const row = rowTemplate.cloneNode(true);
+    const badge = row.querySelector(".roulette-tier-badge");
+    const input = row.querySelector(".roulette-reward-input");
+    const share = row.querySelector(".roulette-reward-share");
+    if (!badge || !input || !share) return;
+
+    badge.textContent = translateWithCount(translations[currentLang].rouletteCurrentTierValue, entry.bullets);
+    input.value = entry.reward;
+    share.textContent = getShareText(getRouletteSafeChance(entry.bullets));
+
+    input.addEventListener("input", (event) => {
+      entry.reward = event.target.value;
+      if (entry.bullets === selectedBullets) renderRouletteSummary();
+    });
+
+    input.addEventListener("blur", (event) => {
+      const fallback = currentLang === "zh" ? "未命名奖励" : "Untitled Reward";
+      entry.reward = event.target.value.trim() || fallback;
+      renderRouletteRewardList();
+      renderRouletteSummary();
+    });
+
+    rouletteRewardList.appendChild(row);
+  });
+}
+
+function setRouletteStatus(key) {
+  rouletteStatusText.textContent = translations[currentLang][key];
+}
+
+function resetRouletteGame() {
+  rouletteLocked = false;
+  rouletteRevolver.classList.remove("spinning");
+  rouletteFireButton.disabled = false;
+  setRouletteStatus("rouletteStatusIdle");
+  renderRouletteSummary();
+}
+
+function pullRouletteTrigger() {
+  if (rouletteLocked) return;
+  rouletteLocked = true;
+  rouletteFireButton.disabled = true;
+  rouletteRevolver.classList.add("spinning");
+  setRouletteStatus("rouletteStatusSpinning");
+
+  window.setTimeout(() => {
+    const hit = Math.random() < selectedBullets / 6;
+    const rewardEntry = getRouletteRewardEntry();
+    rouletteRevolver.classList.remove("spinning");
+    rouletteLocked = false;
+    rouletteFireButton.disabled = false;
+
+    if (hit) {
+      setRouletteStatus("rouletteStatusHit");
+      resultTitle.textContent = translations[currentLang].rouletteResultHit;
+      resultMeta.textContent = translations[currentLang].rouletteResultHitMeta;
+      resultCopy.textContent = translations[currentLang].rouletteResultHitCopy;
+      resultVisual.hidden = true;
+      resultDialog.showModal();
+      return;
+    }
+
+    setRouletteStatus("rouletteStatusSafe");
+    resultTitle.textContent = rewardEntry.reward;
+    resultMeta.textContent = translations[currentLang].rouletteResultSafeMeta;
+    resultCopy.textContent = translations[currentLang].rouletteResultSafeCopy;
+    resultVisual.hidden = true;
+    resultDialog.showModal();
+  }, 1400);
 }
 
 function getFocusedIndex() {
@@ -424,6 +613,7 @@ function spin() {
     const focused = wheelItems[getFocusedIndex()];
     resultTitle.textContent = focused.label;
     resultMeta.textContent = currentLang === "zh" ? "恭喜抽中" : "Congratulations";
+    resultCopy.textContent = translations[currentLang].resultCopy;
     resultDialog.showModal();
   }
 
@@ -583,6 +773,7 @@ function openBlindbox(index) {
   resultVisual.hidden = false;
   resultTitle.textContent = currentLang === "zh" ? "开启盲盒中..." : "Opening blind box...";
   resultMeta.textContent = currentLang === "zh" ? "请稍候" : "Please wait";
+  resultCopy.textContent = translations[currentLang].resultCopy;
   closeDialogButton.disabled = true;
   resultDialog.showModal();
 
@@ -593,6 +784,7 @@ function openBlindbox(index) {
     resultCard.dataset.state = "revealed";
     resultTitle.textContent = cell.label;
     resultMeta.textContent = currentLang === "zh" ? "恭喜开出礼物" : "You opened a reward";
+    resultCopy.textContent = translations[currentLang].resultCopy;
     closeDialogButton.disabled = false;
   }, 1000);
 }
@@ -617,7 +809,8 @@ function setActiveActivity(activity) {
     const panelName = panel.dataset.panel;
     const show =
       (activity === "wheel" && (panelName === "wheel" || panelName === "wheel-editor")) ||
-      (activity === "blindbox" && (panelName === "blindbox" || panelName === "blindbox-editor"));
+      (activity === "blindbox" && (panelName === "blindbox" || panelName === "blindbox-editor")) ||
+      (activity === "roulette" && (panelName === "roulette" || panelName === "roulette-editor"));
     panel.classList.toggle("active", show);
   });
 
@@ -643,16 +836,20 @@ function applyLanguage(lang) {
   toggleBlindboxChanceButton.textContent = translations[lang][showBlindboxChanceInfo ? "hideChance" : "showChance"];
   wheelItems = structuredClone(defaultWheelItemsByLang[lang]);
   blindboxPrizes = structuredClone(defaultBlindboxPrizesByLang[lang]);
+  rouletteRewards = structuredClone(defaultRouletteRewardsByLang[lang]);
   blindboxCells = [];
   renderWheelEditor();
   renderBlindboxPrizeList();
+  renderRouletteRewardList();
+  renderRouletteSummary();
+  setRouletteStatus("rouletteStatusIdle");
   ensureBlindboxBoard();
   drawWheel();
 }
 
 activityCards.forEach((card) => {
   card.addEventListener("click", () => {
-    if (card.dataset.activity === "wheel" || card.dataset.activity === "blindbox") {
+    if (card.dataset.activity === "wheel" || card.dataset.activity === "blindbox" || card.dataset.activity === "roulette") {
       setActiveActivity(card.dataset.activity);
     }
   });
@@ -701,6 +898,20 @@ generateBlindboxButton.addEventListener("click", generateBlindboxBoard);
 shuffleBlindboxButton.addEventListener("click", generateBlindboxBoard);
 resetBlindboxConfigButton.addEventListener("click", resetBlindboxConfig);
 resetBlindboxBoardButton.addEventListener("click", resetBlindboxBoard);
+rouletteFireButton.addEventListener("click", pullRouletteTrigger);
+rouletteResetButton.addEventListener("click", () => {
+  rouletteRewards = structuredClone(defaultRouletteRewardsByLang[currentLang]);
+  selectedBullets = 1;
+  renderRouletteRewardList();
+  resetRouletteGame();
+});
+rouletteBulletPicker.addEventListener("click", (event) => {
+  const button = event.target.closest(".roulette-bullet-chip");
+  if (!button || rouletteLocked) return;
+  selectedBullets = Number(button.dataset.bullets);
+  renderRouletteSummary();
+  setRouletteStatus("rouletteStatusIdle");
+});
 
 closeDialogButton.addEventListener("click", () => resultDialog.close());
 resultDialog.addEventListener("click", (event) => {
@@ -718,10 +929,14 @@ resultDialog.addEventListener("close", () => {
   resultCard.dataset.state = "";
   resultVisual.hidden = true;
   closeDialogButton.disabled = false;
+  resultCopy.textContent = translations[currentLang].resultCopy;
 });
 
 renderWheelEditor();
 renderBlindboxPrizeList();
+renderRouletteRewardList();
+renderRouletteSummary();
+setRouletteStatus("rouletteStatusIdle");
 ensureBlindboxBoard();
 applyTheme(currentTheme);
 toggleChanceButton.textContent = translations[currentLang].showChance;

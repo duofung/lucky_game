@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>幸运轮盘</title>
-    <link rel="stylesheet" href="./style.css?v=20260414i" />
+    <link rel="stylesheet" href="./style.css?v=20260414k" />
   </head>
   <body>
     <div class="page-shell">
@@ -64,7 +64,6 @@
                 <strong data-i18n="rouletteTitle">左轮轮盘赌</strong>
                 <small data-i18n="rouletteDesc">戏剧化停顿与刺激感氛围</small>
               </span>
-              <em data-i18n="comingSoon">即将上线</em>
             </button>
             <button class="activity-card" data-activity="memory">
               <span class="activity-icon">▦</span>
@@ -129,13 +128,70 @@
               <div class="panel-header panel-header-inline">
                 <div class="section-label" data-i18n="blindPreview">盲盒礼物墙</div>
                 <div class="blindbox-stats">
-                  <span id="blindboxStats" data-i18n="blindStatsDefault">已开启 0 / 66</span>
+                  <span id="blindboxStats" data-i18n="blindStatsDefault">已开启 0 / 78</span>
                   <button id="resetBlindboxBoardButton" class="secondary-button" data-i18n="resetRound">重置本轮</button>
                 </div>
               </div>
 
               <div class="blindbox-grid-shell">
                 <div id="blindboxGrid" class="blindbox-grid"></div>
+              </div>
+            </section>
+
+            <section class="roulette-stage glass-panel activity-panel" data-panel="roulette">
+              <div class="panel-header panel-header-inline">
+                <div class="section-label" data-i18n="roulettePreview">对弈现场</div>
+                <button id="rouletteFireButton" class="primary-button" data-i18n="rouletteFire">扣动扳机</button>
+              </div>
+
+              <div class="roulette-stage-shell">
+                <div class="roulette-hero">
+                  <div class="roulette-revolver" id="rouletteRevolver">
+                    <div class="roulette-cylinder">
+                      <span class="roulette-chamber" data-chamber="0"></span>
+                      <span class="roulette-chamber" data-chamber="1"></span>
+                      <span class="roulette-chamber" data-chamber="2"></span>
+                      <span class="roulette-chamber" data-chamber="3"></span>
+                      <span class="roulette-chamber" data-chamber="4"></span>
+                      <span class="roulette-chamber" data-chamber="5"></span>
+                      <span class="roulette-center-pin"></span>
+                    </div>
+                  </div>
+
+                  <div class="roulette-metrics">
+                    <article>
+                      <span data-i18n="rouletteBulletCount">当前子弹数</span>
+                      <strong id="rouletteBulletValue">1 / 6</strong>
+                    </article>
+                    <article>
+                      <span data-i18n="rouletteHitChance">中弹几率</span>
+                      <strong id="rouletteHitChanceValue">16.7%</strong>
+                    </article>
+                    <article>
+                      <span data-i18n="rouletteReward">脱险奖励</span>
+                      <strong id="rouletteRewardValue">入场纪念贴纸</strong>
+                    </article>
+                  </div>
+                </div>
+
+                <div class="roulette-bullet-picker" id="rouletteBulletPicker">
+                  <button class="roulette-bullet-chip active" type="button" data-bullets="1">1</button>
+                  <button class="roulette-bullet-chip" type="button" data-bullets="2">2</button>
+                  <button class="roulette-bullet-chip" type="button" data-bullets="3">3</button>
+                  <button class="roulette-bullet-chip" type="button" data-bullets="4">4</button>
+                  <button class="roulette-bullet-chip" type="button" data-bullets="5">5</button>
+                </div>
+
+                <div class="roulette-outlook">
+                  <div class="current-result">
+                    <span data-i18n="rouletteStatusLabel">本轮状态</span>
+                    <strong id="rouletteStatusText">选择子弹数量，准备开始对弈</strong>
+                  </div>
+                  <div class="current-result">
+                    <span data-i18n="rouletteRuleLabel">奖励规则</span>
+                    <strong data-i18n="rouletteRuleCopy">中弹无奖励，脱险则获得对应档位礼品</strong>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -194,6 +250,31 @@
                 <button id="shuffleBlindboxButton" class="secondary-button" data-i18n="shuffleBlindbox">重新打乱</button>
                 <button id="resetBlindboxConfigButton" class="ghost-button" data-i18n="resetBlindboxConfig">恢复盲盒默认</button>
               </div>
+            </section>
+
+            <section class="editor-panel glass-panel activity-panel roulette-editor" data-panel="roulette-editor">
+              <div class="panel-header panel-header-inline">
+                <div class="section-label" data-i18n="rouletteEditorLabel">对弈设置</div>
+                <button id="rouletteResetButton" class="ghost-button" data-i18n="resetDefault">恢复默认</button>
+              </div>
+
+              <div class="blindbox-summary roulette-summary">
+                <article>
+                  <span data-i18n="rouletteSafeChance">脱险几率</span>
+                  <strong id="rouletteSafeChanceValue">83.3%</strong>
+                </article>
+                <article>
+                  <span data-i18n="rouletteCurrentTier">当前档位</span>
+                  <strong id="rouletteCurrentTierValue">1 颗子弹</strong>
+                </article>
+              </div>
+
+              <div class="editor-head roulette-editor-head">
+                <span data-i18n="rouletteTierLabel">子弹数量</span>
+                <span data-i18n="rouletteReward">脱险奖励</span>
+                <span data-i18n="rouletteSafeChance">脱险几率</span>
+              </div>
+              <div id="rouletteRewardList" class="item-list roulette-reward-list"></div>
             </section>
           </div>
         </section>
@@ -275,6 +356,17 @@
       </button>
     </template>
 
-    <script src="./script.js?v=20260414i"></script>
+    <template id="rouletteRewardTemplate">
+      <div class="roulette-reward-row">
+        <div class="roulette-tier-badge"></div>
+        <label>
+          <span class="sr-only">roulette reward</span>
+          <input class="roulette-reward-input" type="text" maxlength="28" />
+        </label>
+        <div class="roulette-reward-share">0%</div>
+      </div>
+    </template>
+
+    <script src="./script.js?v=20260414k"></script>
   </body>
 </html>
