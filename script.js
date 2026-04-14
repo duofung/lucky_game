@@ -441,11 +441,15 @@ function renderBlindboxPrizeList() {
   const shares = getBlindboxShares();
 
   blindboxPrizes.forEach((prize, index) => {
-    const row = blindboxPrizeTemplate.content.firstElementChild.cloneNode(true);
+    const rowTemplate = blindboxPrizeTemplate.content.firstElementChild;
+    if (!rowTemplate) return;
+    const row = rowTemplate.cloneNode(true);
     const nameInput = row.querySelector(".blindbox-prize-name");
     const qtyInput = row.querySelector(".blindbox-prize-qty");
     const share = row.querySelector(".blindbox-prize-share");
     const remove = row.querySelector(".blindbox-remove");
+
+    if (!nameInput || !qtyInput || !share || !remove) return;
 
     nameInput.value = prize.label;
     qtyInput.value = prize.qty;
@@ -499,9 +503,12 @@ function updateBlindboxStats() {
 function renderBlindboxGrid() {
   blindboxGrid.innerHTML = "";
   blindboxCells.forEach((cell, index) => {
-    const button = blindboxCellTemplate.content.firstElementChild.cloneNode(true);
+    const cellTemplate = blindboxCellTemplate.content.firstElementChild;
+    if (!cellTemplate) return;
+    const button = cellTemplate.cloneNode(true);
     const name = button.querySelector(".blindbox-cell-name");
     const badge = button.querySelector(".blindbox-cell-index");
+    if (!name || !badge) return;
     badge.textContent = String(index + 1).padStart(2, "0");
     if (cell.opened) {
       name.textContent = cell.label;
