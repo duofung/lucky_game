@@ -1,96 +1,96 @@
 :root {
-  --bg: #f5f5f7;
-  --bg-accent: rgba(255, 143, 189, 0.24);
-  --bg-accent-2: rgba(255, 209, 102, 0.16);
-  --panel: rgba(255, 255, 255, 0.72);
-  --panel-strong: rgba(255, 255, 255, 0.88);
+  --bg: #ffd6e7;
+  --bg-accent: #ffc1da;
+  --bg-accent-2: #ffe3ee;
+  --panel: #ffe7f1;
+  --panel-strong: #fff1f7;
   --text: #1d1d1f;
   --muted: #6e6e73;
-  --line: rgba(15, 15, 20, 0.08);
+  --line: rgba(119, 67, 89, 0.14);
   --primary: #ff7eb6;
   --secondary: #ffc4dd;
   --gold: #ffd166;
   --mint: #98ead8;
-  --shadow: 0 18px 48px rgba(15, 15, 20, 0.08);
-  --surface-1: rgba(255, 255, 255, 0.76);
-  --surface-2: rgba(255, 255, 255, 0.52);
-  --surface-3: rgba(255, 255, 255, 0.94);
+  --shadow: 0 18px 48px rgba(119, 67, 89, 0.12);
+  --surface-1: #ffe1ed;
+  --surface-2: #ffd8e8;
+  --surface-3: #fff0f6;
 }
 
 body[data-theme="orange"] {
-  --bg: #f7f3ef;
-  --bg-accent: rgba(255, 159, 67, 0.24);
-  --bg-accent-2: rgba(255, 209, 102, 0.16);
-  --panel: rgba(255, 250, 245, 0.76);
-  --panel-strong: rgba(255, 250, 245, 0.9);
+  --bg: #ffd9bd;
+  --bg-accent: #ffc89c;
+  --bg-accent-2: #ffe5cf;
+  --panel: #ffe8d7;
+  --panel-strong: #fff2e8;
   --text: #40352f;
   --muted: #8a776b;
-  --line: rgba(88, 70, 58, 0.12);
+  --line: rgba(116, 77, 51, 0.14);
   --primary: #ff9f43;
   --secondary: #ffd0a6;
   --gold: #ffd166;
   --mint: #ffd7b8;
-  --shadow: 0 18px 48px rgba(64, 53, 47, 0.09);
-  --surface-1: rgba(255, 252, 249, 0.82);
-  --surface-2: rgba(255, 248, 244, 0.62);
-  --surface-3: rgba(255, 253, 251, 0.94);
+  --shadow: 0 18px 48px rgba(116, 77, 51, 0.12);
+  --surface-1: #ffe0c7;
+  --surface-2: #ffd6b6;
+  --surface-3: #fff1e3;
 }
 
 body[data-theme="blue"] {
-  --bg: #f3f5f7;
-  --bg-accent: rgba(101, 199, 255, 0.22);
-  --bg-accent-2: rgba(142, 227, 239, 0.16);
-  --panel: rgba(250, 252, 253, 0.76);
-  --panel-strong: rgba(250, 252, 253, 0.9);
+  --bg: #cfeeff;
+  --bg-accent: #b7e4ff;
+  --bg-accent-2: #e0f6ff;
+  --panel: #dff3ff;
+  --panel-strong: #eef9ff;
   --text: #2f3941;
   --muted: #77848f;
-  --line: rgba(65, 77, 88, 0.12);
+  --line: rgba(48, 93, 128, 0.14);
   --primary: #5aa9ff;
   --secondary: #bfe4ff;
   --gold: #90e0ef;
   --mint: #8ee3ef;
-  --shadow: 0 18px 48px rgba(47, 57, 65, 0.08);
-  --surface-1: rgba(252, 253, 254, 0.82);
-  --surface-2: rgba(246, 248, 249, 0.64);
-  --surface-3: rgba(252, 253, 254, 0.94);
+  --shadow: 0 18px 48px rgba(48, 93, 128, 0.12);
+  --surface-1: #d4efff;
+  --surface-2: #c2e8ff;
+  --surface-3: #eff9ff;
 }
 
 body[data-theme="space"] {
-  --bg: #0a1017;
-  --bg-accent: #0f1f34;
-  --bg-accent-2: #1a3f6b;
-  --panel: rgba(13, 18, 28, 0.78);
-  --panel-strong: rgba(17, 24, 36, 0.92);
-  --text: #ebf2ff;
-  --muted: #93a8c3;
-  --line: rgba(92, 122, 162, 0.22);
-  --primary: #4f9cff;
-  --secondary: #89b8ff;
-  --gold: #96b6db;
+  --bg: #050608;
+  --bg-accent: #0b0d11;
+  --bg-accent-2: #141821;
+  --panel: #0f1218;
+  --panel-strong: #171b23;
+  --text: #f3f5f7;
+  --muted: #8f98a7;
+  --line: rgba(143, 152, 167, 0.18);
+  --primary: #6ea8ff;
+  --secondary: #243041;
+  --gold: #9db2c9;
   --mint: #6fd3ff;
-  --shadow: 0 28px 60px rgba(0, 0, 0, 0.42);
-  --surface-1: rgba(20, 28, 42, 0.82);
-  --surface-2: rgba(17, 24, 36, 0.72);
-  --surface-3: rgba(22, 31, 47, 0.94);
+  --shadow: 0 22px 52px rgba(0, 0, 0, 0.48);
+  --surface-1: #11151c;
+  --surface-2: #171c25;
+  --surface-3: #1c222d;
 }
 
 body[data-theme="klein"] {
-  --bg: #f2f3f8;
-  --bg-accent: rgba(155, 93, 229, 0.24);
-  --bg-accent-2: rgba(241, 91, 181, 0.16);
-  --panel: rgba(248, 249, 252, 0.78);
-  --panel-strong: rgba(250, 251, 253, 0.92);
+  --bg: #e3d6ff;
+  --bg-accent: #d3c0ff;
+  --bg-accent-2: #efe5ff;
+  --panel: #e9dcff;
+  --panel-strong: #f5eeff;
   --text: #2f3550;
   --muted: #78809a;
-  --line: rgba(47, 53, 80, 0.12);
+  --line: rgba(89, 73, 133, 0.14);
   --primary: #9b5de5;
   --secondary: #d4b8ff;
   --gold: #f15bb5;
   --mint: #cdb4ff;
-  --shadow: 0 18px 48px rgba(47, 53, 80, 0.08);
-  --surface-1: rgba(251, 252, 254, 0.84);
-  --surface-2: rgba(244, 246, 250, 0.68);
-  --surface-3: rgba(252, 253, 255, 0.96);
+  --shadow: 0 18px 48px rgba(89, 73, 133, 0.12);
+  --surface-1: #e5d4ff;
+  --surface-2: #dcc8ff;
+  --surface-3: #f4ecff;
 }
 
 * {
@@ -102,34 +102,12 @@ body {
   min-height: 100vh;
   font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   color: var(--text);
-  background:
-    radial-gradient(circle at top left, var(--bg-accent), transparent 24%),
-    radial-gradient(circle at right top, var(--bg-accent-2), transparent 22%),
-    linear-gradient(180deg, #fbfbfd 0%, var(--bg) 48%, #f3f3f5 100%);
+  background: var(--bg);
 }
 
 body::before,
 body::after {
-  content: "";
-  position: fixed;
-  inset: auto;
-  width: 22rem;
-  height: 22rem;
-  border-radius: 50%;
-  filter: blur(70px);
-  z-index: -1;
-}
-
-body::before {
-  top: -6rem;
-  right: -6rem;
-  background: color-mix(in srgb, var(--bg-accent) 72%, transparent);
-}
-
-body::after {
-  bottom: -8rem;
-  left: -6rem;
-  background: color-mix(in srgb, var(--bg-accent-2) 50%, transparent);
+  content: none;
 }
 
 .page-shell {
@@ -327,7 +305,7 @@ p {
   border: 0;
   padding: 9px 13px;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--surface-2);
   color: var(--text);
   cursor: pointer;
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
@@ -335,36 +313,26 @@ p {
 }
 
 .skin-chip.active {
-  background: var(--text);
+  background: var(--primary);
   color: #fff;
-  box-shadow: 0 10px 24px rgba(29, 29, 31, 0.16);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--primary) 30%, transparent);
 }
 
 .glass-panel {
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, white 82%, var(--bg-accent)),
-      color-mix(in srgb, white 90%, var(--bg-accent-2))
-    );
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: var(--panel);
+  border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
   border-radius: 24px;
   box-shadow: var(--shadow);
-  backdrop-filter: blur(26px) saturate(130%);
+  backdrop-filter: blur(18px) saturate(115%);
 }
 
 .layout {
   padding: 14px;
   border-radius: 30px;
-  background:
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, white 76%, var(--bg-accent)),
-      color-mix(in srgb, white 88%, var(--bg-accent-2))
-    );
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: var(--bg-accent);
+  border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
   box-shadow: 0 24px 60px rgba(15, 15, 20, 0.06);
-  backdrop-filter: blur(28px) saturate(125%);
+  backdrop-filter: blur(20px) saturate(110%);
   align-items: flex-start;
   gap: 14px;
 }
@@ -407,7 +375,7 @@ p {
   align-items: center;
   gap: 14px;
   border-radius: 18px;
-  background: color-mix(in srgb, white 80%, var(--bg-accent));
+  background: var(--surface-1);
   color: var(--text);
   box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.04);
 }
@@ -421,12 +389,7 @@ p {
 }
 
 .activity-card.active {
-  background:
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, white 74%, var(--primary)),
-      color-mix(in srgb, white 86%, var(--secondary))
-    );
+  background: var(--secondary);
   transform: translateY(-1px);
   box-shadow:
     0 8px 22px rgba(15, 15, 20, 0.05),
@@ -439,7 +402,7 @@ p {
   display: grid;
   place-items: center;
   border-radius: 12px;
-  background: color-mix(in srgb, white 72%, var(--secondary));
+  background: var(--surface-3);
   font-size: 1.1rem;
   box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.06);
 }
@@ -468,12 +431,7 @@ p {
 .blindbox-stage,
 .brand-panel,
 .skin-switcher {
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, white 84%, var(--bg-accent)),
-      color-mix(in srgb, white 92%, var(--bg-accent-2))
-    );
+  background: var(--panel);
 }
 
 .wheel-stage {
@@ -510,12 +468,7 @@ p {
   margin-top: 18px;
   padding: 14px;
   border-radius: 22px;
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, white 88%, var(--bg-accent)),
-      color-mix(in srgb, white 94%, var(--bg-accent-2))
-    );
+  background: var(--panel-strong);
   border: 1px solid rgba(29, 29, 31, 0.04);
   min-height: 620px;
 }
@@ -684,7 +637,7 @@ p {
 .blindbox-summary article {
   padding: 14px 16px;
   border-radius: 16px;
-  background: color-mix(in srgb, white 84%, var(--bg-accent));
+  background: var(--surface-1);
   box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.04);
 }
 
@@ -714,7 +667,7 @@ p {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: color-mix(in srgb, white 90%, var(--bg-accent));
+  background: var(--surface-3);
   padding: 12px 14px;
   font: inherit;
   color: var(--text);
@@ -730,7 +683,7 @@ p {
   margin-top: 14px;
   padding: 14px 16px;
   border-radius: 16px;
-  background: color-mix(in srgb, white 86%, var(--bg-accent));
+  background: var(--surface-1);
   box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.04);
 }
 
@@ -805,7 +758,7 @@ p {
   padding: 14px 16px;
   margin-top: 12px;
   border-radius: 16px;
-  background: color-mix(in srgb, white 82%, var(--bg-accent));
+  background: var(--surface-2);
   color: var(--muted);
   font-size: 0.92rem;
   display: grid;
@@ -830,7 +783,7 @@ p {
 .item-name-display {
   padding: 14px 16px;
   border-radius: 16px;
-  background: color-mix(in srgb, white 90%, var(--bg-accent));
+  background: var(--surface-3);
   border: 1px solid var(--line);
   color: var(--text);
   font-weight: 600;
@@ -855,7 +808,7 @@ p {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 16px;
-  background: color-mix(in srgb, white 90%, var(--bg-accent));
+  background: var(--surface-3);
   padding: 14px 16px;
   font: inherit;
   color: var(--text);
@@ -872,7 +825,7 @@ p {
 .ghost-button {
   padding: 10px 15px;
   border-radius: 14px;
-  background: color-mix(in srgb, white 82%, var(--bg-accent));
+  background: var(--surface-2);
   color: var(--text);
   box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.05);
 }
@@ -880,8 +833,8 @@ p {
 .ghost-chip.active,
 .primary-button {
   color: white;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--text) 86%, white), var(--text));
-  box-shadow: 0 14px 28px rgba(15, 15, 20, 0.16);
+  background: var(--primary);
+  box-shadow: 0 14px 28px color-mix(in srgb, var(--primary) 26%, transparent);
 }
 
 .primary-button,
@@ -899,7 +852,7 @@ p {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: color-mix(in srgb, white 84%, var(--bg-accent));
+  background: var(--surface-2);
   color: var(--primary);
   font-size: 1.3rem;
   box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.05);
