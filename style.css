@@ -475,8 +475,8 @@ p {
 
 .blindbox-grid {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(13, minmax(0, 1fr));
+  gap: 7px;
   align-content: start;
 }
 
@@ -516,16 +516,16 @@ p {
 .blindbox-cell-glow {
   inset: 10% 12% 8%;
   border-radius: 24px;
-  background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--primary) 22%, white), transparent 68%);
+  background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--primary) 14%, white), transparent 68%);
   filter: blur(12px);
-  opacity: 0.55;
+  opacity: 0.42;
   z-index: 0;
 }
 
 .blindbox-cell-box {
   inset: 14% 10% 10%;
   border-radius: 18px;
-  background: color-mix(in srgb, white 28%, var(--primary));
+  background: var(--primary);
   border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
   box-shadow:
     0 14px 26px color-mix(in srgb, var(--primary) 14%, transparent),
@@ -538,7 +538,7 @@ p {
   inset: 8% 8% auto;
   height: 28%;
   border-radius: 18px 18px 14px 14px;
-  background: color-mix(in srgb, white 14%, var(--primary));
+  background: color-mix(in srgb, black 8%, var(--primary));
   border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
   box-shadow:
     0 12px 20px rgba(0, 0, 0, 0.08),
@@ -548,7 +548,7 @@ p {
 }
 
 .blindbox-cell-ribbon {
-  background: color-mix(in srgb, white 8%, var(--gold));
+  background: var(--gold);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
   z-index: 5;
 }
@@ -575,7 +575,7 @@ p {
   top: 26%;
   transform: translate(-50%, -50%);
   border-radius: 999px;
-  background: color-mix(in srgb, white 8%, var(--gold));
+  background: var(--gold);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
   z-index: 6;
 }
@@ -585,7 +585,7 @@ p {
   height: 18px;
   top: 18%;
   border-radius: 18px 18px 8px 18px;
-  background: color-mix(in srgb, white 8%, var(--gold));
+  background: var(--gold);
   z-index: 5;
 }
 
@@ -614,7 +614,7 @@ p {
 }
 
 .blindbox-cell.opened .blindbox-cell-box {
-  background: color-mix(in srgb, white 32%, var(--gold));
+  background: color-mix(in srgb, white 18%, var(--gold));
 }
 
 .blindbox-cell.opened .blindbox-cell-lid {
@@ -1012,7 +1012,7 @@ p {
 .result-giftbox-box {
   inset: 20% 10% 10%;
   border-radius: 28px;
-  background: color-mix(in srgb, white 30%, var(--primary));
+  background: var(--primary);
   box-shadow:
     0 22px 40px color-mix(in srgb, var(--primary) 18%, transparent),
     inset 0 1px 0 rgba(255, 255, 255, 0.58);
@@ -1022,13 +1022,13 @@ p {
   inset: 8% 8% auto;
   height: 28%;
   border-radius: 28px 28px 20px 20px;
-  background: color-mix(in srgb, white 16%, var(--primary));
+  background: color-mix(in srgb, black 8%, var(--primary));
   box-shadow: 0 14px 20px rgba(0, 0, 0, 0.08);
   transform-origin: center top;
 }
 
 .result-giftbox-ribbon {
-  background: color-mix(in srgb, white 8%, var(--gold));
+  background: var(--gold);
   z-index: 2;
 }
 
@@ -1054,7 +1054,7 @@ p {
   top: 30%;
   transform: translate(-50%, -50%);
   border-radius: 999px;
-  background: color-mix(in srgb, white 8%, var(--gold));
+  background: var(--gold);
   z-index: 3;
 }
 
@@ -1063,7 +1063,7 @@ p {
   height: 24px;
   top: 21%;
   border-radius: 24px 24px 10px 24px;
-  background: color-mix(in srgb, white 8%, var(--gold));
+  background: var(--gold);
   z-index: 2;
 }
 

@@ -215,6 +215,7 @@ const generateBlindboxButton = document.querySelector("#generateBlindboxButton")
 const shuffleBlindboxButton = document.querySelector("#shuffleBlindboxButton");
 const resetBlindboxConfigButton = document.querySelector("#resetBlindboxConfigButton");
 const resetBlindboxBoardButton = document.querySelector("#resetBlindboxBoardButton");
+const toggleBlindboxChanceButton = document.querySelector("#toggleBlindboxChanceButton");
 const blindboxStats = document.querySelector("#blindboxStats");
 const boxTotalValue = document.querySelector("#boxTotalValue");
 const assignedCountValue = document.querySelector("#assignedCountValue");
@@ -225,6 +226,7 @@ let currentLang = "zh";
 let currentTheme = "pink";
 let currentActivity = "wheel";
 let showChanceInfo = false;
+let showBlindboxChanceInfo = true;
 let wheelItems = structuredClone(defaultWheelItemsByLang.zh);
 let blindboxPrizes = structuredClone(defaultBlindboxPrizesByLang.zh);
 let blindboxCells = [];
@@ -455,7 +457,7 @@ function renderBlindboxPrizeList() {
 
     nameInput.value = prize.label;
     qtyInput.value = prize.qty;
-    share.textContent = getShareText(shares[index] || 0);
+    share.textContent = showBlindboxChanceInfo ? getShareText(shares[index] || 0) : "--";
 
     nameInput.addEventListener("input", (event) => {
       blindboxPrizes[index].label = event.target.value.trim() || (currentLang === "zh" ? "未命名礼物" : "Untitled");
@@ -619,6 +621,7 @@ function applyLanguage(lang) {
   });
 
   toggleChanceButton.textContent = translations[lang][showChanceInfo ? "hideChance" : "showChance"];
+  toggleBlindboxChanceButton.textContent = translations[lang][showBlindboxChanceInfo ? "hideChance" : "showChance"];
   wheelItems = structuredClone(defaultWheelItemsByLang[lang]);
   blindboxPrizes = structuredClone(defaultBlindboxPrizesByLang[lang]);
   blindboxCells = [];
@@ -668,6 +671,13 @@ toggleChanceButton.addEventListener("click", () => {
   renderWheelEditor();
 });
 
+toggleBlindboxChanceButton.addEventListener("click", () => {
+  showBlindboxChanceInfo = !showBlindboxChanceInfo;
+  toggleBlindboxChanceButton.textContent =
+    translations[currentLang][showBlindboxChanceInfo ? "hideChance" : "showChance"];
+  renderBlindboxPrizeList();
+});
+
 generateBlindboxButton.addEventListener("click", generateBlindboxBoard);
 shuffleBlindboxButton.addEventListener("click", generateBlindboxBoard);
 resetBlindboxConfigButton.addEventListener("click", resetBlindboxConfig);
@@ -696,5 +706,6 @@ renderBlindboxPrizeList();
 ensureBlindboxBoard();
 applyTheme(currentTheme);
 toggleChanceButton.textContent = translations[currentLang].showChance;
+toggleBlindboxChanceButton.textContent = translations[currentLang].hideChance;
 setActiveActivity("wheel");
 drawWheel();
