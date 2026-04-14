@@ -1,4 +1,23 @@
 :root {
+  --bg: #f6f8fb;
+  --bg-accent: #edf3fb;
+  --bg-accent-2: #ffffff;
+  --panel: #f8fbff;
+  --panel-strong: #ffffff;
+  --text: #1d2b3a;
+  --muted: #6f7f92;
+  --line: rgba(76, 109, 145, 0.12);
+  --primary: #7fb2ff;
+  --secondary: #d9e8ff;
+  --gold: #a8c9ff;
+  --mint: #d6e6ff;
+  --shadow: 0 18px 48px rgba(81, 113, 156, 0.1);
+  --surface-1: #eef5ff;
+  --surface-2: #e6f0ff;
+  --surface-3: #ffffff;
+}
+
+body[data-theme="pink"] {
   --bg: #ffd6e7;
   --bg-accent: #ffc1da;
   --bg-accent-2: #ffe3ee;

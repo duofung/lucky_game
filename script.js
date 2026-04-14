@@ -49,6 +49,7 @@ const translations = {
     resultCopy: "恭喜抽中高人气奖励，现场视觉会更适合用户举起手机拍照分享。",
     drawAgain: "再次抽取",
     skinLabel: "皮肤切换",
+    themeWhite: "极简白",
     themePink: "少女粉",
     themeOrange: "阳光橙",
     themeBlue: "天之蓝",
@@ -106,6 +107,7 @@ const translations = {
     resultCopy: "The reward reveal is designed to feel social-first, with enough ceremony to invite photos and booth-side sharing.",
     drawAgain: "Draw Again",
     skinLabel: "Theme Switch",
+    themeWhite: "Pure White",
     themePink: "Blush Pink",
     themeOrange: "Sunny Orange",
     themeBlue: "Sky Blue",
@@ -116,6 +118,12 @@ const translations = {
 };
 
 const themePalettes = {
+  white: {
+    slices: ["#d7e7ff", "#a9c9ff", "#c7ddff", "#90b8ff", "#e3efff", "#b8d1ff"],
+    label: "#28456f",
+    centerOuter: "#ffffff",
+    centerInner: "#6fa8ff",
+  },
   pink: {
     slices: ["#ff8fbd", "#ffd166", "#8ee3ef", "#ffbe98", "#c8a2ff", "#ff6fa8"],
     label: "#5b2142",
@@ -223,7 +231,7 @@ const remainingCountValue = document.querySelector("#remainingCountValue");
 const blindboxValidation = document.querySelector("#blindboxValidation");
 
 let currentLang = "zh";
-let currentTheme = "pink";
+let currentTheme = "white";
 let currentActivity = "wheel";
 let showChanceInfo = false;
 let showBlindboxChanceInfo = true;
