@@ -669,7 +669,8 @@ p {
 }
 
 .blindbox-editor-head {
-  grid-template-columns: minmax(0, 1.7fr) 96px 82px 42px;
+  grid-template-columns: minmax(0, 1fr) 58px 52px 36px;
+  gap: 6px;
 }
 
 .blindbox-prize-list {
@@ -678,8 +679,8 @@ p {
 
 .blindbox-prize-row {
   display: grid;
-  grid-template-columns: minmax(0, 1.7fr) 96px 82px 42px;
-  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) 58px 52px 36px;
+  gap: 6px;
   align-items: center;
 }
 
@@ -689,9 +690,18 @@ p {
   border: 1px solid var(--line);
   border-radius: 14px;
   background: var(--surface-3);
-  padding: 12px 14px;
+  padding: 10px 12px;
   font: inherit;
   color: var(--text);
+}
+
+.blindbox-prize-name {
+  padding: 10px 14px;
+}
+
+.blindbox-prize-qty {
+  text-align: center;
+  padding-inline: 8px;
 }
 
 .blindbox-prize-share {
