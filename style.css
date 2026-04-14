@@ -1,4 +1,5 @@
 :root {
+  --side-rail: 340px;
   --bg: #f6f8fb;
   --bg-accent: #edf3fb;
   --bg-accent-2: #ffffff;
@@ -368,7 +369,8 @@ p {
 }
 
 .activity-sidebar {
-  width: min(320px, 100%);
+  width: var(--side-rail);
+  flex: 0 0 var(--side-rail);
   padding: 14px 10px 14px 8px;
   position: sticky;
   top: 20px;
@@ -436,7 +438,7 @@ p {
   align-items: stretch;
   gap: 14px;
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(380px, 460px);
+  grid-template-columns: minmax(0, 1fr) var(--side-rail);
 }
 
 .wheel-stage,
@@ -459,7 +461,7 @@ p {
 }
 
 .editor-panel {
-  width: min(460px, 100%);
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
