@@ -53,7 +53,7 @@ const translations = {
     themeOrange: "阳光橙",
     themeBlue: "天之蓝",
     themeSpace: "科技黑",
-    themeKlein: "梦幻紫",
+    themeKlein: "克莱因蓝",
     footerMadeBy: "技术支持：价直互联（深圳）展览科技有限公司",
   },
   en: {
@@ -110,7 +110,7 @@ const translations = {
     themeOrange: "Sunny Orange",
     themeBlue: "Sky Blue",
     themeSpace: "Tech Black",
-    themeKlein: "Dream Purple",
+    themeKlein: "Klein Blue",
     footerMadeBy: "Technical Support: Value Link Interconnect (Shenzhen) Exhibition Technology Co., Ltd.",
   },
 };
@@ -141,10 +141,10 @@ const themePalettes = {
     centerInner: "#5ea6ff",
   },
   klein: {
-    slices: ["#9b5de5", "#c77dff", "#b8a1ff", "#7b61ff", "#f15bb5", "#a66cff"],
+    slices: ["#2d5bff", "#4a73ff", "#6f90ff", "#2f6bff", "#89a5ff", "#3f63f6"],
     label: "#f7f8fb",
-    centerOuter: "#f4f6fb",
-    centerInner: "#8f4dff",
+    centerOuter: "#eef3ff",
+    centerInner: "#2450ff",
   },
 };
 
