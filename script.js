@@ -117,22 +117,22 @@ const translations = {
 
 const themePalettes = {
   pink: {
-    slices: ["#c89dac", "#d6bea2", "#b9c8bf", "#d8c7bb", "#bdb5c8", "#b78595"],
-    label: "#43363c",
+    slices: ["#d6a8b8", "#dfc3a5", "#bfd0c5", "#e1cfc3", "#c7bdd4", "#c58b9f"],
+    label: "#4a3a40",
     centerOuter: "#fcf8f9",
-    centerInner: "#b87f93",
+    centerInner: "#c38ca0",
   },
   orange: {
-    slices: ["#c49c86", "#d5baa0", "#c8ab99", "#b99080", "#d1b39a", "#c7a289"],
-    label: "#4d3d33",
+    slices: ["#d3a68f", "#debf9f", "#cfb19d", "#c69686", "#d8b596", "#cb9f86"],
+    label: "#524238",
     centerOuter: "#fcf8f4",
-    centerInner: "#bb8d74",
+    centerInner: "#c9977a",
   },
   blue: {
-    slices: ["#9eacb7", "#c0c9cf", "#aeb9c0", "#96a6b1", "#c9cbc3", "#a6b4bc"],
-    label: "#37424a",
+    slices: ["#a7bbca", "#c7d1d7", "#b4c2c9", "#9caebb", "#cdc9bf", "#aec0c8"],
+    label: "#39464e",
     centerOuter: "#f7f9fa",
-    centerInner: "#8798a8",
+    centerInner: "#8eaabd",
   },
   space: {
     slices: ["#222831", "#2d3642", "#1b212b", "#323c4d", "#0f141b", "#3d495d"],
@@ -141,10 +141,10 @@ const themePalettes = {
     centerInner: "#5ea6ff",
   },
   klein: {
-    slices: ["#8891ac", "#bbc0cf", "#97a0b7", "#7e88a4", "#cbc4ba", "#a7afc3"],
+    slices: ["#8798c0", "#c2c7d7", "#99a8c6", "#7e8eb3", "#d0c6b8", "#adb7cf"],
     label: "#f7f8fb",
     centerOuter: "#f4f6fb",
-    centerInner: "#6f7b9c",
+    centerInner: "#6f82b4",
   },
 };
 

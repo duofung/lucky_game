@@ -1,15 +1,15 @@
 :root {
   --bg: #f5f5f7;
-  --bg-accent: rgba(207, 186, 196, 0.14);
-  --bg-accent-2: rgba(214, 201, 186, 0.12);
+  --bg-accent: rgba(203, 156, 176, 0.18);
+  --bg-accent-2: rgba(226, 199, 180, 0.14);
   --panel: rgba(255, 255, 255, 0.72);
   --panel-strong: rgba(255, 255, 255, 0.88);
   --text: #1d1d1f;
   --muted: #6e6e73;
   --line: rgba(15, 15, 20, 0.08);
-  --primary: #b87f93;
-  --secondary: #d8c0ca;
-  --gold: #d8b98c;
+  --primary: #c38ca0;
+  --secondary: #dec1cc;
+  --gold: #dcc097;
   --mint: #98ead8;
   --shadow: 0 18px 48px rgba(15, 15, 20, 0.08);
   --surface-1: rgba(255, 255, 255, 0.76);
@@ -19,17 +19,17 @@
 
 body[data-theme="orange"] {
   --bg: #f7f3ef;
-  --bg-accent: rgba(214, 190, 170, 0.18);
-  --bg-accent-2: rgba(201, 173, 149, 0.14);
+  --bg-accent: rgba(214, 170, 146, 0.2);
+  --bg-accent-2: rgba(209, 185, 148, 0.16);
   --panel: rgba(255, 250, 245, 0.76);
   --panel-strong: rgba(255, 250, 245, 0.9);
   --text: #40352f;
   --muted: #8a776b;
   --line: rgba(88, 70, 58, 0.12);
-  --primary: #bb8d74;
-  --secondary: #d6b9aa;
-  --gold: #cfb08a;
-  --mint: #dcc4b2;
+  --primary: #c9977a;
+  --secondary: #dec1af;
+  --gold: #d5ba8b;
+  --mint: #d8c0ad;
   --shadow: 0 18px 48px rgba(64, 53, 47, 0.09);
   --surface-1: rgba(255, 252, 249, 0.82);
   --surface-2: rgba(255, 248, 244, 0.62);
@@ -38,17 +38,17 @@ body[data-theme="orange"] {
 
 body[data-theme="blue"] {
   --bg: #f3f5f7;
-  --bg-accent: rgba(179, 193, 205, 0.16);
-  --bg-accent-2: rgba(170, 182, 193, 0.12);
+  --bg-accent: rgba(154, 182, 201, 0.18);
+  --bg-accent-2: rgba(184, 197, 204, 0.14);
   --panel: rgba(250, 252, 253, 0.76);
   --panel-strong: rgba(250, 252, 253, 0.9);
   --text: #2f3941;
   --muted: #77848f;
   --line: rgba(65, 77, 88, 0.12);
-  --primary: #8798a8;
-  --secondary: #b8c3cd;
-  --gold: #c3b8a4;
-  --mint: #b7c7cf;
+  --primary: #8eaabd;
+  --secondary: #bfccd5;
+  --gold: #c7bca8;
+  --mint: #b6c9d2;
   --shadow: 0 18px 48px rgba(47, 57, 65, 0.08);
   --surface-1: rgba(252, 253, 254, 0.82);
   --surface-2: rgba(246, 248, 249, 0.64);
@@ -76,17 +76,17 @@ body[data-theme="space"] {
 
 body[data-theme="klein"] {
   --bg: #f2f3f8;
-  --bg-accent: rgba(163, 172, 196, 0.16);
-  --bg-accent-2: rgba(140, 149, 173, 0.14);
+  --bg-accent: rgba(130, 146, 193, 0.2);
+  --bg-accent-2: rgba(176, 178, 205, 0.16);
   --panel: rgba(248, 249, 252, 0.78);
   --panel-strong: rgba(250, 251, 253, 0.92);
   --text: #2f3550;
   --muted: #78809a;
   --line: rgba(47, 53, 80, 0.12);
-  --primary: #6f7b9c;
-  --secondary: #b3b9ca;
-  --gold: #c6baa8;
-  --mint: #b6bfd1;
+  --primary: #6f82b4;
+  --secondary: #b6bdd4;
+  --gold: #cdbfa9;
+  --mint: #bac3d6;
   --shadow: 0 18px 48px rgba(47, 53, 80, 0.08);
   --surface-1: rgba(251, 252, 254, 0.84);
   --surface-2: rgba(244, 246, 250, 0.68);
