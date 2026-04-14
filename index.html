@@ -233,7 +233,10 @@
 
     <template id="itemTemplate">
       <div class="item-row">
-        <div class="item-name-display"></div>
+        <label>
+          <span class="sr-only">name</span>
+          <input class="item-name" type="text" maxlength="20" />
+        </label>
         <label>
           <span class="sr-only">weight</span>
           <input class="item-weight" type="number" min="0" max="9999" />

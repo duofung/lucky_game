@@ -801,7 +801,7 @@ p {
   align-items: center;
 }
 
-.item-name-display {
+.item-name {
   padding: 11px 12px;
   border-radius: 14px;
   background: var(--surface-3);
@@ -809,12 +809,7 @@ p {
   color: var(--text);
   font-weight: 600;
   min-height: 44px;
-  display: flex;
-  align-items: center;
-  white-space: normal;
-  word-break: break-word;
   line-height: 1.35;
-  writing-mode: horizontal-tb;
 }
 
 .item-share {

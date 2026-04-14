@@ -321,14 +321,25 @@ function renderWheelEditor() {
 
   wheelItems.forEach((item, index) => {
     const row = itemTemplate.content.firstElementChild.cloneNode(true);
-    const nameDisplay = row.querySelector(".item-name-display");
+    const nameInput = row.querySelector(".item-name");
     const weightInput = row.querySelector(".item-weight");
     const shareDisplay = row.querySelector(".item-share");
     const removeButton = row.querySelector(".remove-button");
 
-    nameDisplay.textContent = item.label;
+    nameInput.value = item.label;
     weightInput.value = item.weight;
     shareDisplay.textContent = showChanceInfo ? getShareText(shares[index] || 0) : "--";
+
+    nameInput.addEventListener("input", (event) => {
+      wheelItems[index].label = event.target.value;
+      drawWheel();
+    });
+
+    nameInput.addEventListener("blur", (event) => {
+      const value = event.target.value.trim();
+      wheelItems[index].label = value || (currentLang === "zh" ? "未命名奖项" : "Untitled");
+      renderWheelEditor();
+    });
 
     weightInput.addEventListener("input", (event) => {
       wheelItems[index].weight = Math.max(0, Number(event.target.value) || 0);
