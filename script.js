@@ -53,7 +53,7 @@ const translations = {
     themeOrange: "阳光橙",
     themeBlue: "天之蓝",
     themeSpace: "科技黑",
-    themeKlein: "克莱因蓝",
+    themeKlein: "梦幻紫",
     footerMadeBy: "技术支持：价直互联（深圳）展览科技有限公司",
   },
   en: {
@@ -110,29 +110,29 @@ const translations = {
     themeOrange: "Sunny Orange",
     themeBlue: "Sky Blue",
     themeSpace: "Tech Black",
-    themeKlein: "Klein Blue",
+    themeKlein: "Dream Purple",
     footerMadeBy: "Technical Support: Value Link Interconnect (Shenzhen) Exhibition Technology Co., Ltd.",
   },
 };
 
 const themePalettes = {
   pink: {
-    slices: ["#d6a8b8", "#dfc3a5", "#bfd0c5", "#e1cfc3", "#c7bdd4", "#c58b9f"],
-    label: "#4a3a40",
+    slices: ["#ff8fbd", "#ffd166", "#8ee3ef", "#ffbe98", "#c8a2ff", "#ff6fa8"],
+    label: "#5b2142",
     centerOuter: "#fcf8f9",
-    centerInner: "#c38ca0",
+    centerInner: "#ff5fa2",
   },
   orange: {
-    slices: ["#d3a68f", "#debf9f", "#cfb19d", "#c69686", "#d8b596", "#cb9f86"],
-    label: "#524238",
+    slices: ["#ff9f43", "#ffd166", "#ffb36b", "#ff7f50", "#ffc857", "#ff9966"],
+    label: "#5b341c",
     centerOuter: "#fcf8f4",
-    centerInner: "#c9977a",
+    centerInner: "#ff8a3d",
   },
   blue: {
-    slices: ["#a7bbca", "#c7d1d7", "#b4c2c9", "#9caebb", "#cdc9bf", "#aec0c8"],
-    label: "#39464e",
+    slices: ["#65c7ff", "#7dd3fc", "#90e0ef", "#5aa9ff", "#a29bfe", "#48cae4"],
+    label: "#163b69",
     centerOuter: "#f7f9fa",
-    centerInner: "#8eaabd",
+    centerInner: "#2f8fff",
   },
   space: {
     slices: ["#222831", "#2d3642", "#1b212b", "#323c4d", "#0f141b", "#3d495d"],
@@ -141,10 +141,10 @@ const themePalettes = {
     centerInner: "#5ea6ff",
   },
   klein: {
-    slices: ["#8798c0", "#c2c7d7", "#99a8c6", "#7e8eb3", "#d0c6b8", "#adb7cf"],
+    slices: ["#9b5de5", "#c77dff", "#b8a1ff", "#7b61ff", "#f15bb5", "#a66cff"],
     label: "#f7f8fb",
     centerOuter: "#f4f6fb",
-    centerInner: "#6f82b4",
+    centerInner: "#8f4dff",
   },
 };
 
