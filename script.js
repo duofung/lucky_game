@@ -27,9 +27,10 @@ const translations = {
     addItem: "新增奖项",
     prizeName: "奖项名称",
     prizeScore: "分值",
+    prizeWeight: "权重",
     resetDefault: "恢复默认",
     editorHintTitle: "配置建议",
-    editorHintText: "奖项名称尽量短一些，现场展示会更利落；分值可以用于积分制兑换或内部统计。",
+    editorHintText: "权重越高，中奖概率越大；奖项名称尽量短一些，现场展示会更利落。",
     congratsTag: "抽奖结果",
     resultCopy: "恭喜抽中高人气奖励，现场视觉会更适合用户举起手机拍照分享。",
     drawAgain: "再次抽取",
@@ -71,9 +72,10 @@ const translations = {
     addItem: "Add Prize",
     prizeName: "Prize Name",
     prizeScore: "Score",
+    prizeWeight: "Weight",
     resetDefault: "Reset",
     editorHintTitle: "Editing Hint",
-    editorHintText: "Shorter labels read better from a distance, and scores work well for either public points or internal redemption logic.",
+    editorHintText: "Higher weight means higher win probability. Shorter labels also read better from a distance.",
     congratsTag: "Result",
     resultCopy: "The reward reveal is designed to feel social-first, with enough ceremony to invite photos and booth-side sharing.",
     drawAgain: "Spin Again",
@@ -142,20 +144,20 @@ const themePalettes = {
 
 const defaultItemsByLang = {
   zh: [
-    { label: "限定礼盒", score: 30, color: "#f6a6c6" },
-    { label: "品牌香氛卡", score: 15, color: "#ffcb77" },
-    { label: "新品试用装", score: 25, color: "#98ead8" },
-    { label: "午后甜点券", score: 20, color: "#ffd8a8" },
-    { label: "专属折扣码", score: 35, color: "#f8bfd7" },
-    { label: "隐藏惊喜奖", score: 50, color: "#c8b6ff" },
+    { label: "限定礼盒", score: 30, weight: 16, color: "#f6a6c6" },
+    { label: "品牌香氛卡", score: 15, weight: 24, color: "#ffcb77" },
+    { label: "新品试用装", score: 25, weight: 20, color: "#98ead8" },
+    { label: "午后甜点券", score: 20, weight: 18, color: "#ffd8a8" },
+    { label: "专属折扣码", score: 35, weight: 14, color: "#f8bfd7" },
+    { label: "隐藏惊喜奖", score: 50, weight: 8, color: "#c8b6ff" },
   ],
   en: [
-    { label: "Gift Box", score: 30, color: "#f6a6c6" },
-    { label: "Scent Card", score: 15, color: "#ffcb77" },
-    { label: "Sample Kit", score: 25, color: "#98ead8" },
-    { label: "Dessert Pass", score: 20, color: "#ffd8a8" },
-    { label: "Promo Code", score: 35, color: "#f8bfd7" },
-    { label: "Secret Prize", score: 50, color: "#c8b6ff" },
+    { label: "Gift Box", score: 30, weight: 16, color: "#f6a6c6" },
+    { label: "Scent Card", score: 15, weight: 24, color: "#ffcb77" },
+    { label: "Sample Kit", score: 25, weight: 20, color: "#98ead8" },
+    { label: "Dessert Pass", score: 20, weight: 18, color: "#ffd8a8" },
+    { label: "Promo Code", score: 35, weight: 14, color: "#f8bfd7" },
+    { label: "Secret Prize", score: 50, weight: 8, color: "#c8b6ff" },
   ],
 };
 
@@ -265,10 +267,12 @@ function renderList() {
     const row = itemTemplate.content.firstElementChild.cloneNode(true);
     const nameInput = row.querySelector(".item-name");
     const scoreInput = row.querySelector(".item-score");
+    const weightInput = row.querySelector(".item-weight");
     const removeButton = row.querySelector(".remove-button");
 
     nameInput.value = item.label;
     scoreInput.value = item.score;
+    weightInput.value = item.weight ?? 1;
 
     nameInput.addEventListener("input", (event) => {
       items[index].label = event.target.value.trim() || (currentLang === "zh" ? "未命名奖项" : "Untitled");
@@ -278,6 +282,10 @@ function renderList() {
     scoreInput.addEventListener("input", (event) => {
       items[index].score = Number(event.target.value) || 0;
       drawWheel();
+    });
+
+    weightInput.addEventListener("input", (event) => {
+      items[index].weight = Math.max(0, Number(event.target.value) || 0);
     });
 
     removeButton.addEventListener("click", () => {
@@ -300,10 +308,31 @@ function addItem() {
   items.push({
     label: currentLang === "zh" ? `新奖项 ${items.length + 1}` : `Prize ${items.length + 1}`,
     score: 10,
+    weight: 10,
     color: randomColor(),
   });
   renderList();
   drawWheel();
+}
+
+function pickWeightedWinnerIndex() {
+  const normalizedWeights = items.map((item) => Math.max(0, Number(item.weight) || 0));
+  const totalWeight = normalizedWeights.reduce((sum, weight) => sum + weight, 0);
+
+  if (totalWeight <= 0) {
+    return Math.floor(Math.random() * items.length);
+  }
+
+  let threshold = Math.random() * totalWeight;
+
+  for (let index = 0; index < normalizedWeights.length; index += 1) {
+    threshold -= normalizedWeights[index];
+    if (threshold < 0) {
+      return index;
+    }
+  }
+
+  return normalizedWeights.length - 1;
 }
 
 function shuffleItems() {
@@ -331,7 +360,7 @@ function spin() {
   isSpinning = true;
   spinButton.disabled = true;
 
-  const winnerIndex = Math.floor(Math.random() * items.length);
+  const winnerIndex = pickWeightedWinnerIndex();
   const slice = (Math.PI * 2) / items.length;
   const currentNormalized = ((rotation % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
   const targetRotation = ((-winnerIndex * slice) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);

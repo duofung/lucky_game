@@ -538,6 +538,9 @@ p {
   background: var(--surface-2);
   color: var(--muted);
   font-size: 0.92rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 88px 88px 44px;
+  gap: 10px;
 }
 
 .item-list {
@@ -549,7 +552,7 @@ p {
 
 .item-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 110px 48px;
+  grid-template-columns: minmax(0, 1fr) 110px 110px 48px;
   gap: 10px;
   align-items: center;
 }
@@ -728,6 +731,10 @@ p {
   .editor-head {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .editor-head {
+    display: none;
   }
 
   .hero-metrics {
