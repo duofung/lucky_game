@@ -1,5 +1,5 @@
 :root {
-  --side-rail: 340px;
+  --side-rail: 320px;
   --bg: #f6f8fb;
   --bg-accent: #edf3fb;
   --bg-accent-2: #ffffff;
@@ -354,7 +354,7 @@ p {
   box-shadow: 0 24px 60px rgba(15, 15, 20, 0.06);
   backdrop-filter: blur(20px) saturate(110%);
   align-items: flex-start;
-  gap: 14px;
+  gap: 12px;
 }
 
 .activity-card,
@@ -436,7 +436,7 @@ p {
 
 .content-grid {
   align-items: stretch;
-  gap: 14px;
+  gap: 12px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) var(--side-rail);
 }
