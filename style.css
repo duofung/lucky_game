@@ -1,20 +1,20 @@
 :root {
-  --bg: #fff8fd;
-  --bg-accent: #ffe7f4;
-  --bg-accent-2: #ffe4b8;
-  --panel: rgba(255, 255, 255, 0.68);
-  --panel-strong: rgba(255, 255, 255, 0.82);
-  --text: #40293b;
-  --muted: #86677d;
-  --line: rgba(126, 76, 112, 0.14);
+  --bg: #f5f5f7;
+  --bg-accent: rgba(255, 189, 215, 0.18);
+  --bg-accent-2: rgba(255, 205, 134, 0.14);
+  --panel: rgba(255, 255, 255, 0.72);
+  --panel-strong: rgba(255, 255, 255, 0.88);
+  --text: #1d1d1f;
+  --muted: #6e6e73;
+  --line: rgba(15, 15, 20, 0.08);
   --primary: #ef5da8;
-  --secondary: #f8a7c8;
-  --gold: #ffcb77;
+  --secondary: #f2b8d5;
+  --gold: #ffcd78;
   --mint: #98ead8;
-  --shadow: 0 28px 60px rgba(214, 115, 160, 0.18);
-  --surface-1: rgba(255, 255, 255, 0.78);
-  --surface-2: rgba(255, 255, 255, 0.56);
-  --surface-3: rgba(255, 255, 255, 0.92);
+  --shadow: 0 18px 48px rgba(15, 15, 20, 0.08);
+  --surface-1: rgba(255, 255, 255, 0.76);
+  --surface-2: rgba(255, 255, 255, 0.52);
+  --surface-3: rgba(255, 255, 255, 0.94);
 }
 
 body[data-theme="orange"] {
@@ -103,9 +103,9 @@ body {
   font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at top left, var(--bg-accent), transparent 28%),
-    radial-gradient(circle at right center, color-mix(in srgb, var(--bg-accent-2) 52%, transparent), transparent 26%),
-    linear-gradient(135deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 75%, var(--bg-accent)) 45%, color-mix(in srgb, var(--bg) 84%, white) 100%);
+    radial-gradient(circle at top left, var(--bg-accent), transparent 24%),
+    radial-gradient(circle at right top, var(--bg-accent-2), transparent 22%),
+    linear-gradient(180deg, #fbfbfd 0%, var(--bg) 48%, #f3f3f5 100%);
 }
 
 body::before,
@@ -113,10 +113,10 @@ body::after {
   content: "";
   position: fixed;
   inset: auto;
-  width: 28rem;
-  height: 28rem;
+  width: 22rem;
+  height: 22rem;
   border-radius: 50%;
-  filter: blur(50px);
+  filter: blur(70px);
   z-index: -1;
 }
 
@@ -133,7 +133,7 @@ body::after {
 }
 
 .page-shell {
-  padding: 28px 32px 18px;
+  padding: 26px 32px 20px;
 }
 
 .topbar,
@@ -158,7 +158,7 @@ body::after {
 }
 
 .topbar {
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .brand-block {
@@ -168,17 +168,17 @@ body::after {
 }
 
 .brand-panel {
-  padding: 18px 22px;
+  padding: 20px 24px;
   align-items: center;
-  min-width: 420px;
+  min-width: 460px;
 }
 
 .brand-mark {
   position: relative;
-  width: 68px;
-  height: 68px;
+  width: 58px;
+  height: 58px;
   flex: 0 0 auto;
-  animation: orbit-spin 14s linear infinite;
+  animation: orbit-spin 18s linear infinite;
 }
 
 .brand-mark::before,
@@ -192,24 +192,24 @@ body::after {
 
 .brand-mark::before {
   inset: -6px;
-  border: 1px solid color-mix(in srgb, var(--primary) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
   border-radius: 28px;
-  animation: orbit-spin 18s linear infinite reverse;
+  animation: orbit-spin 24s linear infinite reverse;
 }
 
 .brand-mark::after {
   inset: 6px;
-  border-top: 3px solid color-mix(in srgb, var(--gold) 82%, white);
+  border-top: 2px solid color-mix(in srgb, var(--gold) 74%, white);
   border-right: 3px solid transparent;
   border-bottom: 3px solid transparent;
   border-left: 3px solid transparent;
   border-radius: 24px;
-  animation: orbit-spin 5.2s linear infinite;
+  animation: orbit-spin 9s linear infinite;
 }
 
 .brand-mark-ring {
   inset: 0;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 76%, white), color-mix(in srgb, var(--gold) 78%, white));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 84%, white), color-mix(in srgb, var(--primary) 28%, white));
   box-shadow: var(--shadow);
   transform: rotate(-10deg);
 }
@@ -244,7 +244,7 @@ body::after {
 
 .brand-kicker {
   margin-bottom: 6px;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   letter-spacing: 0.16em;
   color: var(--muted);
 }
@@ -254,13 +254,13 @@ body::after {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 12px;
-  border-radius: 18px;
-  font-size: 12px;
-  letter-spacing: 0.12em;
+  padding: 7px 12px;
+  border-radius: 14px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  background: var(--surface-1);
-  border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(29, 29, 31, 0.06);
 }
 
 h1,
@@ -270,12 +270,11 @@ h3 {
 }
 
 h1 {
-  font-family: "Baskerville", "Times New Roman", "Songti SC", serif;
-  line-height: 1.08;
-}
-
-h1 {
-  font-size: clamp(2rem, 3vw, 2.9rem);
+  font-family: "PingFang SC", "SF Pro Display", "Helvetica Neue", sans-serif;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+  font-size: clamp(2.2rem, 3vw, 3.15rem);
 }
 
 h3 {
@@ -284,7 +283,7 @@ h3 {
 
 p {
   margin: 0;
-  line-height: 1.7;
+  line-height: 1.65;
   color: var(--muted);
 }
 
@@ -316,41 +315,42 @@ p {
 .skin-bar {
   display: flex;
   justify-content: center;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
 .skin-switcher {
-  padding: 12px 16px;
-  gap: 16px;
+  padding: 10px 14px;
+  gap: 14px;
 }
 
 .skin-chip {
   border: 0;
-  padding: 9px 14px;
-  border-radius: 18px;
-  background: var(--surface-1);
+  padding: 9px 13px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.7);
   color: var(--text);
   cursor: pointer;
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.04);
 }
 
 .skin-chip.active {
-  background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 72%, white));
+  background: var(--text);
   color: #fff;
-  box-shadow: 0 14px 24px color-mix(in srgb, var(--primary) 28%, transparent);
+  box-shadow: 0 10px 24px rgba(29, 29, 31, 0.16);
 }
 
 .glass-panel {
   background: var(--panel);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 24px;
   box-shadow: var(--shadow);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(26px) saturate(130%);
 }
 
 .layout {
   align-items: flex-start;
-  gap: 18px;
+  gap: 20px;
 }
 
 .activity-card,
@@ -366,7 +366,7 @@ p {
 
 .activity-sidebar {
   width: min(320px, 100%);
-  padding: 22px;
+  padding: 18px;
   position: sticky;
   top: 20px;
   margin-top: 0;
@@ -380,16 +380,16 @@ p {
 
 .activity-card {
   width: 100%;
-  padding: 18px;
+  padding: 16px;
   text-align: left;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 14px;
-  border-radius: 22px;
-  background: var(--surface-1);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.52);
   color: var(--text);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.04);
 }
 
 .activity-card small,
@@ -401,19 +401,22 @@ p {
 }
 
 .activity-card.active {
-  background: linear-gradient(135deg, var(--surface-3), color-mix(in srgb, var(--primary) 10%, var(--surface-1)));
-  transform: translateY(-2px);
-  box-shadow: 0 18px 30px color-mix(in srgb, var(--primary) 18%, transparent);
+  background: rgba(255, 255, 255, 0.94);
+  transform: translateY(-1px);
+  box-shadow:
+    0 12px 32px rgba(15, 15, 20, 0.08),
+    inset 0 0 0 1px rgba(29, 29, 31, 0.05);
 }
 
 .activity-icon {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   display: grid;
   place-items: center;
-  border-radius: 14px;
-  background: linear-gradient(180deg, color-mix(in srgb, white 90%, var(--bg-accent)), color-mix(in srgb, white 70%, var(--primary)));
-  font-size: 1.3rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.06);
 }
 
 .hero-panel {
@@ -423,7 +426,7 @@ p {
 
 .content-grid {
   align-items: stretch;
-  gap: 18px;
+  gap: 20px;
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(380px, 460px);
 }
@@ -431,7 +434,7 @@ p {
 .wheel-stage,
 .editor-panel,
 .blindbox-stage {
-  padding: 24px;
+  padding: 22px;
 }
 
 .wheel-stage {
@@ -467,9 +470,9 @@ p {
 .blindbox-grid-shell {
   margin-top: 18px;
   padding: 14px;
-  border-radius: 28px;
-  background: linear-gradient(180deg, var(--surface-3), var(--surface-1));
-  border: 1px solid rgba(255, 255, 255, 0.52);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.64);
+  border: 1px solid rgba(29, 29, 31, 0.04);
   min-height: 620px;
 }
 
@@ -636,8 +639,9 @@ p {
 
 .blindbox-summary article {
   padding: 14px 16px;
-  border-radius: 18px;
-  background: var(--surface-1);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.64);
+  box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.04);
 }
 
 .blindbox-summary strong {
@@ -665,8 +669,8 @@ p {
 .blindbox-prize-qty {
   width: 100%;
   border: 1px solid var(--line);
-  border-radius: 16px;
-  background: linear-gradient(180deg, var(--surface-3), var(--surface-1));
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.68);
   padding: 12px 14px;
   font: inherit;
   color: var(--text);
@@ -681,8 +685,9 @@ p {
 .blindbox-validation {
   margin-top: 14px;
   padding: 14px 16px;
-  border-radius: 18px;
-  background: var(--surface-1);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.64);
+  box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.04);
 }
 
 .blindbox-validation[data-state="warn"] {
@@ -723,15 +728,14 @@ p {
 .wheel-frame {
   max-width: 620px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 20px;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 30% 30%, color-mix(in srgb, white 95%, var(--bg-accent)), color-mix(in srgb, white 72%, var(--bg-accent)) 45%, color-mix(in srgb, var(--primary) 18%, transparent) 80%),
-    linear-gradient(135deg, color-mix(in srgb, white 82%, var(--bg-accent)), color-mix(in srgb, white 72%, var(--primary)));
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.72) 58%, rgba(255, 255, 255, 0.18) 100%);
   box-shadow:
-    inset 0 0 0 18px rgba(255, 255, 255, 0.42),
-    inset 0 0 0 24px color-mix(in srgb, var(--primary) 18%, white),
-    0 30px 60px color-mix(in srgb, var(--primary) 22%, transparent);
+    inset 0 0 0 12px rgba(255, 255, 255, 0.72),
+    inset 0 0 0 18px rgba(15, 15, 20, 0.03),
+    0 24px 48px rgba(15, 15, 20, 0.08);
 }
 
 #wheelCanvas {
@@ -739,7 +743,7 @@ p {
   height: auto;
   display: block;
   border-radius: 50%;
-  background: radial-gradient(circle at center, color-mix(in srgb, white 96%, var(--bg-accent)), color-mix(in srgb, white 80%, var(--bg-accent)));
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.96), rgba(248, 248, 250, 0.88));
   cursor: pointer;
 }
 
@@ -756,8 +760,8 @@ p {
 .editor-head {
   padding: 14px 16px;
   margin-top: 12px;
-  border-radius: 18px;
-  background: var(--surface-2);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.52);
   color: var(--muted);
   font-size: 0.92rem;
   display: grid;
@@ -781,8 +785,8 @@ p {
 
 .item-name-display {
   padding: 14px 16px;
-  border-radius: 18px;
-  background: linear-gradient(180deg, var(--surface-3), var(--surface-1));
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.68);
   border: 1px solid var(--line);
   color: var(--text);
   font-weight: 600;
@@ -806,8 +810,8 @@ p {
 .item-row input {
   width: 100%;
   border: 1px solid var(--line);
-  border-radius: 18px;
-  background: linear-gradient(180deg, var(--surface-3), var(--surface-1));
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.68);
   padding: 14px 16px;
   font: inherit;
   color: var(--text);
@@ -822,17 +826,18 @@ p {
 .ghost-chip,
 .secondary-button,
 .ghost-button {
-  padding: 10px 16px;
-  border-radius: 18px;
-  background: var(--surface-1);
+  padding: 10px 15px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.66);
   color: var(--text);
+  box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.05);
 }
 
 .ghost-chip.active,
 .primary-button {
   color: white;
-  background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 64%, var(--secondary)), color-mix(in srgb, var(--primary) 48%, var(--gold)));
-  box-shadow: 0 16px 30px color-mix(in srgb, var(--primary) 24%, transparent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--text) 86%, white), var(--text));
+  box-shadow: 0 14px 28px rgba(15, 15, 20, 0.16);
 }
 
 .primary-button,
@@ -843,16 +848,17 @@ p {
 }
 
 .primary-button {
-  padding: 13px 22px;
+  padding: 12px 20px;
 }
 
 .remove-button {
   width: 44px;
   height: 44px;
-  border-radius: 14px;
-  background: var(--surface-1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.66);
   color: var(--primary);
   font-size: 1.3rem;
+  box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.05);
 }
 
 @keyframes orbit-spin {
@@ -957,7 +963,7 @@ p {
   padding: 12px 0 2px;
   text-align: center;
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
 }
 
 .result-dialog::backdrop {
@@ -969,11 +975,10 @@ p {
   position: relative;
   overflow: hidden;
   padding: 30px;
-  border-radius: 34px;
+  border-radius: 28px;
   background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.95), rgba(255, 240, 247, 0.92)),
-    linear-gradient(180deg, #fff, #fff4f9);
-  box-shadow: 0 30px 70px rgba(180, 74, 128, 0.28);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(250, 250, 252, 0.94));
+  box-shadow: 0 28px 72px rgba(15, 15, 20, 0.14);
   text-align: center;
 }
 
