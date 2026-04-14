@@ -15,7 +15,6 @@ const translations = {
     assignedCount: "已分配",
     remainingCount: "剩余",
     blindboxQty: "数量",
-    prizeRare: "稀有度",
     generateBlindbox: "生成盲盒",
     shuffleBlindbox: "重新打乱",
     resetBlindboxConfig: "恢复盲盒默认",
@@ -73,7 +72,6 @@ const translations = {
     assignedCount: "Assigned",
     remainingCount: "Remaining",
     blindboxQty: "Qty",
-    prizeRare: "Tier",
     generateBlindbox: "Generate Boxes",
     shuffleBlindbox: "Shuffle Layout",
     resetBlindboxConfig: "Reset Blind Box",
@@ -172,20 +170,20 @@ const defaultWheelItemsByLang = {
 const blindboxBoxCount = 66;
 const defaultBlindboxPrizesByLang = {
   zh: [
-    { label: "典藏礼盒", qty: 2, rarity: "超稀有" },
-    { label: "品牌水杯", qty: 4, rarity: "稀有" },
-    { label: "联名香薰卡", qty: 6, rarity: "稀有" },
-    { label: "定制笔记本", qty: 8, rarity: "精选" },
-    { label: "新品试用装", qty: 10, rarity: "精选" },
-    { label: "品牌手提袋", qty: 36, rarity: "基础" },
+    { label: "典藏礼盒", qty: 2 },
+    { label: "品牌水杯", qty: 4 },
+    { label: "联名香薰卡", qty: 6 },
+    { label: "定制笔记本", qty: 8 },
+    { label: "新品试用装", qty: 10 },
+    { label: "品牌手提袋", qty: 36 },
   ],
   en: [
-    { label: "Collector Box", qty: 2, rarity: "Ultra" },
-    { label: "Branded Tumbler", qty: 4, rarity: "Rare" },
-    { label: "Scent Card", qty: 6, rarity: "Rare" },
-    { label: "Notebook", qty: 8, rarity: "Select" },
-    { label: "Sample Kit", qty: 10, rarity: "Select" },
-    { label: "Carry Bag", qty: 36, rarity: "Base" },
+    { label: "Collector Box", qty: 2 },
+    { label: "Branded Tumbler", qty: 4 },
+    { label: "Scent Card", qty: 6 },
+    { label: "Notebook", qty: 8 },
+    { label: "Sample Kit", qty: 10 },
+    { label: "Carry Bag", qty: 36 },
   ],
 };
 
@@ -228,6 +226,7 @@ let showChanceInfo = false;
 let wheelItems = structuredClone(defaultWheelItemsByLang.zh);
 let blindboxPrizes = structuredClone(defaultBlindboxPrizesByLang.zh);
 let blindboxCells = [];
+let blindboxOpening = false;
 let rotation = 0;
 let isSpinning = false;
 
@@ -446,13 +445,11 @@ function renderBlindboxPrizeList() {
     const nameInput = row.querySelector(".blindbox-prize-name");
     const qtyInput = row.querySelector(".blindbox-prize-qty");
     const share = row.querySelector(".blindbox-prize-share");
-    const rarity = row.querySelector(".blindbox-prize-rare");
     const remove = row.querySelector(".blindbox-remove");
 
     nameInput.value = prize.label;
     qtyInput.value = prize.qty;
     share.textContent = getShareText(shares[index] || 0);
-    rarity.textContent = prize.rarity;
 
     nameInput.addEventListener("input", (event) => {
       blindboxPrizes[index].label = event.target.value.trim() || (currentLang === "zh" ? "未命名礼物" : "Untitled");
@@ -480,7 +477,7 @@ function buildBlindboxPool() {
   const pool = [];
   blindboxPrizes.forEach((prize) => {
     for (let index = 0; index < prize.qty; index += 1) {
-      pool.push({ label: prize.label, rarity: prize.rarity, opened: false });
+      pool.push({ label: prize.label, opened: false, opening: false });
     }
   });
   return pool;
@@ -503,10 +500,19 @@ function renderBlindboxGrid() {
   blindboxGrid.innerHTML = "";
   blindboxCells.forEach((cell, index) => {
     const button = blindboxCellTemplate.content.firstElementChild.cloneNode(true);
-    const label = button.querySelector(".blindbox-cell-label");
-    button.dataset.rarity = cell.rarity;
-    label.textContent = cell.opened ? cell.label : String(index + 1).padStart(2, "0");
+    const name = button.querySelector(".blindbox-cell-name");
+    const badge = button.querySelector(".blindbox-cell-index");
+    badge.textContent = String(index + 1).padStart(2, "0");
+    if (cell.opened) {
+      name.textContent = cell.label;
+    } else if (cell.opening) {
+      name.textContent = currentLang === "zh" ? "开启中" : "Opening";
+    } else {
+      name.textContent = "";
+    }
     if (cell.opened) button.classList.add("opened");
+    if (cell.opening) button.classList.add("opening");
+    if (blindboxOpening && !cell.opening && !cell.opened) button.disabled = true;
     button.addEventListener("click", () => openBlindbox(index));
     blindboxGrid.appendChild(button);
   });
@@ -517,31 +523,48 @@ function generateBlindboxBoard() {
   const assigned = blindboxPrizes.reduce((sum, prize) => sum + (Number(prize.qty) || 0), 0);
   if (assigned !== blindboxBoxCount) return;
   blindboxCells = shuffleArray(buildBlindboxPool());
+  blindboxOpening = false;
   renderBlindboxGrid();
+}
+
+function ensureBlindboxBoard() {
+  const assigned = blindboxPrizes.reduce((sum, prize) => sum + (Number(prize.qty) || 0), 0);
+  if (assigned !== blindboxBoxCount) return;
+  if (blindboxCells.length === blindboxBoxCount) return;
+  generateBlindboxBoard();
 }
 
 function resetBlindboxBoard() {
   if (!blindboxCells.length) return;
-  blindboxCells = blindboxCells.map((cell) => ({ ...cell, opened: false }));
+  blindboxOpening = false;
+  blindboxCells = blindboxCells.map((cell) => ({ ...cell, opened: false, opening: false }));
   renderBlindboxGrid();
 }
 
 function resetBlindboxConfig() {
   blindboxPrizes = structuredClone(defaultBlindboxPrizesByLang[currentLang]);
   renderBlindboxPrizeList();
+  blindboxOpening = false;
   blindboxCells = [];
-  blindboxGrid.innerHTML = "";
-  blindboxStats.textContent = translations[currentLang].blindStatsDefault;
+  ensureBlindboxBoard();
 }
 
 function openBlindbox(index) {
   const cell = blindboxCells[index];
-  if (!cell || cell.opened) return;
-  cell.opened = true;
+  if (!cell || cell.opened || cell.opening || blindboxOpening) return;
+  blindboxOpening = true;
+  cell.opening = true;
   renderBlindboxGrid();
-  resultTitle.textContent = cell.label;
-  resultMeta.textContent = currentLang === "zh" ? `${cell.rarity} 礼物` : `${cell.rarity} reward`;
-  resultDialog.showModal();
+
+  window.setTimeout(() => {
+    cell.opening = false;
+    cell.opened = true;
+    blindboxOpening = false;
+    renderBlindboxGrid();
+    resultTitle.textContent = cell.label;
+    resultMeta.textContent = currentLang === "zh" ? "恭喜开出礼物" : "You opened a reward";
+    resultDialog.showModal();
+  }, 1000);
 }
 
 function applyTheme(theme) {
@@ -567,6 +590,8 @@ function setActiveActivity(activity) {
       (activity === "blindbox" && (panelName === "blindbox" || panelName === "blindbox-editor"));
     panel.classList.toggle("active", show);
   });
+
+  if (activity === "blindbox") ensureBlindboxBoard();
 }
 
 function applyLanguage(lang) {
@@ -585,13 +610,12 @@ function applyLanguage(lang) {
   });
 
   toggleChanceButton.textContent = translations[lang][showChanceInfo ? "hideChance" : "showChance"];
-  blindboxStats.textContent = translations[lang].blindStatsDefault;
   wheelItems = structuredClone(defaultWheelItemsByLang[lang]);
   blindboxPrizes = structuredClone(defaultBlindboxPrizesByLang[lang]);
   blindboxCells = [];
-  blindboxGrid.innerHTML = "";
   renderWheelEditor();
   renderBlindboxPrizeList();
+  ensureBlindboxBoard();
   drawWheel();
 }
 
@@ -653,6 +677,7 @@ resultDialog.addEventListener("click", (event) => {
 
 renderWheelEditor();
 renderBlindboxPrizeList();
+ensureBlindboxBoard();
 applyTheme(currentTheme);
 toggleChanceButton.textContent = translations[currentLang].showChance;
 setActiveActivity("wheel");

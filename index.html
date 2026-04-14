@@ -182,7 +182,6 @@
                 <span data-i18n="prizeName">奖项名称</span>
                 <span data-i18n="blindboxQty">数量</span>
                 <span data-i18n="prizeChance">几率</span>
-                <span data-i18n="prizeRare">稀有度</span>
                 <span></span>
               </div>
               <div id="blindboxPrizeList" class="item-list blindbox-prize-list"></div>
@@ -242,16 +241,22 @@
           <input class="blindbox-prize-qty" type="number" min="0" max="999" />
         </label>
         <div class="blindbox-prize-share">0%</div>
-        <div class="blindbox-prize-rare"></div>
         <button class="remove-button blindbox-remove" type="button" aria-label="remove">×</button>
       </div>
     </template>
 
     <template id="blindboxCellTemplate">
       <button class="blindbox-cell" type="button">
+        <span class="blindbox-cell-glow"></span>
+        <span class="blindbox-cell-box"></span>
         <span class="blindbox-cell-lid"></span>
-        <span class="blindbox-cell-ribbon"></span>
-        <span class="blindbox-cell-label"></span>
+        <span class="blindbox-cell-ribbon blindbox-cell-ribbon-vertical"></span>
+        <span class="blindbox-cell-ribbon blindbox-cell-ribbon-horizontal"></span>
+        <span class="blindbox-cell-bow-knot"></span>
+        <span class="blindbox-cell-bow-loop blindbox-cell-bow-left"></span>
+        <span class="blindbox-cell-bow-loop blindbox-cell-bow-right"></span>
+        <span class="blindbox-cell-index"></span>
+        <span class="blindbox-cell-name"></span>
       </button>
     </template>
 
