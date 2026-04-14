@@ -42,7 +42,7 @@ const translations = {
     rouletteStatusSafe: "本轮脱险成功，奖励已锁定",
     rouletteStatusHit: "本轮中弹，遗憾无奖励",
     rouletteResultSafe: "脱险成功",
-    rouletteResultHit: "中弹出局",
+    rouletteResultHit: "YOU OUT!",
     rouletteResultSafeMeta: "成功脱险，奖励已锁定",
     rouletteResultHitMeta: "本轮中弹，没有奖励",
     rouletteResultSafeCopy: "子弹越多，风险越高，但一旦顺利脱险，现场奖励也会同步升级。",
@@ -123,7 +123,7 @@ const translations = {
     rouletteStatusSafe: "Safe round. Reward secured.",
     rouletteStatusHit: "Hit this round. No reward.",
     rouletteResultSafe: "Safe Round",
-    rouletteResultHit: "Hit",
+    rouletteResultHit: "YOU OUT!",
     rouletteResultSafeMeta: "You made it through and locked the reward.",
     rouletteResultHitMeta: "Hit this round. No reward earned.",
     rouletteResultSafeCopy: "More bullets raise the risk, but surviving also upgrades the booth reward for this round.",
@@ -407,6 +407,7 @@ function setRouletteStatus(key) {
 function resetRouletteGame() {
   rouletteLocked = false;
   rouletteRevolver.classList.remove("spinning");
+  rouletteRevolver.classList.remove("recoil", "fire", "hit", "safe");
   rouletteFireButton.disabled = false;
   setRouletteStatus("rouletteStatusIdle");
   renderRouletteSummary();
@@ -416,6 +417,8 @@ function pullRouletteTrigger() {
   if (rouletteLocked) return;
   rouletteLocked = true;
   rouletteFireButton.disabled = true;
+  rouletteRevolver.classList.remove("recoil", "fire", "hit", "safe");
+  rouletteRevolver.offsetWidth;
   rouletteRevolver.classList.add("spinning");
   setRouletteStatus("rouletteStatusSpinning");
 
@@ -423,26 +426,37 @@ function pullRouletteTrigger() {
     const hit = Math.random() < selectedBullets / 6;
     const rewardEntry = getRouletteRewardEntry();
     rouletteRevolver.classList.remove("spinning");
-    rouletteLocked = false;
-    rouletteFireButton.disabled = false;
+    rouletteRevolver.classList.add("recoil", "fire", hit ? "hit" : "safe");
 
-    if (hit) {
-      setRouletteStatus("rouletteStatusHit");
-      resultTitle.textContent = translations[currentLang].rouletteResultHit;
-      resultMeta.textContent = translations[currentLang].rouletteResultHitMeta;
-      resultCopy.textContent = translations[currentLang].rouletteResultHitCopy;
+    window.setTimeout(() => {
+      rouletteLocked = false;
+      rouletteFireButton.disabled = false;
+      rouletteRevolver.classList.remove("fire");
+
+      if (hit) {
+        setRouletteStatus("rouletteStatusHit");
+        resultCard.dataset.variant = "roulette-hit";
+        resultTitle.textContent = translations[currentLang].rouletteResultHit;
+        resultMeta.textContent = translations[currentLang].rouletteResultHitMeta;
+        resultCopy.textContent = translations[currentLang].rouletteResultHitCopy;
+        resultVisual.hidden = true;
+        resultDialog.showModal();
+        return;
+      }
+
+      setRouletteStatus("rouletteStatusSafe");
+      resultCard.dataset.variant = "roulette-safe";
+      resultTitle.textContent = rewardEntry.reward;
+      resultMeta.textContent = translations[currentLang].rouletteResultSafeMeta;
+      resultCopy.textContent = translations[currentLang].rouletteResultSafeCopy;
       resultVisual.hidden = true;
       resultDialog.showModal();
-      return;
-    }
+    }, 340);
 
-    setRouletteStatus("rouletteStatusSafe");
-    resultTitle.textContent = rewardEntry.reward;
-    resultMeta.textContent = translations[currentLang].rouletteResultSafeMeta;
-    resultCopy.textContent = translations[currentLang].rouletteResultSafeCopy;
-    resultVisual.hidden = true;
-    resultDialog.showModal();
-  }, 1400);
+    window.setTimeout(() => {
+      rouletteRevolver.classList.remove("recoil", "hit", "safe");
+    }, 900);
+  }, 1500);
 }
 
 function getFocusedIndex() {
@@ -927,6 +941,7 @@ resultDialog.addEventListener("click", (event) => {
 resultDialog.addEventListener("close", () => {
   resultDialog.dataset.mode = "";
   resultCard.dataset.state = "";
+  resultCard.dataset.variant = "";
   resultVisual.hidden = true;
   closeDialogButton.disabled = false;
   resultCopy.textContent = translations[currentLang].resultCopy;
