@@ -1,116 +1,21 @@
 :root {
   --side-rail: 320px;
-  --bg: #f6f8fb;
-  --bg-accent: #edf3fb;
+  --bg: #f3f5f7;
+  --bg-accent: #edf1f5;
   --bg-accent-2: #ffffff;
-  --panel: #f8fbff;
+  --panel: rgba(255, 255, 255, 0.9);
   --panel-strong: #ffffff;
-  --text: #1d2b3a;
-  --muted: #6f7f92;
-  --line: rgba(76, 109, 145, 0.12);
-  --primary: #7fb2ff;
-  --secondary: #d9e8ff;
-  --gold: #a8c9ff;
-  --mint: #d6e6ff;
-  --shadow: 0 18px 48px rgba(81, 113, 156, 0.1);
-  --surface-1: #eef5ff;
-  --surface-2: #e6f0ff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --line: rgba(15, 23, 42, 0.08);
+  --primary: #8eb4e7;
+  --secondary: #edf4fb;
+  --gold: #c9d8eb;
+  --mint: #e8eff7;
+  --shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
+  --surface-1: #f5f8fb;
+  --surface-2: #eef3f8;
   --surface-3: #ffffff;
-}
-
-body[data-theme="pink"] {
-  --bg: #ffd6e7;
-  --bg-accent: #ffc1da;
-  --bg-accent-2: #ffe3ee;
-  --panel: #ffe7f1;
-  --panel-strong: #fff1f7;
-  --text: #1d1d1f;
-  --muted: #6e6e73;
-  --line: rgba(119, 67, 89, 0.14);
-  --primary: #ff7eb6;
-  --secondary: #ffc4dd;
-  --gold: #ffd166;
-  --mint: #98ead8;
-  --shadow: 0 18px 48px rgba(119, 67, 89, 0.12);
-  --surface-1: #ffe1ed;
-  --surface-2: #ffd8e8;
-  --surface-3: #fff0f6;
-}
-
-body[data-theme="orange"] {
-  --bg: #ffd9bd;
-  --bg-accent: #ffc89c;
-  --bg-accent-2: #ffe5cf;
-  --panel: #ffe8d7;
-  --panel-strong: #fff2e8;
-  --text: #40352f;
-  --muted: #8a776b;
-  --line: rgba(116, 77, 51, 0.14);
-  --primary: #ff9f43;
-  --secondary: #ffd0a6;
-  --gold: #ffd166;
-  --mint: #ffd7b8;
-  --shadow: 0 18px 48px rgba(116, 77, 51, 0.12);
-  --surface-1: #ffe0c7;
-  --surface-2: #ffd6b6;
-  --surface-3: #fff1e3;
-}
-
-body[data-theme="blue"] {
-  --bg: #cfeeff;
-  --bg-accent: #b7e4ff;
-  --bg-accent-2: #e0f6ff;
-  --panel: #dff3ff;
-  --panel-strong: #eef9ff;
-  --text: #2f3941;
-  --muted: #77848f;
-  --line: rgba(48, 93, 128, 0.14);
-  --primary: #5aa9ff;
-  --secondary: #bfe4ff;
-  --gold: #90e0ef;
-  --mint: #8ee3ef;
-  --shadow: 0 18px 48px rgba(48, 93, 128, 0.12);
-  --surface-1: #d4efff;
-  --surface-2: #c2e8ff;
-  --surface-3: #eff9ff;
-}
-
-body[data-theme="space"] {
-  --bg: #050608;
-  --bg-accent: #0b0d11;
-  --bg-accent-2: #141821;
-  --panel: #0f1218;
-  --panel-strong: #171b23;
-  --text: #f3f5f7;
-  --muted: #8f98a7;
-  --line: rgba(143, 152, 167, 0.18);
-  --primary: #6ea8ff;
-  --secondary: #243041;
-  --gold: #9db2c9;
-  --mint: #6fd3ff;
-  --shadow: 0 22px 52px rgba(0, 0, 0, 0.48);
-  --surface-1: #11151c;
-  --surface-2: #171c25;
-  --surface-3: #1c222d;
-}
-
-body[data-theme="klein"] {
-  --bg: #d7e2ff;
-  --bg-accent: #c2d2ff;
-  --bg-accent-2: #edf2ff;
-  --panel: #e3ebff;
-  --panel-strong: #f1f5ff;
-  --text: #25345a;
-  --muted: #6678a7;
-  --line: rgba(50, 76, 145, 0.14);
-  --primary: #2f5bff;
-  --secondary: #b8c9ff;
-  --gold: #8fb3ff;
-  --mint: #c6d6ff;
-  --shadow: 0 18px 48px rgba(47, 91, 255, 0.14);
-  --surface-1: #dce7ff;
-  --surface-2: #d2dfff;
-  --surface-3: #f0f4ff;
 }
 
 * {
@@ -122,7 +27,9 @@ body {
   min-height: 100vh;
   font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   color: var(--text);
-  background: var(--bg);
+  background:
+    radial-gradient(circle at top, rgba(180, 204, 232, 0.18), transparent 28%),
+    linear-gradient(180deg, #f9fafb 0%, var(--bg) 22%, #eef2f6 100%);
 }
 
 body::before,
@@ -156,7 +63,7 @@ body::after {
 }
 
 .topbar {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .brand-block {
@@ -166,7 +73,7 @@ body::after {
 }
 
 .brand-panel {
-  padding: 20px 24px;
+  padding: 22px 26px;
   align-items: center;
   min-width: 460px;
 }
@@ -241,9 +148,9 @@ body::after {
 }
 
 .brand-kicker {
-  margin-bottom: 6px;
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
+  margin-bottom: 8px;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
   color: var(--muted);
 }
 
@@ -257,8 +164,9 @@ body::after {
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(29, 29, 31, 0.06);
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  color: #64748b;
 }
 
 h1,
@@ -296,63 +204,34 @@ p {
 .lang-toolbar {
   margin-left: auto;
   align-self: flex-start;
-}
-
-.toolbar-label {
-  font-size: 0.92rem;
-  color: var(--muted);
-}
-
-.skin-switcher,
-.skin-options {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.skin-bar {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 22px;
-}
-
-.skin-switcher {
-  padding: 10px 14px;
-  gap: 14px;
-}
-
-.skin-chip {
-  border: 0;
-  padding: 9px 13px;
-  border-radius: 14px;
-  background: var(--surface-2);
-  color: var(--text);
-  cursor: pointer;
-  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
-  box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.04);
-}
-
-.skin-chip.active {
-  background: var(--primary);
-  color: #fff;
-  box-shadow: 0 10px 24px color-mix(in srgb, var(--primary) 30%, transparent);
+  padding: 6px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow:
+    inset 0 0 0 1px rgba(15, 23, 42, 0.05),
+    0 8px 24px rgba(15, 23, 42, 0.04);
 }
 
 .glass-panel {
-  background: var(--panel);
-  border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
-  border-radius: 24px;
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(18px) saturate(115%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.72));
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  border-radius: 28px;
+  box-shadow:
+    0 16px 44px rgba(15, 23, 42, 0.06),
+    0 2px 6px rgba(15, 23, 42, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px) saturate(108%);
 }
 
 .layout {
   padding: 14px;
-  border-radius: 30px;
-  background: var(--bg-accent);
-  border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
-  box-shadow: 0 24px 60px rgba(15, 15, 20, 0.06);
-  backdrop-filter: blur(20px) saturate(110%);
+  border-radius: 34px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(248, 250, 252, 0.74));
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  box-shadow:
+    0 24px 64px rgba(15, 23, 42, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(22px) saturate(108%);
   align-items: flex-start;
   gap: 12px;
 }
@@ -396,9 +275,9 @@ p {
   align-items: center;
   gap: 14px;
   border-radius: 18px;
-  background: var(--surface-1);
+  background: rgba(255, 255, 255, 0.68);
   color: var(--text);
-  box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.04);
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.04);
 }
 
 .activity-card small,
@@ -410,11 +289,11 @@ p {
 }
 
 .activity-card.active {
-  background: var(--secondary);
+  background: linear-gradient(180deg, #f6faff, #edf4fb);
   transform: translateY(-1px);
   box-shadow:
-    0 8px 22px rgba(15, 15, 20, 0.05),
-    inset 0 0 0 1px rgba(29, 29, 31, 0.05);
+    0 10px 24px rgba(15, 23, 42, 0.05),
+    inset 0 0 0 1px rgba(142, 180, 231, 0.28);
 }
 
 .activity-icon {
@@ -450,8 +329,7 @@ p {
 .wheel-stage,
 .editor-panel,
 .blindbox-stage,
-.brand-panel,
-.skin-switcher {
+.brand-panel {
   background: var(--panel);
 }
 
@@ -1182,17 +1060,21 @@ p {
 .secondary-button,
 .ghost-button {
   padding: 10px 15px;
-  border-radius: 14px;
-  background: var(--surface-2);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.82);
   color: var(--text);
-  box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.05);
+  box-shadow:
+    inset 0 0 0 1px rgba(15, 23, 42, 0.06),
+    0 8px 18px rgba(15, 23, 42, 0.03);
 }
 
 .ghost-chip.active,
 .primary-button {
-  color: white;
-  background: var(--primary);
-  box-shadow: 0 14px 28px color-mix(in srgb, var(--primary) 26%, transparent);
+  color: #ffffff;
+  background: linear-gradient(180deg, #9bbbe7, #7fa6d8);
+  box-shadow:
+    0 14px 28px rgba(126, 163, 216, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.34);
 }
 
 .primary-button,
@@ -1618,10 +1500,6 @@ p {
 
   .brand-panel {
     min-width: 0;
-  }
-
-  .skin-bar {
-    justify-content: flex-start;
   }
 
   .item-row {

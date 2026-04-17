@@ -71,13 +71,6 @@ const translations = {
     congratsTag: "抽奖结果",
     resultCopy: "恭喜抽中高人气奖励，现场视觉会更适合用户举起手机拍照分享。",
     drawAgain: "再次抽取",
-    skinLabel: "皮肤切换",
-    themeWhite: "极简白",
-    themePink: "少女粉",
-    themeOrange: "阳光橙",
-    themeBlue: "天之蓝",
-    themeSpace: "科技黑",
-    themeKlein: "克莱因蓝",
     footerMadeBy: "技术支持：价直互联（深圳）展览科技有限公司",
   },
   en: {
@@ -152,53 +145,16 @@ const translations = {
     congratsTag: "Result",
     resultCopy: "The reward reveal is designed to feel social-first, with enough ceremony to invite photos and booth-side sharing.",
     drawAgain: "Draw Again",
-    skinLabel: "Theme Switch",
-    themeWhite: "Pure White",
-    themePink: "Blush Pink",
-    themeOrange: "Sunny Orange",
-    themeBlue: "Sky Blue",
-    themeSpace: "Tech Black",
-    themeKlein: "Klein Blue",
     footerMadeBy: "Technical Support: Value Link Interconnect (Shenzhen) Exhibition Technology Co., Ltd.",
   },
 };
 
 const themePalettes = {
   white: {
-    slices: ["#d7e7ff", "#a9c9ff", "#c7ddff", "#90b8ff", "#e3efff", "#b8d1ff"],
-    label: "#28456f",
+    slices: ["#e6eefb", "#cfdcf4", "#dbe6f8", "#b9cef0", "#eef4fd", "#cad9f1"],
+    label: "#29405f",
     centerOuter: "#ffffff",
-    centerInner: "#6fa8ff",
-  },
-  pink: {
-    slices: ["#ff8fbd", "#ffd166", "#8ee3ef", "#ffbe98", "#c8a2ff", "#ff6fa8"],
-    label: "#5b2142",
-    centerOuter: "#fcf8f9",
-    centerInner: "#ff5fa2",
-  },
-  orange: {
-    slices: ["#ff9f43", "#ffd166", "#ffb36b", "#ff7f50", "#ffc857", "#ff9966"],
-    label: "#5b341c",
-    centerOuter: "#fcf8f4",
-    centerInner: "#ff8a3d",
-  },
-  blue: {
-    slices: ["#65c7ff", "#7dd3fc", "#90e0ef", "#5aa9ff", "#a29bfe", "#48cae4"],
-    label: "#163b69",
-    centerOuter: "#f7f9fa",
-    centerInner: "#2f8fff",
-  },
-  space: {
-    slices: ["#222831", "#2d3642", "#1b212b", "#323c4d", "#0f141b", "#3d495d"],
-    label: "#eef4ff",
-    centerOuter: "#1d2530",
-    centerInner: "#5ea6ff",
-  },
-  klein: {
-    slices: ["#2d5bff", "#4a73ff", "#6f90ff", "#2f6bff", "#89a5ff", "#3f63f6"],
-    label: "#f7f8fb",
-    centerOuter: "#eef3ff",
-    centerInner: "#2450ff",
+    centerInner: "#7ea3d8",
   },
 };
 
@@ -279,7 +235,6 @@ const closeDialogButton = document.querySelector("#closeDialogButton");
 const resultVisual = document.querySelector("#resultVisual");
 const langButtons = document.querySelectorAll("[data-lang]");
 const activityCards = document.querySelectorAll(".activity-card");
-const themeButtons = document.querySelectorAll("[data-theme]");
 const activityPanels = document.querySelectorAll(".activity-panel");
 const blindboxPrizeList = document.querySelector("#blindboxPrizeList");
 const blindboxGrid = document.querySelector("#blindboxGrid");
@@ -309,7 +264,6 @@ const rouletteChambers = document.querySelectorAll(".roulette-chamber");
 const rouletteRevolver = document.querySelector("#rouletteRevolver");
 
 let currentLang = "zh";
-let currentTheme = "white";
 let currentActivity = "wheel";
 let showChanceInfo = false;
 let showBlindboxChanceInfo = true;
@@ -469,7 +423,7 @@ function getFocusedIndex() {
 function drawWheel() {
   const center = canvas.width / 2;
   const radius = center - 18;
-  const themePalette = themePalettes[currentTheme] || themePalettes.pink;
+  const themePalette = themePalettes.white;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   const gradient = ctx.createRadialGradient(center, center, 30, center, center, radius);
@@ -803,12 +757,8 @@ function openBlindbox(index) {
   }, 1000);
 }
 
-function applyTheme(theme) {
-  currentTheme = theme;
-  document.body.dataset.theme = theme;
-  themeButtons.forEach((button) => {
-    button.classList.toggle("active", button.dataset.theme === theme);
-  });
+function applyTheme() {
+  document.body.dataset.theme = "white";
   drawWheel();
   if (blindboxCells.length) renderBlindboxGrid();
 }
@@ -867,10 +817,6 @@ activityCards.forEach((card) => {
       setActiveActivity(card.dataset.activity);
     }
   });
-});
-
-themeButtons.forEach((button) => {
-  button.addEventListener("click", () => applyTheme(button.dataset.theme));
 });
 
 langButtons.forEach((button) => {
@@ -953,7 +899,7 @@ renderRouletteRewardList();
 renderRouletteSummary();
 setRouletteStatus("rouletteStatusIdle");
 ensureBlindboxBoard();
-applyTheme(currentTheme);
+applyTheme();
 toggleChanceButton.textContent = translations[currentLang].showChance;
 toggleBlindboxChanceButton.textContent = translations[currentLang].hideChance;
 setActiveActivity("wheel");
