@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>幸运轮盘</title>
-    <link rel="stylesheet" href="./style.css?v=20260417a" />
+    <link rel="stylesheet" href="./style.css?v=20260417c" />
   </head>
   <body>
     <div class="page-shell">
@@ -56,7 +56,6 @@
                 <strong data-i18n="memoryTitle">九宫格记忆力</strong>
                 <small data-i18n="memoryDesc">短时挑战，适合排队与围观</small>
               </span>
-              <em data-i18n="comingSoon">即将上线</em>
             </button>
             <button class="activity-card" data-activity="pachinko">
               <span class="activity-icon">◉</span>
@@ -181,6 +180,49 @@
               </div>
             </section>
 
+            <section class="memory-stage glass-panel activity-panel" data-panel="memory">
+              <div class="panel-header panel-header-inline">
+                <div class="section-label" data-i18n="memoryPreview">记忆挑战</div>
+                <button id="memoryActionButton" class="primary-button" data-i18n="memoryStart">开始挑战</button>
+              </div>
+
+              <div class="memory-stage-shell">
+                <div class="memory-hero-bar">
+                  <article class="memory-stat-card">
+                    <span data-i18n="memoryLevel">当前关卡</span>
+                    <strong id="memoryLevelValue">1</strong>
+                  </article>
+                  <article class="memory-stat-card">
+                    <span data-i18n="memoryGridCount">格子数量</span>
+                    <strong id="memoryGridCountValue">4</strong>
+                  </article>
+                  <article class="memory-stat-card">
+                    <span data-i18n="memoryTargetCount">记忆目标</span>
+                    <strong id="memoryTargetCountValue">1</strong>
+                  </article>
+                  <article class="memory-stat-card">
+                    <span data-i18n="memoryCountdown">记忆时间</span>
+                    <strong id="memoryCountdownValue">10s</strong>
+                  </article>
+                </div>
+
+                <div class="memory-prompt-card">
+                  <div>
+                    <span class="memory-prompt-label" data-i18n="memoryStatusLabel">当前状态</span>
+                    <strong id="memoryStatusText" data-i18n="memoryIdle">点击开始，进入第 1 关</strong>
+                  </div>
+                  <div class="memory-target-wrap">
+                    <span class="memory-prompt-label" data-i18n="memoryTargetsLabel">本轮目标</span>
+                    <div id="memoryTargetList" class="memory-target-list"></div>
+                  </div>
+                </div>
+
+                <div class="memory-grid-shell">
+                  <div id="memoryGridBoard" class="memory-grid-board"></div>
+                </div>
+              </div>
+            </section>
+
             <section class="editor-panel glass-panel activity-panel active" data-panel="wheel-editor">
               <div class="panel-header panel-header-inline">
                 <div class="section-label" data-i18n="editorLabel">玩法编辑</div>
@@ -261,6 +303,45 @@
                 <span data-i18n="rouletteSafeChance">脱险几率</span>
               </div>
               <div id="rouletteRewardList" class="item-list roulette-reward-list"></div>
+            </section>
+
+            <section class="editor-panel glass-panel activity-panel memory-editor" data-panel="memory-editor">
+              <div class="panel-header panel-header-inline">
+                <div class="section-label" data-i18n="memoryEditorLabel">挑战设置</div>
+                <button id="memoryResetButton" class="ghost-button" data-i18n="resetDefault">恢复默认</button>
+              </div>
+
+              <div class="blindbox-summary memory-summary">
+                <article>
+                  <span data-i18n="memoryRewardTier">当前奖励档</span>
+                  <strong id="memoryRewardTierValue">基础礼</strong>
+                </article>
+                <article>
+                  <span data-i18n="memoryCategoryLabel">素材类型</span>
+                  <strong id="memoryCategoryValue">混合素材</strong>
+                </article>
+              </div>
+
+              <div class="memory-category-list" id="memoryCategoryList">
+                <button class="memory-category-chip active" type="button" data-category="mixed" data-i18n="memoryCategoryMixed">混合素材</button>
+                <button class="memory-category-chip" type="button" data-category="fruit" data-i18n="memoryCategoryFruit">水果</button>
+                <button class="memory-category-chip" type="button" data-category="animal" data-i18n="memoryCategoryAnimal">动物</button>
+                <button class="memory-category-chip" type="button" data-category="food" data-i18n="memoryCategoryFood">食物</button>
+                <button class="memory-category-chip" type="button" data-category="people" data-i18n="memoryCategoryPeople">人物</button>
+                <button class="memory-category-chip" type="button" data-category="numbers" data-i18n="memoryCategoryNumbers">数字</button>
+                <button class="memory-category-chip" type="button" data-category="words" data-i18n="memoryCategoryWords">字幕</button>
+              </div>
+
+              <div class="memory-rule-card">
+                <p data-i18n="memoryRuleIntro">前 10 关固定记忆 1 个目标，之后逐步提升到 2、4、6 个目标，记忆时间统一为 10 秒。</p>
+              </div>
+
+              <div class="editor-head memory-editor-head">
+                <span data-i18n="memoryRewardRange">通关区间</span>
+                <span data-i18n="memoryRewardTier">奖励档位</span>
+                <span data-i18n="memoryRewardSample">礼品建议</span>
+              </div>
+              <div id="memoryRewardList" class="item-list memory-reward-list"></div>
             </section>
           </div>
         </section>
@@ -353,6 +434,14 @@
       </div>
     </template>
 
-    <script src="./script.js?v=20260414k"></script>
+    <template id="memoryRewardTemplate">
+      <div class="memory-reward-row">
+        <div class="memory-reward-range"></div>
+        <div class="memory-reward-tier"></div>
+        <div class="memory-reward-sample"></div>
+      </div>
+    </template>
+
+    <script src="./script.js?v=20260417c"></script>
   </body>
 </html>

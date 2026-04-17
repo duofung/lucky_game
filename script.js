@@ -48,7 +48,39 @@ const translations = {
     rouletteResultSafeCopy: "子弹越多，风险越高，但一旦顺利脱险，现场奖励也会同步升级。",
     rouletteResultHitCopy: "这一局没有奖励，重新选择子弹数量，再和庄家对一轮。",
     memoryTitle: "九宫格记忆力",
-    memoryDesc: "短时挑战，适合排队与围观",
+    memoryDesc: "图片格阵记忆挑战，适合围观互动",
+    memoryPreview: "记忆挑战",
+    memoryEditorLabel: "挑战设置",
+    memoryStart: "开始挑战",
+    memoryNext: "进入下一关",
+    memoryRetry: "重新挑战",
+    memoryLevel: "当前关卡",
+    memoryGridCount: "格子数量",
+    memoryTargetCount: "记忆目标",
+    memoryCountdown: "记忆时间",
+    memoryStatusLabel: "当前状态",
+    memoryTargetsLabel: "本轮目标",
+    memoryIdle: "点击开始，进入第 1 关",
+    memoryMemorizing: "记忆时间进行中，请记住图片位置",
+    memoryAnswering: "请找出指定图片的位置",
+    memorySuccess: "挑战成功，已解锁下一关",
+    memoryFailed: "挑战失败，本轮结束",
+    memoryRewardTier: "当前奖励档",
+    memoryCategoryLabel: "素材类型",
+    memoryCategoryMixed: "混合素材",
+    memoryCategoryFruit: "水果",
+    memoryCategoryAnimal: "动物",
+    memoryCategoryFood: "食物",
+    memoryCategoryPeople: "人物",
+    memoryCategoryNumbers: "数字",
+    memoryCategoryWords: "字幕",
+    memoryRuleIntro: "前 10 关固定记忆 1 个目标，之后逐步提升到 2、4、6 个目标，记忆时间统一为 10 秒。",
+    memoryRewardRange: "通关区间",
+    memoryRewardSample: "礼品建议",
+    memoryResultSuccessMeta: "本关挑战成功",
+    memoryResultFailedTitle: "挑战结束",
+    memoryResultFailedMeta: "本轮可领取对应档位礼品",
+    memoryResultCopy: "记忆图片位置，持续向更高关卡挑战，礼品价值会随档位同步升级。",
     pachinkoTitle: "幸运弹珠",
     pachinkoDesc: "适合人流停留的掉落式抽奖",
     giftWallTitle: "礼盒翻牌墙",
@@ -122,7 +154,39 @@ const translations = {
     rouletteResultSafeCopy: "More bullets raise the risk, but surviving also upgrades the booth reward for this round.",
     rouletteResultHitCopy: "No reward this time. Adjust the bullet count and challenge the dealer again.",
     memoryTitle: "Memory Grid",
-    memoryDesc: "Fast challenge for queue-time engagement",
+    memoryDesc: "Grid-based picture memory challenge for crowd engagement",
+    memoryPreview: "Memory Challenge",
+    memoryEditorLabel: "Challenge Setup",
+    memoryStart: "Start Challenge",
+    memoryNext: "Next Level",
+    memoryRetry: "Retry",
+    memoryLevel: "Level",
+    memoryGridCount: "Grid Count",
+    memoryTargetCount: "Targets",
+    memoryCountdown: "Memory Time",
+    memoryStatusLabel: "Status",
+    memoryTargetsLabel: "Targets",
+    memoryIdle: "Press start to enter level 1",
+    memoryMemorizing: "Memorize the picture positions before time runs out",
+    memoryAnswering: "Find the requested pictures",
+    memorySuccess: "Level cleared. Next level unlocked",
+    memoryFailed: "Challenge failed. Round over",
+    memoryRewardTier: "Reward Tier",
+    memoryCategoryLabel: "Asset Type",
+    memoryCategoryMixed: "Mixed",
+    memoryCategoryFruit: "Fruit",
+    memoryCategoryAnimal: "Animals",
+    memoryCategoryFood: "Food",
+    memoryCategoryPeople: "People",
+    memoryCategoryNumbers: "Numbers",
+    memoryCategoryWords: "Words",
+    memoryRuleIntro: "Levels 1-10 require 1 target, then scale to 2, 4, and 6 targets, all with a fixed 10-second memory phase.",
+    memoryRewardRange: "Clear Range",
+    memoryRewardSample: "Suggested Reward",
+    memoryResultSuccessMeta: "Level cleared",
+    memoryResultFailedTitle: "Challenge Over",
+    memoryResultFailedMeta: "Claim the reward tier tied to your progress",
+    memoryResultCopy: "Memorize picture positions and climb to higher tiers for stronger rewards.",
     pachinkoTitle: "Lucky Pachinko",
     pachinkoDesc: "Drop-play prizes for booth traffic",
     giftWallTitle: "Gift Flip Wall",
@@ -214,6 +278,53 @@ const defaultRouletteRewardsByLang = {
   ],
 };
 
+const memoryBaseAssetsByCategory = {
+  fruit: [
+    ["🍎", "苹果", "Apple"], ["🍌", "香蕉", "Banana"], ["🍇", "葡萄", "Grapes"], ["🍓", "草莓", "Strawberry"],
+    ["🍍", "菠萝", "Pineapple"], ["🍑", "桃子", "Peach"], ["🍒", "樱桃", "Cherry"], ["🥝", "奇异果", "Kiwi"],
+    ["🍊", "橙子", "Orange"], ["🍉", "西瓜", "Watermelon"], ["🍐", "雪梨", "Pear"], ["🥭", "芒果", "Mango"],
+  ],
+  animal: [
+    ["🐶", "小狗", "Dog"], ["🐱", "小猫", "Cat"], ["🦊", "狐狸", "Fox"], ["🐼", "熊猫", "Panda"],
+    ["🐯", "老虎", "Tiger"], ["🦁", "狮子", "Lion"], ["🐸", "青蛙", "Frog"], ["🐵", "猴子", "Monkey"],
+    ["🐻", "棕熊", "Bear"], ["🐰", "兔子", "Rabbit"], ["🦄", "独角兽", "Unicorn"], ["🐨", "考拉", "Koala"],
+  ],
+  food: [
+    ["🍔", "汉堡", "Burger"], ["🍕", "披萨", "Pizza"], ["🍟", "薯条", "Fries"], ["🌭", "热狗", "Hot Dog"],
+    ["🍩", "甜甜圈", "Donut"], ["🧁", "纸杯蛋糕", "Cupcake"], ["🍪", "曲奇", "Cookie"], ["🍜", "拉面", "Ramen"],
+    ["🍣", "寿司", "Sushi"], ["🍛", "咖喱饭", "Curry Rice"], ["🥗", "沙拉", "Salad"], ["🥨", "椒盐卷饼", "Pretzel"],
+  ],
+  people: [
+    ["👩", "女士", "Woman"], ["👨", "男士", "Man"], ["👧", "女孩", "Girl"], ["👦", "男孩", "Boy"],
+    ["🧑‍🚀", "宇航员", "Astronaut"], ["🧑‍🍳", "厨师", "Chef"], ["🧑‍⚕️", "医生", "Doctor"], ["🧑‍🏫", "老师", "Teacher"],
+    ["🧑‍💼", "白领", "Office Worker"], ["🧑‍🎤", "歌手", "Singer"], ["🧑‍🎨", "画家", "Painter"], ["🧑‍🔬", "Scientist", "Scientist"],
+  ],
+  words: [
+    ["A", "字母 A", "Letter A"], ["B", "字母 B", "Letter B"], ["C", "字母 C", "Letter C"], ["D", "字母 D", "Letter D"],
+    ["E", "字母 E", "Letter E"], ["F", "字母 F", "Letter F"], ["G", "字母 G", "Letter G"], ["H", "字母 H", "Letter H"],
+    ["星", "星", "Star"], ["光", "光", "Light"], ["礼", "礼", "Gift"], ["赢", "赢", "Win"],
+  ],
+};
+
+const memoryRewardTiers = {
+  zh: [
+    { range: "1 - 3 关", tier: "基础礼", sample: "品牌贴纸 / 手提袋" },
+    { range: "4 - 7 关", tier: "标准礼", sample: "香氛卡 / 饮品券" },
+    { range: "8 - 10 关", tier: "进阶礼", sample: "试用装 / 定制文具" },
+    { range: "11 - 15 关", tier: "高阶礼", sample: "联名周边 / 礼盒体验装" },
+    { range: "16 - 20 关", tier: "稀有礼", sample: "限定礼盒 / 高价值套装" },
+    { range: "21+ 关", tier: "大奖档", sample: "当日大奖 / VIP 套礼" },
+  ],
+  en: [
+    { range: "Lv 1 - 3", tier: "Starter", sample: "Sticker pack / tote bag" },
+    { range: "Lv 4 - 7", tier: "Standard", sample: "Scent card / drink pass" },
+    { range: "Lv 8 - 10", tier: "Advanced", sample: "Sample kit / branded stationery" },
+    { range: "Lv 11 - 15", tier: "Elite", sample: "Collab merch / gift set" },
+    { range: "Lv 16 - 20", tier: "Rare", sample: "Limited box / premium bundle" },
+    { range: "Lv 21+", tier: "Grand Prize", sample: "Daily jackpot / VIP set" },
+  ],
+};
+
 const canvas = document.querySelector("#wheelCanvas");
 const ctx = canvas.getContext("2d");
 const itemList = document.querySelector("#itemList");
@@ -262,6 +373,20 @@ const rouletteBulletPicker = document.querySelector("#rouletteBulletPicker");
 const rouletteBulletButtons = document.querySelectorAll(".roulette-bullet-chip");
 const rouletteChambers = document.querySelectorAll(".roulette-chamber");
 const rouletteRevolver = document.querySelector("#rouletteRevolver");
+const memoryActionButton = document.querySelector("#memoryActionButton");
+const memoryResetButton = document.querySelector("#memoryResetButton");
+const memoryGridBoard = document.querySelector("#memoryGridBoard");
+const memoryLevelValue = document.querySelector("#memoryLevelValue");
+const memoryGridCountValue = document.querySelector("#memoryGridCountValue");
+const memoryTargetCountValue = document.querySelector("#memoryTargetCountValue");
+const memoryCountdownValue = document.querySelector("#memoryCountdownValue");
+const memoryStatusText = document.querySelector("#memoryStatusText");
+const memoryTargetList = document.querySelector("#memoryTargetList");
+const memoryCategoryList = document.querySelector("#memoryCategoryList");
+const memoryCategoryValue = document.querySelector("#memoryCategoryValue");
+const memoryRewardTierValue = document.querySelector("#memoryRewardTierValue");
+const memoryRewardList = document.querySelector("#memoryRewardList");
+const memoryRewardTemplate = document.querySelector("#memoryRewardTemplate");
 
 let currentLang = "zh";
 let currentActivity = "wheel";
@@ -276,6 +401,14 @@ let selectedBullets = 1;
 let rouletteLocked = false;
 let rotation = 0;
 let isSpinning = false;
+let memoryLevel = 1;
+let memoryCategory = "mixed";
+let memoryCountdown = 10;
+let memoryState = "idle";
+let memoryBoard = [];
+let memoryTargets = [];
+let memoryMatchedKeys = new Set();
+let memoryCountdownTimer = null;
 
 function translateWithCount(template, count) {
   return template.replace("{count}", String(count));
@@ -411,6 +544,259 @@ function pullRouletteTrigger() {
       rouletteRevolver.classList.remove("recoil", "hit", "safe");
     }, 900);
   }, 1500);
+}
+
+function getMemoryLevelConfig(level = memoryLevel) {
+  let cells = 4;
+  let targets = 1;
+
+  if (level === 1) {
+    cells = 4;
+  } else if (level <= 4) {
+    cells = 6;
+  } else if (level <= 10) {
+    cells = 6 + (level - 4) * 2;
+  } else if (level <= 15) {
+    cells = 18 + (level - 11) * 2;
+    targets = 2;
+  } else if (level <= 20) {
+    cells = 28 + (level - 16) * 2;
+    targets = 4;
+  } else {
+    cells = 38 + (level - 21) * 2;
+    targets = 6;
+  }
+
+  return {
+    level,
+    cells,
+    targets,
+    columns: Math.min(6, Math.max(2, Math.ceil(Math.sqrt(cells)))),
+  };
+}
+
+function getMemoryRewardTier(level = memoryLevel) {
+  const tiers = memoryRewardTiers[currentLang];
+  if (level <= 3) return tiers[0];
+  if (level <= 7) return tiers[1];
+  if (level <= 10) return tiers[2];
+  if (level <= 15) return tiers[3];
+  if (level <= 20) return tiers[4];
+  return tiers[5];
+}
+
+function buildMemoryAssets() {
+  const categories = Object.entries(memoryBaseAssetsByCategory).reduce((acc, [key, items]) => {
+    acc[key] = items.map(([icon, zh, en], index) => ({
+      key: `${key}-${index}`,
+      icon,
+      label: currentLang === "zh" ? zh : en,
+    }));
+    return acc;
+  }, {});
+
+  categories.numbers = Array.from({ length: 60 }, (_, index) => ({
+    key: `numbers-${index}`,
+    icon: String(index + 1),
+    label: currentLang === "zh" ? `数字 ${index + 1}` : `Number ${index + 1}`,
+  }));
+
+  categories.mixed = [
+    ...categories.fruit,
+    ...categories.animal,
+    ...categories.food,
+    ...categories.people,
+    ...categories.numbers.slice(0, 18),
+    ...categories.words,
+  ];
+
+  return categories;
+}
+
+function getMemoryAssetPool(category = memoryCategory, required = 0) {
+  const assets = buildMemoryAssets();
+  const basePool = assets[category] || assets.mixed;
+  if (basePool.length >= required) return basePool;
+
+  const extras = assets.mixed.filter((item) => !basePool.some((entry) => entry.key === item.key));
+  return [...basePool, ...extras];
+}
+
+function shuffleList(list) {
+  return [...list]
+    .map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value);
+}
+
+function renderMemoryRewardList() {
+  memoryRewardList.innerHTML = "";
+  memoryRewardTiers[currentLang].forEach((tier) => {
+    const row = memoryRewardTemplate.content.firstElementChild.cloneNode(true);
+    row.querySelector(".memory-reward-range").textContent = tier.range;
+    row.querySelector(".memory-reward-tier").textContent = tier.tier;
+    row.querySelector(".memory-reward-sample").textContent = tier.sample;
+    memoryRewardList.appendChild(row);
+  });
+}
+
+function renderMemoryTargets() {
+  memoryTargetList.innerHTML = "";
+  if (!memoryTargets.length) return;
+  memoryTargets.forEach((item) => {
+    const chip = document.createElement("div");
+    chip.className = "memory-target-chip";
+    chip.innerHTML = `<span>${item.icon}</span><strong>${item.label}</strong>`;
+    if (memoryMatchedKeys.has(item.key)) chip.classList.add("done");
+    memoryTargetList.appendChild(chip);
+  });
+}
+
+function renderMemorySummary() {
+  const config = getMemoryLevelConfig();
+  const tier = getMemoryRewardTier();
+  const categoryLabelKey = `memoryCategory${memoryCategory === "mixed" ? "Mixed" : memoryCategory.charAt(0).toUpperCase() + memoryCategory.slice(1)}`;
+  memoryLevelValue.textContent = String(memoryLevel);
+  memoryGridCountValue.textContent = String(config.cells);
+  memoryTargetCountValue.textContent = String(config.targets);
+  memoryCountdownValue.textContent = `${memoryCountdown}s`;
+  memoryRewardTierValue.textContent = tier.tier;
+  memoryCategoryValue.textContent = translations[currentLang][categoryLabelKey];
+}
+
+function renderMemoryBoard() {
+  const config = getMemoryLevelConfig();
+  memoryGridBoard.innerHTML = "";
+  memoryGridBoard.style.setProperty("--memory-columns", String(config.columns));
+  memoryGridBoard.dataset.size = config.cells > 18 ? "dense" : config.cells > 8 ? "mid" : "base";
+
+  memoryBoard.forEach((card, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "memory-card";
+    button.dataset.index = String(index);
+    button.classList.toggle("revealed", memoryState === "memorizing" || card.matched || card.revealed);
+    if (card.matched) button.classList.add("matched");
+
+    const hiddenLabel =
+      memoryState === "memorizing" || card.matched || card.revealed
+        ? `<span class="memory-card-icon">${card.icon}</span><span class="memory-card-label">${card.label}</span>`
+        : `<span class="memory-card-question">?</span>`;
+
+    button.innerHTML = `<span class="memory-card-inner">${hiddenLabel}</span>`;
+    button.addEventListener("click", () => handleMemoryCardClick(index));
+    memoryGridBoard.appendChild(button);
+  });
+
+  renderMemoryTargets();
+  renderMemorySummary();
+}
+
+function setMemoryStatus(key) {
+  memoryStatusText.textContent = translations[currentLang][key];
+}
+
+function stopMemoryTimer() {
+  if (memoryCountdownTimer) {
+    window.clearInterval(memoryCountdownTimer);
+    memoryCountdownTimer = null;
+  }
+}
+
+function startMemoryTimer() {
+  stopMemoryTimer();
+  memoryCountdown = 10;
+  memoryCountdownValue.textContent = `${memoryCountdown}s`;
+  memoryCountdownTimer = window.setInterval(() => {
+    memoryCountdown -= 1;
+    memoryCountdownValue.textContent = `${memoryCountdown}s`;
+    if (memoryCountdown <= 0) {
+      stopMemoryTimer();
+      memoryState = "answering";
+      setMemoryStatus("memoryAnswering");
+      memoryActionButton.textContent = translations[currentLang].memoryRetry;
+      memoryBoard = memoryBoard.map((card) => ({ ...card, revealed: false }));
+      renderMemoryBoard();
+    }
+  }, 1000);
+}
+
+function buildMemoryLevel() {
+  const config = getMemoryLevelConfig();
+  const pool = shuffleList(getMemoryAssetPool(memoryCategory, config.cells));
+  memoryBoard = pool.slice(0, config.cells).map((card) => ({ ...card, revealed: true, matched: false }));
+  memoryTargets = shuffleList(memoryBoard).slice(0, config.targets);
+  memoryMatchedKeys = new Set();
+  memoryCountdown = 10;
+  memoryState = "memorizing";
+  setMemoryStatus("memoryMemorizing");
+  memoryActionButton.textContent = translations[currentLang].memoryRetry;
+  renderMemoryBoard();
+  startMemoryTimer();
+}
+
+function resetMemoryChallenge() {
+  stopMemoryTimer();
+  memoryLevel = 1;
+  memoryCountdown = 10;
+  memoryState = "idle";
+  memoryBoard = [];
+  memoryTargets = [];
+  memoryMatchedKeys = new Set();
+  memoryActionButton.textContent = translations[currentLang].memoryStart;
+  setMemoryStatus("memoryIdle");
+  renderMemoryBoard();
+}
+
+function handleMemorySuccess() {
+  stopMemoryTimer();
+  memoryState = "success";
+  setMemoryStatus("memorySuccess");
+  resultCard.dataset.variant = "memory-success";
+  resultTitle.textContent = `${currentLang === "zh" ? "第" : "Level "}${memoryLevel}${currentLang === "zh" ? "关完成" : " Cleared"}`;
+  resultMeta.textContent = translations[currentLang].memoryResultSuccessMeta;
+  resultCopy.textContent = `${translations[currentLang].memoryResultCopy} ${currentLang === "zh" ? "当前奖励档：" : "Current tier: "}${getMemoryRewardTier().tier}`;
+  resultVisual.hidden = true;
+  resultDialog.showModal();
+  memoryLevel += 1;
+  memoryActionButton.textContent = translations[currentLang].memoryNext;
+  renderMemorySummary();
+}
+
+function handleMemoryFailure() {
+  stopMemoryTimer();
+  memoryState = "failed";
+  setMemoryStatus("memoryFailed");
+  resultCard.dataset.variant = "memory-failed";
+  resultTitle.textContent = translations[currentLang].memoryResultFailedTitle;
+  resultMeta.textContent = `${translations[currentLang].memoryResultFailedMeta} ${getMemoryRewardTier().tier}`;
+  resultCopy.textContent = translations[currentLang].memoryResultCopy;
+  resultVisual.hidden = true;
+  resultDialog.showModal();
+  memoryActionButton.textContent = translations[currentLang].memoryStart;
+}
+
+function handleMemoryCardClick(index) {
+  if (memoryState !== "answering") return;
+  const card = memoryBoard[index];
+  if (!card || card.matched) return;
+
+  const isTarget = memoryTargets.some((item) => item.key === card.key);
+  if (!isTarget || memoryMatchedKeys.has(card.key)) {
+    memoryBoard[index].revealed = true;
+    renderMemoryBoard();
+    handleMemoryFailure();
+    return;
+  }
+
+  memoryMatchedKeys.add(card.key);
+  memoryBoard[index].matched = true;
+  memoryBoard[index].revealed = true;
+  renderMemoryBoard();
+
+  if (memoryMatchedKeys.size === memoryTargets.length) {
+    handleMemorySuccess();
+  }
 }
 
 function getFocusedIndex() {
@@ -761,6 +1147,7 @@ function applyTheme() {
   document.body.dataset.theme = "white";
   drawWheel();
   if (blindboxCells.length) renderBlindboxGrid();
+  renderMemoryBoard();
 }
 
 function setActiveActivity(activity) {
@@ -774,7 +1161,8 @@ function setActiveActivity(activity) {
     const show =
       (activity === "wheel" && (panelName === "wheel" || panelName === "wheel-editor")) ||
       (activity === "blindbox" && (panelName === "blindbox" || panelName === "blindbox-editor")) ||
-      (activity === "roulette" && (panelName === "roulette" || panelName === "roulette-editor"));
+      (activity === "roulette" && (panelName === "roulette" || panelName === "roulette-editor")) ||
+      (activity === "memory" && (panelName === "memory" || panelName === "memory-editor"));
     panel.classList.toggle("active", show);
   });
 
@@ -806,6 +1194,8 @@ function applyLanguage(lang) {
   renderBlindboxPrizeList();
   renderRouletteRewardList();
   renderRouletteSummary();
+  renderMemoryRewardList();
+  resetMemoryChallenge();
   setRouletteStatus("rouletteStatusIdle");
   ensureBlindboxBoard();
   drawWheel();
@@ -813,7 +1203,12 @@ function applyLanguage(lang) {
 
 activityCards.forEach((card) => {
   card.addEventListener("click", () => {
-    if (card.dataset.activity === "wheel" || card.dataset.activity === "blindbox" || card.dataset.activity === "roulette") {
+    if (
+      card.dataset.activity === "wheel" ||
+      card.dataset.activity === "blindbox" ||
+      card.dataset.activity === "roulette" ||
+      card.dataset.activity === "memory"
+    ) {
       setActiveActivity(card.dataset.activity);
     }
   });
@@ -873,6 +1268,35 @@ rouletteBulletPicker.addEventListener("click", (event) => {
   setRouletteStatus("rouletteStatusIdle");
 });
 
+memoryActionButton.addEventListener("click", () => {
+  if (memoryState === "idle" || memoryState === "failed") {
+    memoryLevel = memoryState === "failed" ? 1 : memoryLevel;
+    buildMemoryLevel();
+    return;
+  }
+
+  if (memoryState === "success") {
+    buildMemoryLevel();
+    return;
+  }
+
+  if (memoryState === "memorizing" || memoryState === "answering") {
+    buildMemoryLevel();
+  }
+});
+
+memoryResetButton.addEventListener("click", resetMemoryChallenge);
+
+memoryCategoryList.addEventListener("click", (event) => {
+  const button = event.target.closest(".memory-category-chip");
+  if (!button) return;
+  memoryCategory = button.dataset.category;
+  document.querySelectorAll(".memory-category-chip").forEach((chip) => {
+    chip.classList.toggle("active", chip.dataset.category === memoryCategory);
+  });
+  resetMemoryChallenge();
+});
+
 closeDialogButton.addEventListener("click", () => resultDialog.close());
 resultDialog.addEventListener("click", (event) => {
   const bounds = resultDialog.getBoundingClientRect();
@@ -896,7 +1320,9 @@ resultDialog.addEventListener("close", () => {
 renderWheelEditor();
 renderBlindboxPrizeList();
 renderRouletteRewardList();
+renderMemoryRewardList();
 renderRouletteSummary();
+resetMemoryChallenge();
 setRouletteStatus("rouletteStatusIdle");
 ensureBlindboxBoard();
 applyTheme();
