@@ -80,7 +80,7 @@ const translations = {
     memoryCategoryWords: "字幕",
     memoryRuleIntro: "前 10 关固定记忆 1 个目标，之后逐步提升到 2、4、6 个目标，记忆时间统一为 10 秒。",
     memoryRewardRange: "通关区间",
-    memoryRewardSample: "礼品建议",
+    memoryRewardSample: "礼品内容",
     memoryResultSuccessMeta: "本关挑战成功",
     memoryResultFailedTitle: "挑战结束",
     memoryResultFailedMeta: "本轮可领取对应档位礼品",
@@ -190,7 +190,7 @@ const translations = {
     memoryCategoryWords: "Words",
     memoryRuleIntro: "Levels 1-10 require 1 target, then scale to 2, 4, and 6 targets, all with a fixed 10-second memory phase.",
     memoryRewardRange: "Clear Range",
-    memoryRewardSample: "Suggested Reward",
+    memoryRewardSample: "Prize Content",
     memoryResultSuccessMeta: "Level cleared",
     memoryResultFailedTitle: "Challenge Over",
     memoryResultFailedMeta: "Claim the reward tier tied to your progress",
@@ -314,7 +314,7 @@ const memoryBaseAssetsByCategory = {
   ],
 };
 
-const memoryRewardTiers = {
+const defaultMemoryRewardTiersByLang = {
   zh: [
     { range: "1 - 3 关", tier: "轻甜入门礼", sample: "品牌贴纸 / 温柔手提袋 / 展台小卡" },
     { range: "4 - 7 关", tier: "心动加分彩蛋", sample: "香氛卡 / 饮品券 / 柔雾便签本" },
@@ -458,6 +458,7 @@ let showBlindboxChanceInfo = true;
 let wheelItems = structuredClone(defaultWheelItemsByLang.zh);
 let blindboxPrizes = structuredClone(defaultBlindboxPrizesByLang.zh);
 let rouletteRewards = structuredClone(defaultRouletteRewardsByLang.zh);
+let memoryRewardTiers = structuredClone(defaultMemoryRewardTiersByLang.zh);
 let blindboxCells = [];
 let blindboxOpening = false;
 let selectedBullets = 1;
@@ -640,7 +641,7 @@ function getMemoryLevelConfig(level = memoryLevel) {
 }
 
 function getMemoryRewardTier(level = memoryLevel) {
-  const tiers = memoryRewardTiers[currentLang];
+  const tiers = memoryRewardTiers;
   if (level <= 3) return tiers[0];
   if (level <= 7) return tiers[1];
   if (level <= 10) return tiers[2];
@@ -715,11 +716,30 @@ function shuffleList(list) {
 
 function renderMemoryRewardList() {
   memoryRewardList.innerHTML = "";
-  memoryRewardTiers[currentLang].forEach((tier) => {
+  memoryRewardTiers.forEach((tier, index) => {
     const row = memoryRewardTemplate.content.firstElementChild.cloneNode(true);
-    row.querySelector(".memory-reward-range").textContent = tier.range;
-    row.querySelector(".memory-reward-tier").textContent = tier.tier;
-    row.querySelector(".memory-reward-sample").textContent = tier.sample;
+    const rangeInput = row.querySelector(".memory-reward-range-input");
+    const tierInput = row.querySelector(".memory-reward-tier-input");
+    const sampleInput = row.querySelector(".memory-reward-sample-input");
+
+    rangeInput.value = tier.range;
+    tierInput.value = tier.tier;
+    sampleInput.value = tier.sample;
+
+    rangeInput.addEventListener("input", (event) => {
+      memoryRewardTiers[index].range = event.target.value.trim() || tier.range;
+      renderMemorySummary();
+    });
+
+    tierInput.addEventListener("input", (event) => {
+      memoryRewardTiers[index].tier = event.target.value.trim() || tier.tier;
+      renderMemorySummary();
+    });
+
+    sampleInput.addEventListener("input", (event) => {
+      memoryRewardTiers[index].sample = event.target.value.trim() || tier.sample;
+    });
+
     memoryRewardList.appendChild(row);
   });
 }
@@ -1352,6 +1372,7 @@ function applyLanguage(lang) {
   wheelItems = structuredClone(defaultWheelItemsByLang[lang]);
   blindboxPrizes = structuredClone(defaultBlindboxPrizesByLang[lang]);
   rouletteRewards = structuredClone(defaultRouletteRewardsByLang[lang]);
+  memoryRewardTiers = structuredClone(defaultMemoryRewardTiersByLang[lang]);
   blindboxCells = [];
   renderWheelEditor();
   renderBlindboxPrizeList();
@@ -1447,7 +1468,11 @@ memoryActionButton.addEventListener("click", () => {
   }
 });
 
-memoryResetButton.addEventListener("click", () => resetMemoryChallenge({ autoStart: currentActivity === "memory" }));
+memoryResetButton.addEventListener("click", () => {
+  memoryRewardTiers = structuredClone(defaultMemoryRewardTiersByLang[currentLang]);
+  renderMemoryRewardList();
+  resetMemoryChallenge({ autoStart: currentActivity === "memory" });
+});
 
 memoryCategoryList.addEventListener("click", (event) => {
   const button = event.target.closest(".memory-category-chip");

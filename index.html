@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>幸运轮盘</title>
-    <link rel="stylesheet" href="./style.css?v=20260418a" />
+    <link rel="stylesheet" href="./style.css?v=20260418b" />
   </head>
   <body>
     <div class="page-shell">
@@ -339,7 +339,7 @@
               <div class="editor-head memory-editor-head">
                 <span data-i18n="memoryRewardRange">通关区间</span>
                 <span data-i18n="memoryRewardTier">奖励档位</span>
-                <span data-i18n="memoryRewardSample">礼品建议</span>
+                <span data-i18n="memoryRewardSample">礼品内容</span>
               </div>
               <div id="memoryRewardList" class="item-list memory-reward-list"></div>
             </section>
@@ -436,12 +436,21 @@
 
     <template id="memoryRewardTemplate">
       <div class="memory-reward-row">
-        <div class="memory-reward-range"></div>
-        <div class="memory-reward-tier"></div>
-        <div class="memory-reward-sample"></div>
+        <label>
+          <span class="sr-only">memory reward range</span>
+          <input class="memory-reward-range-input" type="text" maxlength="20" />
+        </label>
+        <label>
+          <span class="sr-only">memory reward tier</span>
+          <input class="memory-reward-tier-input" type="text" maxlength="20" />
+        </label>
+        <label>
+          <span class="sr-only">memory reward content</span>
+          <input class="memory-reward-sample-input" type="text" maxlength="40" />
+        </label>
       </div>
     </template>
 
-    <script src="./script.js?v=20260418a"></script>
+    <script src="./script.js?v=20260418b"></script>
   </body>
 </html>

@@ -1173,27 +1173,42 @@ p {
 }
 
 .memory-editor-head {
-  grid-template-columns: 82px 88px minmax(0, 1fr);
+  grid-template-columns: 88px 110px minmax(0, 1fr);
   margin-top: 14px;
 }
 
 .memory-reward-row {
   display: grid;
-  grid-template-columns: 82px 88px minmax(0, 1fr);
+  grid-template-columns: 88px 110px minmax(0, 1fr);
   gap: 10px;
   align-items: center;
   padding: 10px 12px;
 }
 
-.memory-reward-range,
-.memory-reward-tier {
-  font-weight: 700;
-  font-size: 0.9rem;
+.memory-reward-row input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-3);
+  padding: 9px 10px;
+  font: inherit;
+  color: var(--text);
+  min-height: 40px;
 }
 
-.memory-reward-sample {
+.memory-reward-range-input,
+.memory-reward-tier-input {
+  font-weight: 700;
+}
+
+.memory-reward-sample-input {
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: 0.84rem;
+}
+
+.memory-reward-row input:focus {
+  outline: 2px solid color-mix(in srgb, var(--primary) 18%, transparent);
+  border-color: color-mix(in srgb, var(--primary) 24%, transparent);
 }
 
 .memory-summary article {
@@ -1859,7 +1874,7 @@ p {
 
   .blindbox-prize-row,
   .memory-reward-row {
-    grid-template-columns: 82px 88px minmax(0, 1fr);
+    grid-template-columns: 88px 110px minmax(0, 1fr);
   }
 
   .blindbox-prize-row {
