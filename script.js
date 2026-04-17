@@ -151,10 +151,10 @@ const translations = {
 
 const themePalettes = {
   white: {
-    slices: ["#e6eefb", "#cfdcf4", "#dbe6f8", "#b9cef0", "#eef4fd", "#cad9f1"],
-    label: "#29405f",
+    slices: ["#ffe7d1", "#ffd29f", "#ffddbc", "#ffc786", "#fff0df", "#ffcf97"],
+    label: "#5b3a20",
     centerOuter: "#ffffff",
-    centerInner: "#7ea3d8",
+    centerInner: "#ff6a3d",
   },
 };
 
