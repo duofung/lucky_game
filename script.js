@@ -52,6 +52,9 @@ const translations = {
     memoryPreview: "记忆挑战",
     memoryEditorLabel: "挑战设置",
     memoryStart: "开始挑战",
+    memoryPause: "暂停挑战",
+    memoryResume: "继续挑战",
+    memoryRestart: "重新开始",
     memoryNext: "进入下一关",
     memoryRetry: "重新挑战",
     memoryLevel: "当前关卡",
@@ -62,6 +65,7 @@ const translations = {
     memoryTargetsLabel: "本轮目标",
     memoryIdle: "点击开始，进入第 1 关",
     memoryMemorizing: "记忆时间进行中，请记住图片位置",
+    memoryPaused: "挑战已暂停，点击继续回到记忆阶段",
     memoryAnswering: "请找出指定图片的位置",
     memorySuccess: "挑战成功，已解锁下一关",
     memoryFailed: "挑战失败，本轮结束",
@@ -158,6 +162,9 @@ const translations = {
     memoryPreview: "Memory Challenge",
     memoryEditorLabel: "Challenge Setup",
     memoryStart: "Start Challenge",
+    memoryPause: "Pause",
+    memoryResume: "Resume",
+    memoryRestart: "Restart",
     memoryNext: "Next Level",
     memoryRetry: "Retry",
     memoryLevel: "Level",
@@ -168,6 +175,7 @@ const translations = {
     memoryTargetsLabel: "Targets",
     memoryIdle: "Press start to enter level 1",
     memoryMemorizing: "Memorize the picture positions before time runs out",
+    memoryPaused: "Challenge paused. Resume when you are ready",
     memoryAnswering: "Find the requested pictures",
     memorySuccess: "Level cleared. Next level unlocked",
     memoryFailed: "Challenge failed. Round over",
@@ -297,7 +305,7 @@ const memoryBaseAssetsByCategory = {
   people: [
     ["👩", "女士", "Woman"], ["👨", "男士", "Man"], ["👧", "女孩", "Girl"], ["👦", "男孩", "Boy"],
     ["🧑‍🚀", "宇航员", "Astronaut"], ["🧑‍🍳", "厨师", "Chef"], ["🧑‍⚕️", "医生", "Doctor"], ["🧑‍🏫", "老师", "Teacher"],
-    ["🧑‍💼", "白领", "Office Worker"], ["🧑‍🎤", "歌手", "Singer"], ["🧑‍🎨", "画家", "Painter"], ["🧑‍🔬", "Scientist", "Scientist"],
+    ["🧑‍💼", "白领", "Office Worker"], ["🧑‍🎤", "歌手", "Singer"], ["🧑‍🎨", "画家", "Painter"], ["🧑‍🔬", "科学家", "Scientist"],
   ],
   words: [
     ["A", "字母 A", "Letter A"], ["B", "字母 B", "Letter B"], ["C", "字母 C", "Letter C"], ["D", "字母 D", "Letter D"],
@@ -409,6 +417,7 @@ let memoryBoard = [];
 let memoryTargets = [];
 let memoryMatchedKeys = new Set();
 let memoryCountdownTimer = null;
+let memoryAdvanceTimer = null;
 
 function translateWithCount(template, count) {
   return template.replace("{count}", String(count));
@@ -591,6 +600,7 @@ function buildMemoryAssets() {
       key: `${key}-${index}`,
       icon,
       label: currentLang === "zh" ? zh : en,
+      kind: key,
     }));
     return acc;
   }, {});
@@ -599,6 +609,7 @@ function buildMemoryAssets() {
     key: `numbers-${index}`,
     icon: String(index + 1),
     label: currentLang === "zh" ? `数字 ${index + 1}` : `Number ${index + 1}`,
+    kind: "numbers",
   }));
 
   categories.mixed = [
@@ -642,11 +653,12 @@ function renderMemoryRewardList() {
 
 function renderMemoryTargets() {
   memoryTargetList.innerHTML = "";
-  if (!memoryTargets.length) return;
+  if (!memoryTargets.length || !["answering", "failed"].includes(memoryState)) return;
   memoryTargets.forEach((item) => {
     const chip = document.createElement("div");
     chip.className = "memory-target-chip";
-    chip.innerHTML = `<span>${item.icon}</span><strong>${item.label}</strong>`;
+    const isTextual = item.kind === "numbers" || item.kind === "words";
+    chip.innerHTML = `<span class="${isTextual ? "textual" : ""}">${item.icon}</span>`;
     if (memoryMatchedKeys.has(item.key)) chip.classList.add("done");
     memoryTargetList.appendChild(chip);
   });
@@ -664,6 +676,33 @@ function renderMemorySummary() {
   memoryCategoryValue.textContent = translations[currentLang][categoryLabelKey];
 }
 
+function updateMemoryActionButton() {
+  memoryActionButton.disabled = false;
+
+  if (memoryState === "memorizing") {
+    memoryActionButton.textContent = translations[currentLang].memoryPause;
+    return;
+  }
+
+  if (memoryState === "paused") {
+    memoryActionButton.textContent = translations[currentLang].memoryResume;
+    return;
+  }
+
+  if (memoryState === "failed") {
+    memoryActionButton.textContent = translations[currentLang].memoryRestart;
+    return;
+  }
+
+  if (memoryState === "answering" || memoryState === "transition") {
+    memoryActionButton.textContent = translations[currentLang].memoryPause;
+    memoryActionButton.disabled = true;
+    return;
+  }
+
+  memoryActionButton.textContent = translations[currentLang].memoryStart;
+}
+
 function renderMemoryBoard() {
   const config = getMemoryLevelConfig();
   memoryGridBoard.innerHTML = "";
@@ -678,9 +717,10 @@ function renderMemoryBoard() {
     button.classList.toggle("revealed", memoryState === "memorizing" || card.matched || card.revealed);
     if (card.matched) button.classList.add("matched");
 
+    const isTextual = card.kind === "numbers" || card.kind === "words";
     const hiddenLabel =
       memoryState === "memorizing" || card.matched || card.revealed
-        ? `<span class="memory-card-icon">${card.icon}</span><span class="memory-card-label">${card.label}</span>`
+        ? `<span class="memory-card-icon ${isTextual ? "textual" : ""}">${card.icon}</span>`
         : `<span class="memory-card-question">?</span>`;
 
     button.innerHTML = `<span class="memory-card-inner">${hiddenLabel}</span>`;
@@ -690,6 +730,7 @@ function renderMemoryBoard() {
 
   renderMemoryTargets();
   renderMemorySummary();
+  updateMemoryActionButton();
 }
 
 function setMemoryStatus(key) {
@@ -703,25 +744,36 @@ function stopMemoryTimer() {
   }
 }
 
+function stopMemoryAdvanceTimer() {
+  if (memoryAdvanceTimer) {
+    window.clearTimeout(memoryAdvanceTimer);
+    memoryAdvanceTimer = null;
+  }
+}
+
+function enterMemoryAnswering() {
+  memoryState = "answering";
+  setMemoryStatus("memoryAnswering");
+  memoryBoard = memoryBoard.map((card) => ({ ...card, revealed: false }));
+  renderMemoryBoard();
+}
+
 function startMemoryTimer() {
   stopMemoryTimer();
-  memoryCountdown = 10;
   memoryCountdownValue.textContent = `${memoryCountdown}s`;
   memoryCountdownTimer = window.setInterval(() => {
     memoryCountdown -= 1;
     memoryCountdownValue.textContent = `${memoryCountdown}s`;
     if (memoryCountdown <= 0) {
       stopMemoryTimer();
-      memoryState = "answering";
-      setMemoryStatus("memoryAnswering");
-      memoryActionButton.textContent = translations[currentLang].memoryRetry;
-      memoryBoard = memoryBoard.map((card) => ({ ...card, revealed: false }));
-      renderMemoryBoard();
+      enterMemoryAnswering();
     }
   }, 1000);
 }
 
 function buildMemoryLevel() {
+  stopMemoryAdvanceTimer();
+  stopMemoryTimer();
   const config = getMemoryLevelConfig();
   const pool = shuffleList(getMemoryAssetPool(memoryCategory, config.cells));
   memoryBoard = pool.slice(0, config.cells).map((card) => ({ ...card, revealed: true, matched: false }));
@@ -730,41 +782,40 @@ function buildMemoryLevel() {
   memoryCountdown = 10;
   memoryState = "memorizing";
   setMemoryStatus("memoryMemorizing");
-  memoryActionButton.textContent = translations[currentLang].memoryRetry;
   renderMemoryBoard();
   startMemoryTimer();
 }
 
-function resetMemoryChallenge() {
+function resetMemoryChallenge({ autoStart = false } = {}) {
   stopMemoryTimer();
+  stopMemoryAdvanceTimer();
   memoryLevel = 1;
   memoryCountdown = 10;
   memoryState = "idle";
   memoryBoard = [];
   memoryTargets = [];
   memoryMatchedKeys = new Set();
-  memoryActionButton.textContent = translations[currentLang].memoryStart;
   setMemoryStatus("memoryIdle");
   renderMemoryBoard();
+  if (autoStart) buildMemoryLevel();
 }
 
 function handleMemorySuccess() {
   stopMemoryTimer();
-  memoryState = "success";
+  stopMemoryAdvanceTimer();
+  memoryState = "transition";
   setMemoryStatus("memorySuccess");
-  resultCard.dataset.variant = "memory-success";
-  resultTitle.textContent = `${currentLang === "zh" ? "第" : "Level "}${memoryLevel}${currentLang === "zh" ? "关完成" : " Cleared"}`;
-  resultMeta.textContent = translations[currentLang].memoryResultSuccessMeta;
-  resultCopy.textContent = `${translations[currentLang].memoryResultCopy} ${currentLang === "zh" ? "当前奖励档：" : "Current tier: "}${getMemoryRewardTier().tier}`;
-  resultVisual.hidden = true;
-  resultDialog.showModal();
-  memoryLevel += 1;
-  memoryActionButton.textContent = translations[currentLang].memoryNext;
+  renderMemoryBoard();
+  memoryAdvanceTimer = window.setTimeout(() => {
+    memoryLevel += 1;
+    buildMemoryLevel();
+  }, 900);
   renderMemorySummary();
 }
 
 function handleMemoryFailure() {
   stopMemoryTimer();
+  stopMemoryAdvanceTimer();
   memoryState = "failed";
   setMemoryStatus("memoryFailed");
   resultCard.dataset.variant = "memory-failed";
@@ -773,7 +824,23 @@ function handleMemoryFailure() {
   resultCopy.textContent = translations[currentLang].memoryResultCopy;
   resultVisual.hidden = true;
   resultDialog.showModal();
-  memoryActionButton.textContent = translations[currentLang].memoryStart;
+  renderMemoryBoard();
+}
+
+function pauseMemoryChallenge() {
+  if (memoryState !== "memorizing") return;
+  stopMemoryTimer();
+  memoryState = "paused";
+  setMemoryStatus("memoryPaused");
+  renderMemoryBoard();
+}
+
+function resumeMemoryChallenge() {
+  if (memoryState !== "paused") return;
+  memoryState = "memorizing";
+  setMemoryStatus("memoryMemorizing");
+  renderMemoryBoard();
+  startMemoryTimer();
 }
 
 function handleMemoryCardClick(index) {
@@ -1151,7 +1218,14 @@ function applyTheme() {
 }
 
 function setActiveActivity(activity) {
+  const previousActivity = currentActivity;
   currentActivity = activity;
+
+  if (previousActivity === "memory" && activity !== "memory") {
+    stopMemoryTimer();
+    stopMemoryAdvanceTimer();
+  }
+
   activityCards.forEach((card) => {
     card.classList.toggle("active", card.dataset.activity === activity);
   });
@@ -1167,6 +1241,7 @@ function setActiveActivity(activity) {
   });
 
   if (activity === "blindbox") ensureBlindboxBoard();
+  if (activity === "memory" && previousActivity !== "memory") resetMemoryChallenge({ autoStart: true });
 }
 
 function applyLanguage(lang) {
@@ -1195,7 +1270,7 @@ function applyLanguage(lang) {
   renderRouletteRewardList();
   renderRouletteSummary();
   renderMemoryRewardList();
-  resetMemoryChallenge();
+  resetMemoryChallenge({ autoStart: currentActivity === "memory" });
   setRouletteStatus("rouletteStatusIdle");
   ensureBlindboxBoard();
   drawWheel();
@@ -1269,23 +1344,22 @@ rouletteBulletPicker.addEventListener("click", (event) => {
 });
 
 memoryActionButton.addEventListener("click", () => {
+  if (memoryState === "memorizing") {
+    pauseMemoryChallenge();
+    return;
+  }
+
+  if (memoryState === "paused") {
+    resumeMemoryChallenge();
+    return;
+  }
+
   if (memoryState === "idle" || memoryState === "failed") {
-    memoryLevel = memoryState === "failed" ? 1 : memoryLevel;
-    buildMemoryLevel();
-    return;
-  }
-
-  if (memoryState === "success") {
-    buildMemoryLevel();
-    return;
-  }
-
-  if (memoryState === "memorizing" || memoryState === "answering") {
-    buildMemoryLevel();
+    resetMemoryChallenge({ autoStart: true });
   }
 });
 
-memoryResetButton.addEventListener("click", resetMemoryChallenge);
+memoryResetButton.addEventListener("click", () => resetMemoryChallenge({ autoStart: currentActivity === "memory" }));
 
 memoryCategoryList.addEventListener("click", (event) => {
   const button = event.target.closest(".memory-category-chip");
@@ -1294,7 +1368,7 @@ memoryCategoryList.addEventListener("click", (event) => {
   document.querySelectorAll(".memory-category-chip").forEach((chip) => {
     chip.classList.toggle("active", chip.dataset.category === memoryCategory);
   });
-  resetMemoryChallenge();
+  resetMemoryChallenge({ autoStart: currentActivity === "memory" });
 });
 
 closeDialogButton.addEventListener("click", () => resultDialog.close());
