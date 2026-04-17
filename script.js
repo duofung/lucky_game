@@ -316,21 +316,76 @@ const memoryBaseAssetsByCategory = {
 
 const memoryRewardTiers = {
   zh: [
-    { range: "1 - 3 关", tier: "基础礼", sample: "品牌贴纸 / 手提袋" },
-    { range: "4 - 7 关", tier: "标准礼", sample: "香氛卡 / 饮品券" },
-    { range: "8 - 10 关", tier: "进阶礼", sample: "试用装 / 定制文具" },
-    { range: "11 - 15 关", tier: "高阶礼", sample: "联名周边 / 礼盒体验装" },
-    { range: "16 - 20 关", tier: "稀有礼", sample: "限定礼盒 / 高价值套装" },
-    { range: "21+ 关", tier: "大奖档", sample: "当日大奖 / VIP 套礼" },
+    { range: "1 - 3 关", tier: "轻甜入门礼", sample: "品牌贴纸 / 温柔手提袋 / 展台小卡" },
+    { range: "4 - 7 关", tier: "心动加分彩蛋", sample: "香氛卡 / 饮品券 / 柔雾便签本" },
+    { range: "8 - 10 关", tier: "闪光进阶礼", sample: "试用装 / 定制镜子 / 香氛挂件" },
+    { range: "11 - 15 关", tier: "高光收藏礼", sample: "联名周边 / 礼盒体验装 / 精致水杯" },
+    { range: "16 - 20 关", tier: "限定心愿礼", sample: "限定礼盒 / 高级套装 / 品牌香氛" },
+    { range: "21+ 关", tier: "主角大奖档", sample: "当日大奖 / VIP 套礼 / 限定大礼包" },
   ],
   en: [
-    { range: "Lv 1 - 3", tier: "Starter", sample: "Sticker pack / tote bag" },
-    { range: "Lv 4 - 7", tier: "Standard", sample: "Scent card / drink pass" },
-    { range: "Lv 8 - 10", tier: "Advanced", sample: "Sample kit / branded stationery" },
-    { range: "Lv 11 - 15", tier: "Elite", sample: "Collab merch / gift set" },
-    { range: "Lv 16 - 20", tier: "Rare", sample: "Limited box / premium bundle" },
-    { range: "Lv 21+", tier: "Grand Prize", sample: "Daily jackpot / VIP set" },
+    { range: "Lv 1 - 3", tier: "Soft Starter", sample: "Sticker set / tote bag / booth card" },
+    { range: "Lv 4 - 7", tier: "Glow Boost", sample: "Scent card / drink pass / memo pad" },
+    { range: "Lv 8 - 10", tier: "Spark Tier", sample: "Sample kit / pocket mirror / charm" },
+    { range: "Lv 11 - 15", tier: "Highlight Tier", sample: "Collab merch / gift set / tumbler" },
+    { range: "Lv 16 - 20", tier: "Wish Tier", sample: "Limited box / premium bundle / fragrance" },
+    { range: "Lv 21+", tier: "Main Character", sample: "Daily jackpot / VIP set / grand bundle" },
   ],
+};
+
+const memoryEncouragementByLang = {
+  zh: {
+    warmup: [
+      { title: "你记得很稳", meta: "这一关的节奏拿捏得很好", copy: "已经进入状态了，继续保持这种轻松专注感，下一关会更漂亮地拿下。" },
+      { title: "好会记", meta: "细节捕捉得很准确", copy: "你刚才的判断非常干净利落，这种感觉很适合一路往上冲。" },
+    ],
+    rising: [
+      { title: "你真的在发光", meta: "难度上来了，你也跟上了", copy: "越往后越考验短时记忆和稳定感，你现在的表现已经很亮眼了。" },
+      { title: "这关过得很漂亮", meta: "节奏和记忆点都抓住了", copy: "不是单纯记住而已，是你已经开始掌控这个游戏的节奏了。" },
+    ],
+    advanced: [
+      { title: "高难度也拿下了", meta: "记忆力和判断都在线", copy: "这种关卡已经不只是反应快了，你的稳定度和专注力都很强。" },
+      { title: "这一轮很有主角感", meta: "越难越显得你厉害", copy: "你把复杂的信息收得很干净，继续往前就是更高档位的奖励了。" },
+    ],
+    elite: [
+      { title: "这已经是高手区了", meta: "你刚刚的表现非常能打", copy: "到了这里还能这么稳，真的很有压场感，继续冲会非常好看。" },
+      { title: "太强了，完全稳住", meta: "高压关卡也没有乱", copy: "这种难度还能保持清晰判断，已经是很漂亮的挑战表现了。" },
+    ],
+    comfort: [
+      { title: "已经很不错了", meta: "这一轮只是差一点点", copy: "你不是没记住，是信息量刚好多了一点。稍微调整一下，下次会更顺。" },
+      { title: "别急，这关本来就难", meta: "你已经记住不少了", copy: "能走到这里说明状态很好，只是最后那个位置有点调皮，下次一定会更稳。" },
+    ],
+    support: [
+      { title: "真的很可惜，但不影响你厉害", meta: "高难度翻车很正常", copy: "越到后面越容易在细节上失手，不过你的整体判断已经很在线了，下一轮很有机会更进一步。" },
+      { title: "就差一点点惊艳全场", meta: "这一轮先收住也没关系", copy: "你已经把前面的节奏跑得很漂亮了，休息一下再来，会更有感觉。" },
+    ],
+  },
+  en: {
+    warmup: [
+      { title: "That was smooth", meta: "You handled the rhythm beautifully", copy: "You are already in the zone. Keep this calm focus and the next round will feel even better." },
+      { title: "Strong start", meta: "You caught the details quickly", copy: "That was clean and confident. This kind of pace is perfect for climbing higher." },
+    ],
+    rising: [
+      { title: "You are glowing now", meta: "The challenge rose and you matched it", copy: "This is where memory and rhythm begin to matter more, and you are handling both really well." },
+      { title: "Beautiful clear", meta: "You held the pace with style", copy: "It was not just about remembering. You are starting to control the whole flow of the game." },
+    ],
+    advanced: [
+      { title: "You cleared a hard one", meta: "Focus and judgment both stayed sharp", copy: "At this level it is about steadiness, and you made it look graceful." },
+      { title: "Main-character energy", meta: "The harder it gets, the better you look", copy: "You kept the board tidy in your head even with more pressure. That is a strong run." },
+    ],
+    elite: [
+      { title: "This is expert territory", meta: "And you still made it look calm", copy: "Reaching this far with this much control already feels impressive. Keep going." },
+      { title: "So composed under pressure", meta: "That level was not easy", copy: "You stayed clear even at high difficulty. That is a really beautiful kind of consistency." },
+    ],
+    comfort: [
+      { title: "You were genuinely close", meta: "This round just slipped a little", copy: "It was not a bad run at all. The information load only got a bit heavier, and you can absolutely come back stronger." },
+      { title: "That was a near miss", meta: "You remembered more than it felt like", copy: "You were already reading the board well. One small miss does not erase a strong performance." },
+    ],
+    support: [
+      { title: "Still a lovely run", meta: "Higher levels are meant to be tough", copy: "The deeper rounds are where tiny details become tricky. Take a breath and try again with the same confidence." },
+      { title: "It is okay to miss one", meta: "Your overall rhythm was strong", copy: "You built a really nice run already. Another attempt will probably feel even more natural." },
+    ],
+  },
 };
 
 const canvas = document.querySelector("#wheelCanvas");
@@ -594,6 +649,24 @@ function getMemoryRewardTier(level = memoryLevel) {
   return tiers[5];
 }
 
+function pickMemoryMessage(group) {
+  const messages = memoryEncouragementByLang[currentLang][group] || [];
+  if (!messages.length) return null;
+  return messages[Math.floor(Math.random() * messages.length)];
+}
+
+function getMemorySuccessMessage(level = memoryLevel) {
+  if (level <= 3) return pickMemoryMessage("warmup");
+  if (level <= 10) return pickMemoryMessage("rising");
+  if (level <= 15) return pickMemoryMessage("advanced");
+  return pickMemoryMessage("elite");
+}
+
+function getMemoryFailureMessage(level = memoryLevel) {
+  if (level <= 7) return pickMemoryMessage("comfort");
+  return pickMemoryMessage("support");
+}
+
 function buildMemoryAssets() {
   const categories = Object.entries(memoryBaseAssetsByCategory).reduce((acc, [key, items]) => {
     acc[key] = items.map(([icon, zh, en], index) => ({
@@ -805,11 +878,21 @@ function handleMemorySuccess() {
   stopMemoryAdvanceTimer();
   memoryState = "transition";
   setMemoryStatus("memorySuccess");
+  const message = getMemorySuccessMessage();
+  if (message) {
+    resultCard.dataset.variant = "memory-success";
+    resultTitle.textContent = message.title;
+    resultMeta.textContent = message.meta;
+    resultCopy.textContent = `${message.copy} ${currentLang === "zh" ? "当前奖励档：" : "Current reward tier: "}${getMemoryRewardTier().tier}`;
+    resultVisual.hidden = true;
+    resultDialog.showModal();
+  }
   renderMemoryBoard();
   memoryAdvanceTimer = window.setTimeout(() => {
+    if (resultDialog.open) resultDialog.close();
     memoryLevel += 1;
     buildMemoryLevel();
-  }, 900);
+  }, 1500);
   renderMemorySummary();
 }
 
@@ -818,13 +901,18 @@ function handleMemoryFailure() {
   stopMemoryAdvanceTimer();
   memoryState = "failed";
   setMemoryStatus("memoryFailed");
-  resultCard.dataset.variant = "memory-failed";
-  resultTitle.textContent = translations[currentLang].memoryResultFailedTitle;
-  resultMeta.textContent = `${translations[currentLang].memoryResultFailedMeta} ${getMemoryRewardTier().tier}`;
-  resultCopy.textContent = translations[currentLang].memoryResultCopy;
-  resultVisual.hidden = true;
-  resultDialog.showModal();
+  memoryBoard = memoryBoard.map((card) => ({ ...card, revealed: true }));
   renderMemoryBoard();
+  const message = getMemoryFailureMessage();
+  if (!message) return;
+  resultCard.dataset.variant = "memory-failed";
+  resultTitle.textContent = message.title;
+  resultMeta.textContent = `${message.meta} ${currentLang === "zh" ? "当前奖励档：" : "Current reward tier: "}${getMemoryRewardTier().tier}`;
+  resultCopy.textContent = message.copy;
+  resultVisual.hidden = true;
+  window.setTimeout(() => {
+    resultDialog.showModal();
+  }, 520);
 }
 
 function pauseMemoryChallenge() {
