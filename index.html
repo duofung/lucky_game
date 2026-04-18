@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>幸运轮盘</title>
-    <link rel="stylesheet" href="./style.css?v=20260419b" />
+    <link rel="stylesheet" href="./style.css?v=20260419d" />
   </head>
   <body>
     <div class="page-shell">
@@ -20,69 +20,63 @@
             <p data-i18n="brandSubtitle">适用于线下活动、品牌互动与礼品抽奖。</p>
           </div>
         </div>
+        <div class="playback-bar" id="playbackBar" hidden>
+          <button id="backToHubButton" class="secondary-button" type="button" data-i18n="backToHub">返回首页</button>
+          <div class="playback-copy">
+            <div class="brand-kicker" data-i18n="gamePageLabel">GAME PAGE</div>
+            <strong id="currentGameTitle" data-i18n="wheelTitle">幸运轮盘</strong>
+          </div>
+        </div>
         <div class="toolbar lang-toolbar">
           <button class="ghost-chip active" data-lang="zh">中文</button>
           <button class="ghost-chip" data-lang="en">EN</button>
         </div>
       </header>
-      <main class="layout">
-        <aside class="activity-sidebar glass-panel">
-          <div class="section-label" data-i18n="activityLabel">游戏列表</div>
-          <nav class="activity-nav">
-            <button class="activity-card active" data-activity="wheel">
-              <span class="activity-icon">◎</span>
-              <span>
-                <strong data-i18n="wheelTitle">幸运轮盘</strong>
-                <small data-i18n="wheelDesc">礼品、积分、折扣券即时抽取</small>
-              </span>
-            </button>
-            <button class="activity-card" data-activity="blindbox">
-              <span class="activity-icon">◈</span>
-              <span>
-                <strong data-i18n="blindTitle">抽盲盒</strong>
-                <small data-i18n="blindDesc">惊喜揭晓式奖励互动</small>
-              </span>
-            </button>
-            <button class="activity-card" data-activity="roulette">
-              <span class="activity-icon">✦</span>
-              <span>
-                <strong data-i18n="rouletteTitle">左轮轮盘赌</strong>
-                <small data-i18n="rouletteDesc">戏剧化停顿与刺激感氛围</small>
-              </span>
-            </button>
-            <button class="activity-card" data-activity="memory">
-              <span class="activity-icon">▦</span>
-              <span>
-                <strong data-i18n="memoryTitle">九宫格记忆力</strong>
-                <small data-i18n="memoryDesc">短时挑战，适合排队与围观</small>
-              </span>
-            </button>
-            <button class="activity-card" data-activity="pachinko">
-              <span class="activity-icon">◉</span>
-              <span>
-                <strong data-i18n="pachinkoTitle">幸运老虎机</strong>
-                <small data-i18n="pachinkoDesc">三列滚轴揭晓，适合围观互动</small>
-              </span>
-            </button>
-            <button class="activity-card" data-activity="giftwall">
-              <span class="activity-icon">▣</span>
-              <span>
-                <strong data-i18n="giftWallTitle">礼盒翻牌墙</strong>
-                <small data-i18n="giftWallDesc">适合多人围观的翻牌揭晓</small>
-              </span>
-              <em data-i18n="comingSoon">即将上线</em>
-            </button>
-            <button class="activity-card" data-activity="timer">
-              <span class="activity-icon">◌</span>
-              <span>
-                <strong data-i18n="timerTitle">秒杀倒计时</strong>
-                <small data-i18n="timerDesc">适合整点冲刺和限量奖励</small>
-              </span>
-              <em data-i18n="comingSoon">即将上线</em>
-            </button>
-          </nav>
-        </aside>
-
+      <section id="hubScreen" class="hub-screen glass-panel">
+        <div class="hub-copy">
+          <div class="section-label" data-i18n="hubLabel">入口首页</div>
+          <h2 data-i18n="hubTitle">Try Our Demo Games</h2>
+          <p data-i18n="hubSubtitle">每个游戏都会打开成独立页面体验，点击卡片进入对应玩法。</p>
+        </div>
+        <div class="hub-grid">
+          <button class="hub-card" data-open-game="wheel" type="button">
+            <span class="hub-card-frame hub-wheel-frame">
+              <span class="hub-mini-wheel"></span>
+            </span>
+            <strong data-i18n="wheelTitle">幸运轮盘</strong>
+            <small data-i18n="wheelDesc">礼品、积分、折扣券即时抽取</small>
+          </button>
+          <button class="hub-card" data-open-game="blindbox" type="button">
+            <span class="hub-card-frame hub-blindbox-frame">
+              <span class="hub-mini-gifts"></span>
+            </span>
+            <strong data-i18n="blindTitle">抽盲盒</strong>
+            <small data-i18n="blindDesc">78 个礼盒随机揭晓，人人有奖</small>
+          </button>
+          <button class="hub-card" data-open-game="roulette" type="button">
+            <span class="hub-card-frame hub-roulette-frame">
+              <span class="hub-mini-cylinder"></span>
+            </span>
+            <strong data-i18n="rouletteTitle">左轮轮盘赌</strong>
+            <small data-i18n="rouletteDesc">戏剧化停顿与刺激感氛围</small>
+          </button>
+          <button class="hub-card" data-open-game="memory" type="button">
+            <span class="hub-card-frame hub-memory-frame">
+              <span class="hub-mini-grid"></span>
+            </span>
+            <strong data-i18n="memoryTitle">九宫格记忆力</strong>
+            <small data-i18n="memoryDesc">图片格阵记忆挑战，适合围观互动</small>
+          </button>
+          <button class="hub-card" data-open-game="pachinko" type="button">
+            <span class="hub-card-frame hub-slot-frame">
+              <span class="hub-mini-slot"></span>
+            </span>
+            <strong data-i18n="pachinkoTitle">幸运老虎机</strong>
+            <small data-i18n="pachinkoDesc">三列滚轴揭晓，适合围观互动</small>
+          </button>
+        </div>
+      </section>
+      <main id="playgroundShell" class="layout playground-shell" hidden>
         <section class="hero-panel">
           <div class="content-grid">
             <section class="wheel-stage glass-panel activity-panel active" data-panel="wheel">
@@ -606,6 +600,6 @@
       </div>
     </template>
 
-    <script src="./script.js?v=20260419a"></script>
+    <script src="./script.js?v=20260419d"></script>
   </body>
 </html>

@@ -3,6 +3,11 @@ const translations = {
     brandKicker: "EXHIBITION GAME STUDIO",
     brandTitle: "幸运轮盘",
     brandSubtitle: "适用于线下活动、品牌互动与礼品抽奖。",
+    hubLabel: "入口首页",
+    hubTitle: "试试我们的演示游戏",
+    hubSubtitle: "每个游戏都会打开成独立页面体验，点击卡片进入对应玩法。",
+    gamePageLabel: "游戏页面",
+    backToHub: "返回首页",
     activityLabel: "游戏列表",
     wheelTitle: "幸运轮盘",
     wheelDesc: "礼品、积分、折扣券即时抽取",
@@ -127,6 +132,11 @@ const translations = {
     brandKicker: "EXHIBITION GAME STUDIO",
     brandTitle: "Lucky Wheel",
     brandSubtitle: "For offline campaigns, brand activations, and giveaway draws.",
+    hubLabel: "Entry Page",
+    hubTitle: "Try Our Demo Games",
+    hubSubtitle: "Each game opens as its own dedicated page. Click a card to enter.",
+    gamePageLabel: "Game Page",
+    backToHub: "Back to Home",
     activityLabel: "Game List",
     wheelTitle: "Lucky Wheel",
     wheelDesc: "Spin for gifts, credits, and coupons",
@@ -476,6 +486,12 @@ const resultVisual = document.querySelector("#resultVisual");
 const langButtons = document.querySelectorAll("[data-lang]");
 const activityCards = document.querySelectorAll(".activity-card");
 const activityPanels = document.querySelectorAll(".activity-panel");
+const hubScreen = document.querySelector("#hubScreen");
+const playgroundShell = document.querySelector("#playgroundShell");
+const playbackBar = document.querySelector("#playbackBar");
+const backToHubButton = document.querySelector("#backToHubButton");
+const currentGameTitle = document.querySelector("#currentGameTitle");
+const hubCards = document.querySelectorAll("[data-open-game]");
 const blindboxPrizeList = document.querySelector("#blindboxPrizeList");
 const blindboxGrid = document.querySelector("#blindboxGrid");
 const generateBlindboxButton = document.querySelector("#generateBlindboxButton");
@@ -559,6 +575,14 @@ let memoryAdvanceTimer = null;
 let slotSpinning = false;
 let slotCurrentReward = slotRewards[0];
 let slotSpinTimer = null;
+
+const activityTitleKeyMap = {
+  wheel: "wheelTitle",
+  blindbox: "blindTitle",
+  roulette: "rouletteTitle",
+  memory: "memoryTitle",
+  pachinko: "pachinkoTitle",
+};
 
 function translateWithCount(template, count) {
   return template.replace("{count}", String(count));
@@ -1582,6 +1606,41 @@ function applyTheme() {
   renderSlotIdleState();
 }
 
+function updateCurrentGameTitle(activity = currentActivity) {
+  const titleKey = activityTitleKeyMap[activity];
+  if (!titleKey) return;
+  const title = translations[currentLang][titleKey];
+  currentGameTitle.textContent = title;
+  document.title = title;
+}
+
+function openGame(activity) {
+  setActiveActivity(activity);
+  hubScreen.hidden = true;
+  playgroundShell.hidden = false;
+  playbackBar.hidden = false;
+  updateCurrentGameTitle(activity);
+}
+
+function returnToHub() {
+  if (currentActivity === "memory") {
+    stopMemoryTimer();
+    stopMemoryAdvanceTimer();
+  }
+
+  if (currentActivity === "pachinko") {
+    stopSlotSpinTimer();
+    slotSpinning = false;
+    slotSpinButton.disabled = false;
+    renderSlotIdleState();
+  }
+
+  hubScreen.hidden = false;
+  playgroundShell.hidden = true;
+  playbackBar.hidden = true;
+  document.title = translations[currentLang].brandTitle;
+}
+
 function setActiveActivity(activity) {
   const previousActivity = currentActivity;
   currentActivity = activity;
@@ -1655,6 +1714,12 @@ function applyLanguage(lang) {
   setSlotStatus("slotStatusIdle");
   ensureBlindboxBoard();
   drawWheel();
+  updateCurrentGameTitle();
+  if (hubScreen.hidden) {
+    document.title = translations[lang][activityTitleKeyMap[currentActivity]];
+  } else {
+    document.title = translations[lang].brandTitle;
+  }
 }
 
 activityCards.forEach((card) => {
@@ -1670,6 +1735,16 @@ activityCards.forEach((card) => {
     }
   });
 });
+
+hubCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    if (activityTitleKeyMap[card.dataset.openGame]) {
+      openGame(card.dataset.openGame);
+    }
+  });
+});
+
+backToHubButton.addEventListener("click", returnToHub);
 
 langButtons.forEach((button) => {
   button.addEventListener("click", () => applyLanguage(button.dataset.lang));
@@ -1806,4 +1881,6 @@ applyTheme();
 toggleChanceButton.textContent = translations[currentLang].showChance;
 toggleBlindboxChanceButton.textContent = translations[currentLang].hideChance;
 setActiveActivity("wheel");
+updateCurrentGameTitle("wheel");
+document.title = translations[currentLang].brandTitle;
 drawWheel();
