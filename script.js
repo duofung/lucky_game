@@ -85,8 +85,22 @@ const translations = {
     memoryResultFailedTitle: "挑战结束",
     memoryResultFailedMeta: "本轮可领取对应档位礼品",
     memoryResultCopy: "记忆图片位置，持续向更高关卡挑战，礼品价值会随档位同步升级。",
-    pachinkoTitle: "幸运弹珠",
-    pachinkoDesc: "适合人流停留的掉落式抽奖",
+    pachinkoTitle: "幸运老虎机",
+    pachinkoDesc: "三列滚轴揭晓，适合围观互动",
+    slotPreview: "老虎机现场",
+    slotEditorLabel: "老虎机配置",
+    slotSpinNow: "开始摇奖",
+    slotStatusLabel: "当前状态",
+    slotStatusIdle: "拉下摇杆，开始这一轮惊喜揭晓",
+    slotStatusSpinning: "滚轴转动中，幸运结果即将停下",
+    slotStatusResult: "组合锁定，奖励已经揭晓",
+    slotCurrentTier: "当前档位",
+    slotCurrentReward: "礼品内容",
+    slotCurrentChance: "参考几率",
+    slotTierLabel: "档位名称",
+    slotRewardContent: "礼品内容",
+    slotResultMeta: "本轮组合命中成功",
+    slotResultCopy: "滚轴停下的那一刻会更有围观感，也更适合在展台形成一次完整的奖励揭晓。",
     giftWallTitle: "礼盒翻牌墙",
     giftWallDesc: "适合多人围观的翻牌揭晓",
     timerTitle: "秒杀倒计时",
@@ -195,8 +209,22 @@ const translations = {
     memoryResultFailedTitle: "Challenge Over",
     memoryResultFailedMeta: "Claim the reward tier tied to your progress",
     memoryResultCopy: "Memorize picture positions and climb to higher tiers for stronger rewards.",
-    pachinkoTitle: "Lucky Pachinko",
-    pachinkoDesc: "Drop-play prizes for booth traffic",
+    pachinkoTitle: "Lucky Slot",
+    pachinkoDesc: "Three reels, clean suspense, strong crowd energy",
+    slotPreview: "Slot Preview",
+    slotEditorLabel: "Slot Setup",
+    slotSpinNow: "Start Spin",
+    slotStatusLabel: "Status",
+    slotStatusIdle: "Pull the lever and let the reels reveal the next reward",
+    slotStatusSpinning: "The reels are spinning. The result is about to land",
+    slotStatusResult: "The combination is locked and the reward is revealed",
+    slotCurrentTier: "Current Tier",
+    slotCurrentReward: "Prize",
+    slotCurrentChance: "Chance",
+    slotTierLabel: "Tier Name",
+    slotRewardContent: "Prize Content",
+    slotResultMeta: "The combination landed successfully",
+    slotResultCopy: "The final stop is designed to feel social and theatrical, making the reward reveal more watchable at the booth.",
     giftWallTitle: "Gift Flip Wall",
     giftWallDesc: "Reveal-based prizes for group crowds",
     timerTitle: "Countdown Rush",
@@ -283,6 +311,44 @@ const defaultRouletteRewardsByLang = {
     { bullets: 3, reward: "Signature Drink Pass" },
     { bullets: 4, reward: "Collab Gift Set" },
     { bullets: 5, reward: "Grand Prize of the Day" },
+  ],
+};
+
+const slotSymbolsByLang = {
+  zh: [
+    { key: "gift", icon: "🎁", label: "礼盒" },
+    { key: "bag", icon: "🛍️", label: "手提袋" },
+    { key: "scent", icon: "🌸", label: "香氛卡" },
+    { key: "sample", icon: "🧴", label: "试用装" },
+    { key: "drink", icon: "🥤", label: "饮品券" },
+    { key: "logo", icon: "✦", label: "品牌星标" },
+    { key: "crown", icon: "👑", label: "隐藏大奖" },
+  ],
+  en: [
+    { key: "gift", icon: "🎁", label: "Gift Box" },
+    { key: "bag", icon: "🛍️", label: "Tote Bag" },
+    { key: "scent", icon: "🌸", label: "Scent Card" },
+    { key: "sample", icon: "🧴", label: "Sample Kit" },
+    { key: "drink", icon: "🥤", label: "Drink Pass" },
+    { key: "logo", icon: "✦", label: "Brand Star" },
+    { key: "crown", icon: "👑", label: "Jackpot" },
+  ],
+};
+
+const defaultSlotRewardsByLang = {
+  zh: [
+    { tier: "柔光参与礼", reward: "品牌贴纸", weight: 34, combo: ["bag", "drink", "bag"] },
+    { tier: "心动加分彩蛋", reward: "饮品兑换券", weight: 28, combo: ["drink", "logo", "drink"] },
+    { tier: "轻奢进阶礼", reward: "香氛卡礼袋", weight: 18, combo: ["scent", "scent", "logo"] },
+    { tier: "高光精选礼", reward: "新品试用套装", weight: 12, combo: ["sample", "sample", "sample"] },
+    { tier: "主角大奖档", reward: "限定礼盒", weight: 8, combo: ["crown", "gift", "crown"] },
+  ],
+  en: [
+    { tier: "Soft Entry", reward: "Branded Sticker Pack", weight: 34, combo: ["bag", "drink", "bag"] },
+    { tier: "Glow Bonus", reward: "Signature Drink Pass", weight: 28, combo: ["drink", "logo", "drink"] },
+    { tier: "Premium Step-Up", reward: "Scent Card Set", weight: 18, combo: ["scent", "scent", "logo"] },
+    { tier: "Highlight Tier", reward: "Sample Kit Bundle", weight: 12, combo: ["sample", "sample", "sample"] },
+    { tier: "Main Prize", reward: "Limited Gift Box", weight: 8, combo: ["crown", "gift", "crown"] },
   ],
 };
 
@@ -450,6 +516,21 @@ const memoryCategoryValue = document.querySelector("#memoryCategoryValue");
 const memoryRewardTierValue = document.querySelector("#memoryRewardTierValue");
 const memoryRewardList = document.querySelector("#memoryRewardList");
 const memoryRewardTemplate = document.querySelector("#memoryRewardTemplate");
+const slotSpinButton = document.querySelector("#slotSpinButton");
+const slotResetButton = document.querySelector("#slotResetButton");
+const slotStatusText = document.querySelector("#slotStatusText");
+const slotTierValue = document.querySelector("#slotTierValue");
+const slotRewardValue = document.querySelector("#slotRewardValue");
+const slotChanceValue = document.querySelector("#slotChanceValue");
+const slotEditorTierValue = document.querySelector("#slotEditorTierValue");
+const slotEditorRewardValue = document.querySelector("#slotEditorRewardValue");
+const slotRewardList = document.querySelector("#slotRewardList");
+const slotRewardTemplate = document.querySelector("#slotRewardTemplate");
+const slotTracks = [
+  document.querySelector("#slotTrack0"),
+  document.querySelector("#slotTrack1"),
+  document.querySelector("#slotTrack2"),
+];
 
 let currentLang = "zh";
 let currentActivity = "wheel";
@@ -459,6 +540,7 @@ let wheelItems = structuredClone(defaultWheelItemsByLang.zh);
 let blindboxPrizes = structuredClone(defaultBlindboxPrizesByLang.zh);
 let rouletteRewards = structuredClone(defaultRouletteRewardsByLang.zh);
 let memoryRewardTiers = structuredClone(defaultMemoryRewardTiersByLang.zh);
+let slotRewards = structuredClone(defaultSlotRewardsByLang.zh);
 let blindboxCells = [];
 let blindboxOpening = false;
 let selectedBullets = 1;
@@ -474,6 +556,9 @@ let memoryTargets = [];
 let memoryMatchedKeys = new Set();
 let memoryCountdownTimer = null;
 let memoryAdvanceTimer = null;
+let slotSpinning = false;
+let slotCurrentReward = slotRewards[0];
+let slotSpinTimer = null;
 
 function translateWithCount(template, count) {
   return template.replace("{count}", String(count));
@@ -499,6 +584,177 @@ function getRouletteSafeChance(bullets) {
 
 function getRouletteRewardEntry(bullets = selectedBullets) {
   return rouletteRewards.find((entry) => entry.bullets === bullets) || rouletteRewards[0];
+}
+
+function getSlotSymbols() {
+  return slotSymbolsByLang[currentLang];
+}
+
+function getSlotSymbolMap() {
+  return Object.fromEntries(getSlotSymbols().map((symbol) => [symbol.key, symbol]));
+}
+
+function getSlotShares() {
+  const total = slotRewards.reduce((sum, item) => sum + Math.max(0, Number(item.weight) || 0), 0);
+  if (total <= 0) return slotRewards.map(() => 0);
+  return slotRewards.map((item) => (Math.max(0, Number(item.weight) || 0) / total) * 100);
+}
+
+function pickWeightedSlotReward() {
+  const weights = slotRewards.map((item) => Math.max(0, Number(item.weight) || 0));
+  const total = weights.reduce((sum, value) => sum + value, 0);
+  if (total <= 0) return slotRewards[Math.floor(Math.random() * slotRewards.length)];
+
+  let threshold = Math.random() * total;
+  for (let index = 0; index < slotRewards.length; index += 1) {
+    threshold -= weights[index];
+    if (threshold < 0) return slotRewards[index];
+  }
+  return slotRewards[slotRewards.length - 1];
+}
+
+function setSlotStatus(key) {
+  slotStatusText.textContent = translations[currentLang][key];
+}
+
+function stopSlotSpinTimer() {
+  if (slotSpinTimer) {
+    window.clearTimeout(slotSpinTimer);
+    slotSpinTimer = null;
+  }
+}
+
+function renderSlotSummary() {
+  const currentReward = slotCurrentReward || slotRewards[0];
+  const shares = getSlotShares();
+  const currentIndex = Math.max(0, slotRewards.indexOf(currentReward));
+  slotTierValue.textContent = currentReward.tier;
+  slotRewardValue.textContent = currentReward.reward;
+  slotChanceValue.textContent = getShareText(shares[currentIndex] || 0);
+  slotEditorTierValue.textContent = currentReward.tier;
+  slotEditorRewardValue.textContent = currentReward.reward;
+}
+
+function renderSlotIdleState() {
+  const symbolMap = getSlotSymbolMap();
+  const combo = (slotCurrentReward || slotRewards[0]).combo;
+  slotTracks.forEach((track, index) => {
+    const symbol = symbolMap[combo[index]];
+    if (!track || !symbol) return;
+    track.style.transition = "none";
+    track.style.transform = "translateY(0)";
+    track.innerHTML = `<div class="slot-symbol current"><span>${symbol.icon}</span><strong>${symbol.label}</strong></div>`;
+  });
+}
+
+function buildSlotSequence(targetKey, reelIndex) {
+  const symbols = getSlotSymbols();
+  const sequence = [];
+  const total = 14 + reelIndex * 3;
+
+  for (let index = 0; index < total; index += 1) {
+    sequence.push(symbols[Math.floor(Math.random() * symbols.length)]);
+  }
+
+  sequence.push(symbols.find((item) => item.key === targetKey) || symbols[0]);
+  return sequence;
+}
+
+function renderSlotRewardList() {
+  slotRewardList.innerHTML = "";
+  const shares = getSlotShares();
+
+  slotRewards.forEach((entry, index) => {
+    const row = slotRewardTemplate.content.firstElementChild.cloneNode(true);
+    const tierInput = row.querySelector(".slot-tier-input");
+    const rewardInput = row.querySelector(".slot-reward-input");
+    const weightInput = row.querySelector(".slot-weight-input");
+    const share = row.querySelector(".slot-reward-share");
+
+    tierInput.value = entry.tier;
+    rewardInput.value = entry.reward;
+    weightInput.value = entry.weight;
+    share.textContent = getShareText(shares[index] || 0);
+
+    tierInput.addEventListener("input", (event) => {
+      slotRewards[index].tier = event.target.value.trim() || entry.tier;
+      if (slotCurrentReward === entry) renderSlotSummary();
+    });
+
+    rewardInput.addEventListener("input", (event) => {
+      slotRewards[index].reward = event.target.value.trim() || entry.reward;
+      if (slotCurrentReward === entry) renderSlotSummary();
+    });
+
+    weightInput.addEventListener("input", (event) => {
+      slotRewards[index].weight = Math.max(0, Number(event.target.value) || 0);
+      renderSlotRewardList();
+      renderSlotSummary();
+    });
+
+    tierInput.addEventListener("blur", (event) => {
+      const fallback = currentLang === "zh" ? "未命名档位" : "Untitled Tier";
+      slotRewards[index].tier = event.target.value.trim() || fallback;
+      renderSlotRewardList();
+      renderSlotSummary();
+    });
+
+    rewardInput.addEventListener("blur", (event) => {
+      const fallback = currentLang === "zh" ? "未命名礼品" : "Untitled Reward";
+      slotRewards[index].reward = event.target.value.trim() || fallback;
+      renderSlotRewardList();
+      renderSlotSummary();
+    });
+
+    slotRewardList.appendChild(row);
+  });
+}
+
+function spinSlotMachine() {
+  if (slotSpinning) return;
+  stopSlotSpinTimer();
+  slotSpinning = true;
+  slotSpinButton.disabled = true;
+  setSlotStatus("slotStatusSpinning");
+
+  const outcome = pickWeightedSlotReward();
+  slotCurrentReward = outcome;
+  const sequences = outcome.combo.map((key, index) => buildSlotSequence(key, index));
+  const itemHeight = 108;
+
+  slotTracks.forEach((track, index) => {
+    if (!track) return;
+    track.innerHTML = sequences[index]
+      .map((symbol) => `<div class="slot-symbol"><span>${symbol.icon}</span><strong>${symbol.label}</strong></div>`)
+      .join("");
+    track.style.transition = "none";
+    track.style.transform = "translateY(0)";
+  });
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      slotTracks.forEach((track, index) => {
+        if (!track) return;
+        const distance = (sequences[index].length - 1) * itemHeight;
+        track.style.transition = `transform ${1400 + index * 320}ms cubic-bezier(0.16, 0.84, 0.24, 1)`;
+        track.style.transform = `translateY(-${distance}px)`;
+      });
+    });
+  });
+
+  slotSpinTimer = window.setTimeout(() => {
+    slotSpinTimer = null;
+    slotSpinning = false;
+    slotSpinButton.disabled = false;
+    setSlotStatus("slotStatusResult");
+    renderSlotSummary();
+    resultCard.dataset.variant = "slot-result";
+    resultTitle.textContent = outcome.reward;
+    resultMeta.textContent = `${translations[currentLang].slotResultMeta} · ${outcome.tier}`;
+    resultCopy.textContent = translations[currentLang].slotResultCopy;
+    resultVisual.hidden = true;
+    resultDialog.showModal();
+  }, 2450);
 }
 
 function renderRouletteSummary() {
@@ -1323,6 +1579,7 @@ function applyTheme() {
   drawWheel();
   if (blindboxCells.length) renderBlindboxGrid();
   renderMemoryBoard();
+  renderSlotIdleState();
 }
 
 function setActiveActivity(activity) {
@@ -1332,6 +1589,13 @@ function setActiveActivity(activity) {
   if (previousActivity === "memory" && activity !== "memory") {
     stopMemoryTimer();
     stopMemoryAdvanceTimer();
+  }
+
+  if (previousActivity === "pachinko" && activity !== "pachinko") {
+    stopSlotSpinTimer();
+    slotSpinning = false;
+    slotSpinButton.disabled = false;
+    renderSlotIdleState();
   }
 
   activityCards.forEach((card) => {
@@ -1344,7 +1608,8 @@ function setActiveActivity(activity) {
       (activity === "wheel" && (panelName === "wheel" || panelName === "wheel-editor")) ||
       (activity === "blindbox" && (panelName === "blindbox" || panelName === "blindbox-editor")) ||
       (activity === "roulette" && (panelName === "roulette" || panelName === "roulette-editor")) ||
-      (activity === "memory" && (panelName === "memory" || panelName === "memory-editor"));
+      (activity === "memory" && (panelName === "memory" || panelName === "memory-editor")) ||
+      (activity === "pachinko" && (panelName === "pachinko" || panelName === "pachinko-editor"));
     panel.classList.toggle("active", show);
   });
 
@@ -1369,18 +1634,25 @@ function applyLanguage(lang) {
 
   toggleChanceButton.textContent = translations[lang][showChanceInfo ? "hideChance" : "showChance"];
   toggleBlindboxChanceButton.textContent = translations[lang][showBlindboxChanceInfo ? "hideChance" : "showChance"];
+  stopSlotSpinTimer();
   wheelItems = structuredClone(defaultWheelItemsByLang[lang]);
   blindboxPrizes = structuredClone(defaultBlindboxPrizesByLang[lang]);
   rouletteRewards = structuredClone(defaultRouletteRewardsByLang[lang]);
   memoryRewardTiers = structuredClone(defaultMemoryRewardTiersByLang[lang]);
+  slotRewards = structuredClone(defaultSlotRewardsByLang[lang]);
+  slotCurrentReward = slotRewards[0];
   blindboxCells = [];
   renderWheelEditor();
   renderBlindboxPrizeList();
   renderRouletteRewardList();
   renderRouletteSummary();
   renderMemoryRewardList();
+  renderSlotRewardList();
+  renderSlotSummary();
+  renderSlotIdleState();
   resetMemoryChallenge({ autoStart: currentActivity === "memory" });
   setRouletteStatus("rouletteStatusIdle");
+  setSlotStatus("slotStatusIdle");
   ensureBlindboxBoard();
   drawWheel();
 }
@@ -1391,7 +1663,8 @@ activityCards.forEach((card) => {
       card.dataset.activity === "wheel" ||
       card.dataset.activity === "blindbox" ||
       card.dataset.activity === "roulette" ||
-      card.dataset.activity === "memory"
+      card.dataset.activity === "memory" ||
+      card.dataset.activity === "pachinko"
     ) {
       setActiveActivity(card.dataset.activity);
     }
@@ -1452,6 +1725,19 @@ rouletteBulletPicker.addEventListener("click", (event) => {
   setRouletteStatus("rouletteStatusIdle");
 });
 
+slotSpinButton.addEventListener("click", spinSlotMachine);
+slotResetButton.addEventListener("click", () => {
+  stopSlotSpinTimer();
+  slotRewards = structuredClone(defaultSlotRewardsByLang[currentLang]);
+  slotCurrentReward = slotRewards[0];
+  slotSpinning = false;
+  slotSpinButton.disabled = false;
+  setSlotStatus("slotStatusIdle");
+  renderSlotRewardList();
+  renderSlotSummary();
+  renderSlotIdleState();
+});
+
 memoryActionButton.addEventListener("click", () => {
   if (memoryState === "memorizing") {
     pauseMemoryChallenge();
@@ -1508,9 +1794,13 @@ renderWheelEditor();
 renderBlindboxPrizeList();
 renderRouletteRewardList();
 renderMemoryRewardList();
+renderSlotRewardList();
 renderRouletteSummary();
+renderSlotSummary();
+renderSlotIdleState();
 resetMemoryChallenge();
 setRouletteStatus("rouletteStatusIdle");
+setSlotStatus("slotStatusIdle");
 ensureBlindboxBoard();
 applyTheme();
 toggleChanceButton.textContent = translations[currentLang].showChance;

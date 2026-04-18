@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>幸运轮盘</title>
-    <link rel="stylesheet" href="./style.css?v=20260418b" />
+    <link rel="stylesheet" href="./style.css?v=20260418c" />
   </head>
   <body>
     <div class="page-shell">
@@ -60,10 +60,9 @@
             <button class="activity-card" data-activity="pachinko">
               <span class="activity-icon">◉</span>
               <span>
-                <strong data-i18n="pachinkoTitle">幸运弹珠</strong>
-                <small data-i18n="pachinkoDesc">适合人流停留的掉落式抽奖</small>
+                <strong data-i18n="pachinkoTitle">幸运老虎机</strong>
+                <small data-i18n="pachinkoDesc">三列滚轴揭晓，适合围观互动</small>
               </span>
-              <em data-i18n="comingSoon">即将上线</em>
             </button>
             <button class="activity-card" data-activity="giftwall">
               <span class="activity-icon">▣</span>
@@ -223,6 +222,59 @@
               </div>
             </section>
 
+            <section class="slot-stage glass-panel activity-panel" data-panel="pachinko">
+              <div class="panel-header panel-header-inline">
+                <div class="section-label" data-i18n="slotPreview">老虎机现场</div>
+                <button id="slotSpinButton" class="primary-button" data-i18n="slotSpinNow">开始摇奖</button>
+              </div>
+
+              <div class="slot-stage-shell">
+                <div class="slot-machine">
+                  <div class="slot-headline">
+                    <span data-i18n="slotStatusLabel">当前状态</span>
+                    <strong id="slotStatusText" data-i18n="slotStatusIdle">拉下摇杆，开始这一轮惊喜揭晓</strong>
+                  </div>
+
+                  <div class="slot-machine-shell">
+                    <div class="slot-reels">
+                      <div class="slot-reel">
+                        <div class="slot-window">
+                          <div id="slotTrack0" class="slot-track" data-reel="0"></div>
+                        </div>
+                      </div>
+                      <div class="slot-reel">
+                        <div class="slot-window">
+                          <div id="slotTrack1" class="slot-track" data-reel="1"></div>
+                        </div>
+                      </div>
+                      <div class="slot-reel">
+                        <div class="slot-window">
+                          <div id="slotTrack2" class="slot-track" data-reel="2"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="slot-side-accent slot-side-left"></span>
+                    <span class="slot-side-accent slot-side-right"></span>
+                  </div>
+                </div>
+
+                <div class="slot-outlook">
+                  <article class="slot-stat-card">
+                    <span data-i18n="slotCurrentTier">当前档位</span>
+                    <strong id="slotTierValue">柔光参与礼</strong>
+                  </article>
+                  <article class="slot-stat-card">
+                    <span data-i18n="slotCurrentReward">礼品内容</span>
+                    <strong id="slotRewardValue">品牌贴纸</strong>
+                  </article>
+                  <article class="slot-stat-card">
+                    <span data-i18n="slotCurrentChance">参考几率</span>
+                    <strong id="slotChanceValue">34.0%</strong>
+                  </article>
+                </div>
+              </div>
+            </section>
+
             <section class="editor-panel glass-panel activity-panel active" data-panel="wheel-editor">
               <div class="panel-header panel-header-inline">
                 <div class="section-label" data-i18n="editorLabel">玩法编辑</div>
@@ -343,6 +395,32 @@
               </div>
               <div id="memoryRewardList" class="item-list memory-reward-list"></div>
             </section>
+
+            <section class="editor-panel glass-panel activity-panel slot-editor" data-panel="pachinko-editor">
+              <div class="panel-header panel-header-inline">
+                <div class="section-label" data-i18n="slotEditorLabel">老虎机配置</div>
+                <button id="slotResetButton" class="ghost-button" data-i18n="resetDefault">恢复默认</button>
+              </div>
+
+              <div class="blindbox-summary slot-summary">
+                <article>
+                  <span data-i18n="slotCurrentTier">当前档位</span>
+                  <strong id="slotEditorTierValue">柔光参与礼</strong>
+                </article>
+                <article>
+                  <span data-i18n="slotCurrentReward">礼品内容</span>
+                  <strong id="slotEditorRewardValue">品牌贴纸</strong>
+                </article>
+              </div>
+
+              <div class="editor-head slot-editor-head">
+                <span data-i18n="slotTierLabel">档位名称</span>
+                <span data-i18n="slotRewardContent">礼品内容</span>
+                <span data-i18n="prizeWeight">权重</span>
+                <span data-i18n="prizeChance">几率</span>
+              </div>
+              <div id="slotRewardList" class="item-list slot-reward-list"></div>
+            </section>
           </div>
         </section>
       </main>
@@ -451,6 +529,24 @@
       </div>
     </template>
 
-    <script src="./script.js?v=20260418b"></script>
+    <template id="slotRewardTemplate">
+      <div class="slot-reward-row">
+        <label>
+          <span class="sr-only">slot tier name</span>
+          <input class="slot-tier-input" type="text" maxlength="20" />
+        </label>
+        <label>
+          <span class="sr-only">slot reward content</span>
+          <input class="slot-reward-input" type="text" maxlength="40" />
+        </label>
+        <label>
+          <span class="sr-only">slot reward weight</span>
+          <input class="slot-weight-input" type="number" min="0" max="9999" />
+        </label>
+        <div class="slot-reward-share">0%</div>
+      </div>
+    </template>
+
+    <script src="./script.js?v=20260418d"></script>
   </body>
 </html>
