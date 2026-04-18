@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>幸运轮盘</title>
-    <link rel="stylesheet" href="./style.css?v=20260419j" />
+    <link rel="stylesheet" href="./style.css?v=20260419k" />
   </head>
   <body>
     <div class="page-shell">
@@ -97,47 +97,39 @@
           <div class="content-grid">
             <section class="wheel-stage glass-panel activity-panel active" data-panel="wheel">
               <div class="wheel-shell">
-                <div class="wheel-page-head">
-                  <div class="wheel-page-copyblock">
-                    <div class="section-label">现场抽奖 · 品牌互动</div>
-                    <h2 class="wheel-page-title">幸运转盘</h2>
-                    <p class="wheel-page-copy">支持真实抽奖、权重计算、奖项编辑与概率展示。</p>
-                  </div>
-                  <div class="wheel-top-actions">
-                    <button id="shuffleButton" class="secondary-button" data-i18n="shuffleOrder">随机排序</button>
-                    <button id="spinButton" class="primary-button" data-i18n="spinNow">开始抽奖</button>
-                  </div>
-                </div>
+                <button id="shuffleButton" class="wheel-hidden-action" type="button" data-i18n="shuffleOrder">随机排序</button>
+                <button id="spinButton" class="wheel-hidden-action" type="button" data-i18n="spinNow">开始抽奖</button>
+                <div class="wheel-redesign">
+                  <div class="wheel-redesign-main">
+                    <div class="wheel-stage-card">
+                      <div class="wheel-stack wheel-stack-premium">
+                        <div class="wheel-pointer"></div>
+                        <div class="wheel-frame wheel-frame-premium">
+                          <canvas id="wheelCanvas" width="720" height="720" aria-label="Lucky wheel"></canvas>
+                        </div>
+                        <div class="wheel-center-ring">
+                          <button id="wheelCenterButton" class="wheel-center-trigger" type="button">
+                            <span>开始</span>
+                            <span>抽奖</span>
+                          </button>
+                        </div>
+                      </div>
 
-                <div class="wheel-page-grid">
-                  <div class="wheel-stage-card">
-                    <div class="wheel-stack wheel-stack-premium">
-                      <div class="wheel-pointer"></div>
-                      <div class="wheel-frame wheel-frame-premium">
-                        <canvas id="wheelCanvas" width="720" height="720" aria-label="Lucky wheel"></canvas>
-                      </div>
-                      <div class="wheel-center-ring">
-                        <button id="wheelCenterButton" class="wheel-center-trigger" type="button">
-                          <span>开始</span>
-                          <span>抽奖</span>
-                        </button>
-                      </div>
-                    </div>
-
-                    <div class="wheel-bottom-row">
-                      <div class="wheel-focus-card current-result">
-                        <span data-i18n="nextPrize">当前焦点奖项</span>
-                        <strong id="focusedLabel">限定礼盒</strong>
-                        <em id="wheelWinnerBadge" class="wheel-winner-badge" hidden>恭喜抽中：限定礼盒</em>
-                      </div>
-                      <div class="wheel-action-pills">
-                        <button id="toggleChanceButton" class="secondary-button" data-i18n="showChance">显示几率</button>
-                        <button id="resetButton" class="ghost-button" data-i18n="resetDefault">恢复默认</button>
+                      <div class="wheel-bottom-row">
+                        <div class="wheel-focus-card current-result">
+                          <span data-i18n="nextPrize">当前聚焦奖项</span>
+                          <strong id="focusedLabel">限定礼盒</strong>
+                          <em id="wheelWinnerBadge" class="wheel-winner-badge" hidden>恭喜抽中：限定礼盒</em>
+                        </div>
+                        <div class="wheel-action-pills">
+                          <button id="toggleChanceButton" class="secondary-button" data-i18n="showChance">显示几率</button>
+                          <button id="resetButton" class="ghost-button" data-i18n="resetDefault">恢复默认</button>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <aside class="wheel-info-column">
+                  <aside class="wheel-redesign-side">
                     <div class="wheel-info-card">
                       <div class="wheel-card-head">
                         <h3>活动信息</h3>
@@ -163,10 +155,6 @@
                       <div class="wheel-card-head">
                         <h3>奖项配置</h3>
                         <button id="addItemButton" class="secondary-button" data-i18n="addItem">新增奖项</button>
-                      </div>
-                      <div class="wheel-editor-list-head">
-                        <span>奖项名称</span>
-                        <span>权重</span>
                       </div>
                       <div id="itemList" class="item-list wheel-item-list"></div>
                     </div>
@@ -669,6 +657,6 @@
       </div>
     </template>
 
-    <script src="./script.js?v=20260419f"></script>
+    <script src="./script.js?v=20260419g"></script>
   </body>
 </html>
