@@ -1331,13 +1331,22 @@ function renderWheelEditor() {
     const weightInput = row.querySelector(".item-weight");
     const shareDisplay = row.querySelector(".item-share");
     const removeButton = row.querySelector(".remove-button");
+    const titleDisplay = row.querySelector(".wheel-item-title");
 
     nameInput.value = item.label;
     weightInput.value = item.weight;
-    shareDisplay.textContent = showChanceInfo ? getShareText(shares[index] || 0) : "--";
+    titleDisplay.textContent = item.label;
+    shareDisplay.textContent = showChanceInfo
+      ? `${currentLang === "zh" ? "当前概率" : "Chance"} ${getShareText(shares[index] || 0)}`
+      : currentLang === "zh"
+        ? "当前概率 --"
+        : "Chance --";
+    shareDisplay.hidden = !showChanceInfo;
+    removeButton.textContent = currentLang === "zh" ? "删除" : "Remove";
 
     nameInput.addEventListener("input", (event) => {
       wheelItems[index].label = event.target.value;
+      titleDisplay.textContent = event.target.value.trim() || (currentLang === "zh" ? "未命名奖项" : "Untitled");
       drawWheel();
     });
 

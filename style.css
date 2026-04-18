@@ -2077,6 +2077,11 @@ p {
 
 .wheel-shell {
   min-height: 100%;
+  padding: 8px;
+  border: 1px solid rgba(240, 227, 215, 0.88);
+  border-radius: 36px;
+  background: rgba(251, 247, 242, 0.96);
+  box-shadow: 0 20px 60px rgba(160,120,80,0.12);
 }
 
 .wheel-page-head {
@@ -2126,12 +2131,13 @@ p {
 .wheel-info-card {
   border: 1px solid #f0e3d7;
   border-radius: 28px;
-  background: linear-gradient(135deg, #ffffff 0%, #f8f2eb 100%);
+  background: linear-gradient(135deg, #fffdfa 0%, #f8f2eb 100%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.72), 0 16px 40px rgba(160,120,80,0.08);
 }
 
 .wheel-stage-card {
   padding: 32px;
+  min-height: 980px;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.76), inset 0 -4px 14px rgba(160,120,80,0.04);
 }
 
@@ -2224,7 +2230,7 @@ p {
   padding: 18px 20px;
   border: 1px solid #f1e1d3;
   border-radius: 22px;
-  background: rgba(255,255,255,0.72);
+  background: rgba(255,255,255,0.92);
 }
 
 .wheel-focus-card span {
@@ -2253,7 +2259,7 @@ p {
 
 .wheel-info-card {
   padding: 24px;
-  background: #fff;
+  background: rgba(255, 253, 250, 0.98);
 }
 
 .wheel-card-head {
@@ -2308,38 +2314,79 @@ p {
 }
 
 .wheel-editor-list-head {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 110px 64px 34px;
-  gap: 12px;
   margin-bottom: 12px;
   color: #9e806b;
   font-size: 0.8rem;
+  font-weight: 600;
 }
 
 .wheel-item-list .item-row {
-  grid-template-columns: minmax(0, 1fr) 110px 64px 34px;
-  gap: 12px;
-  padding: 14px 0;
-  border: 0;
-  border-bottom: 1px solid #f2e6da;
-  border-radius: 0;
-  background: transparent;
+  display: block;
+  padding: 16px;
+  border: 1px solid #f0dece;
+  border-radius: 24px;
+  background: rgba(255, 250, 246, 0.98);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
 }
 
-.wheel-item-list .item-row:last-child {
-  border-bottom: 0;
-  padding-bottom: 0;
+.wheel-item-list {
+  display: grid;
+  gap: 14px;
+}
+
+.wheel-prize-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.wheel-prize-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.wheel-prize-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffd9a8 0%, #ffbe7a 100%);
+  flex: none;
+}
+
+.wheel-item-title {
+  font-size: 1.02rem;
+  color: #5c4333;
+}
+
+.wheel-remove-text {
+  width: auto;
+  height: auto;
+  border-radius: 999px;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #c7a48d;
+  font-size: 0.84rem;
+}
+
+.wheel-prize-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 124px;
+  gap: 12px;
 }
 
 .wheel-editor-field {
-  display: flex;
-  align-items: center;
+  display: grid;
   gap: 8px;
 }
 
 .wheel-editor-mini {
-  font-size: 0.86rem;
-  color: #6e5648;
+  font-size: 0.76rem;
+  color: #b08f77;
   white-space: nowrap;
 }
 
@@ -2347,18 +2394,22 @@ p {
 .wheel-item-list .item-row input {
   border-radius: 12px;
   min-height: 42px;
-  background: #fff;
+  background: #fffdfa;
+  border-color: #ebd4bf;
 }
 
 .wheel-item-list .item-share {
-  align-self: center;
+  margin-top: 12px;
+  align-self: flex-start;
+  display: inline-flex;
   min-width: 52px;
-  padding: 8px 0;
-  color: #9a7a63;
-  font-size: 0.9rem;
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: #cf7a5e;
+  font-size: 0.78rem;
   font-weight: 700;
   text-align: center;
-  background: transparent;
+  background: #fff3eb;
 }
 
 .wheel-winner-badge {
@@ -2989,6 +3040,10 @@ p {
   }
 
   .wheel-bottom-row {
+    grid-template-columns: 1fr;
+  }
+
+  .wheel-prize-fields {
     grid-template-columns: 1fr;
   }
 
