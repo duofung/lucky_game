@@ -471,6 +471,11 @@ const itemTemplate = document.querySelector("#itemTemplate");
 const blindboxPrizeTemplate = document.querySelector("#blindboxPrizeTemplate");
 const blindboxCellTemplate = document.querySelector("#blindboxCellTemplate");
 const focusedLabel = document.querySelector("#focusedLabel");
+const wheelCenterButton = document.querySelector("#wheelCenterButton");
+const wheelParticipantValue = document.querySelector("#wheelParticipantValue");
+const wheelTotalWeightValue = document.querySelector("#wheelTotalWeightValue");
+const wheelStatePill = document.querySelector("#wheelStatePill");
+const wheelWinnerBadge = document.querySelector("#wheelWinnerBadge");
 const spinButton = document.querySelector("#spinButton");
 const shuffleButton = document.querySelector("#shuffleButton");
 const addItemButton = document.querySelector("#addItemButton");
@@ -575,6 +580,7 @@ let memoryAdvanceTimer = null;
 let slotSpinning = false;
 let slotCurrentReward = slotRewards[0];
 let slotSpinTimer = null;
+let wheelParticipantCount = 286;
 
 const activityTitleKeyMap = {
   wheel: "wheelTitle",
@@ -1316,6 +1322,8 @@ function drawWheel() {
 function renderWheelEditor() {
   itemList.innerHTML = "";
   const shares = getWheelShares();
+  const totalWeight = wheelItems.reduce((sum, item) => sum + Math.max(0, Number(item.weight) || 0), 0);
+  wheelTotalWeightValue.textContent = String(totalWeight);
 
   wheelItems.forEach((item, index) => {
     const row = itemTemplate.content.firstElementChild.cloneNode(true);
@@ -1368,6 +1376,8 @@ function addWheelItem() {
 function resetWheelItems() {
   wheelItems = structuredClone(defaultWheelItemsByLang[currentLang]);
   rotation = 0;
+  wheelWinnerBadge.hidden = true;
+  wheelStatePill.textContent = currentLang === "zh" ? "待机中" : "Idle";
   renderWheelEditor();
 }
 
@@ -1392,6 +1402,10 @@ function spin() {
   if (isSpinning || wheelItems.length < 2) return;
   isSpinning = true;
   spinButton.disabled = true;
+  wheelCenterButton.disabled = true;
+  wheelStatePill.textContent = currentLang === "zh" ? "抽奖中" : "Spinning";
+  wheelWinnerBadge.hidden = true;
+  focusedLabel.textContent = currentLang === "zh" ? "抽奖中..." : "Spinning...";
 
   const winnerIndex = pickWeightedWinnerIndex();
   const slice = (Math.PI * 2) / wheelItems.length;
@@ -1419,10 +1433,16 @@ function spin() {
     drawWheel();
     isSpinning = false;
     spinButton.disabled = false;
+    wheelCenterButton.disabled = false;
+    wheelParticipantCount += 1;
+    wheelParticipantValue.textContent = String(wheelParticipantCount);
+    wheelStatePill.textContent = currentLang === "zh" ? "已开奖" : "Winner";
     const focused = wheelItems[getFocusedIndex()];
     resultTitle.textContent = focused.label;
     resultMeta.textContent = currentLang === "zh" ? "恭喜抽中" : "Congratulations";
     resultCopy.textContent = translations[currentLang].resultCopy;
+    wheelWinnerBadge.textContent = currentLang === "zh" ? `恭喜抽中：${focused.label}` : `Winner: ${focused.label}`;
+    wheelWinnerBadge.hidden = false;
     resultDialog.showModal();
   }
 
@@ -1664,7 +1684,7 @@ function setActiveActivity(activity) {
   activityPanels.forEach((panel) => {
     const panelName = panel.dataset.panel;
     const show =
-      (activity === "wheel" && (panelName === "wheel" || panelName === "wheel-editor")) ||
+      (activity === "wheel" && panelName === "wheel") ||
       (activity === "blindbox" && (panelName === "blindbox" || panelName === "blindbox-editor")) ||
       (activity === "roulette" && (panelName === "roulette" || panelName === "roulette-editor")) ||
       (activity === "memory" && (panelName === "memory" || panelName === "memory-editor")) ||
@@ -1712,6 +1732,9 @@ function applyLanguage(lang) {
   resetMemoryChallenge({ autoStart: currentActivity === "memory" });
   setRouletteStatus("rouletteStatusIdle");
   setSlotStatus("slotStatusIdle");
+  wheelWinnerBadge.hidden = true;
+  wheelParticipantValue.textContent = String(wheelParticipantCount);
+  wheelStatePill.textContent = lang === "zh" ? "待机中" : "Idle";
   ensureBlindboxBoard();
   drawWheel();
   updateCurrentGameTitle();
@@ -1751,6 +1774,7 @@ langButtons.forEach((button) => {
 });
 
 spinButton.addEventListener("click", spin);
+wheelCenterButton.addEventListener("click", spin);
 canvas.addEventListener("click", (event) => {
   const rect = canvas.getBoundingClientRect();
   const scaleX = canvas.width / rect.width;

@@ -97,23 +97,78 @@
           <div class="content-grid">
             <section class="wheel-stage glass-panel activity-panel active" data-panel="wheel">
               <div class="panel-header panel-header-inline">
-                <div class="section-label" data-i18n="livePreview">现场预览</div>
-                <button id="spinButton" class="primary-button" data-i18n="spinNow">开始抽奖</button>
-              </div>
-
-              <div class="wheel-stack">
-                <div class="wheel-pointer"></div>
-                <div class="wheel-frame">
-                  <canvas id="wheelCanvas" width="720" height="720" aria-label="Lucky wheel"></canvas>
+                <div>
+                  <div class="section-label">现场抽奖 · 品牌互动</div>
+                  <h2 class="wheel-page-title">幸运转盘</h2>
+                  <p class="wheel-page-copy">支持真实抽奖、权重计算、奖项编辑与概率展示。</p>
+                </div>
+                <div class="wheel-top-actions">
+                  <button id="shuffleButton" class="secondary-button" data-i18n="shuffleOrder">随机排序</button>
+                  <button id="spinButton" class="primary-button" data-i18n="spinNow">开始抽奖</button>
                 </div>
               </div>
 
-              <div class="stage-footer">
-                <div class="current-result">
-                  <span data-i18n="nextPrize">当前焦点奖项</span>
-                  <strong id="focusedLabel">限定礼盒</strong>
+              <div class="wheel-page-grid">
+                <div class="wheel-stage-card">
+                  <div class="wheel-stack wheel-stack-premium">
+                    <div class="wheel-pointer"></div>
+                    <div class="wheel-frame wheel-frame-premium">
+                      <canvas id="wheelCanvas" width="720" height="720" aria-label="Lucky wheel"></canvas>
+                    </div>
+                    <button id="wheelCenterButton" class="wheel-center-trigger" type="button">
+                      <span>开始</span>
+                      <span>抽奖</span>
+                    </button>
+                  </div>
+
+                  <div class="wheel-bottom-row">
+                    <div class="wheel-focus-card current-result">
+                      <span data-i18n="nextPrize">当前焦点奖项</span>
+                      <strong id="focusedLabel">限定礼盒</strong>
+                      <em id="wheelWinnerBadge" class="wheel-winner-badge" hidden>恭喜抽中：限定礼盒</em>
+                    </div>
+                    <div class="wheel-action-pills">
+                      <button id="toggleChanceButton" class="secondary-button" data-i18n="showChance">显示几率</button>
+                      <button id="resetButton" class="ghost-button" data-i18n="resetDefault">恢复默认</button>
+                    </div>
+                  </div>
                 </div>
-                <button id="shuffleButton" class="secondary-button" data-i18n="shuffleOrder">随机排序</button>
+
+                <aside class="wheel-info-column">
+                  <div class="wheel-info-card">
+                    <div class="wheel-card-head">
+                      <h3>活动信息</h3>
+                      <span id="wheelStatePill" class="wheel-state-pill">待机中</span>
+                    </div>
+                    <div class="wheel-info-list">
+                      <div class="wheel-info-row">
+                        <span>活动名称</span>
+                        <strong>夏日抽奖</strong>
+                      </div>
+                      <div class="wheel-info-row">
+                        <span>参与人数</span>
+                        <strong id="wheelParticipantValue">286</strong>
+                      </div>
+                      <div class="wheel-info-row">
+                        <span>总权重</span>
+                        <strong id="wheelTotalWeightValue">100</strong>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="wheel-info-card wheel-editor-card">
+                    <div class="wheel-card-head">
+                      <h3>奖项配置</h3>
+                      <button id="addItemButton" class="secondary-button" data-i18n="addItem">新增奖项</button>
+                    </div>
+
+                    <div class="wheel-editor-list-head">
+                      <span>奖项名称</span>
+                      <span>权重</span>
+                    </div>
+                    <div id="itemList" class="item-list wheel-item-list"></div>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -345,21 +400,8 @@
             </section>
 
             <section class="editor-panel glass-panel activity-panel active" data-panel="wheel-editor">
-              <div class="panel-header panel-header-inline">
-                <div class="section-label" data-i18n="editorLabel">玩法编辑</div>
-                <button id="addItemButton" class="secondary-button" data-i18n="addItem">新增奖项</button>
-              </div>
-
-              <div class="editor-head">
-                <span data-i18n="prizeName">奖项名称</span>
-                <span data-i18n="prizeWeight">权重</span>
-                <span data-i18n="prizeChance">几率</span>
-              </div>
-              <div id="itemList" class="item-list"></div>
-
-              <div class="editor-actions">
-                <button id="toggleChanceButton" class="secondary-button" data-i18n="showChance">显示几率</button>
-                <button id="resetButton" class="ghost-button" data-i18n="resetDefault">恢复默认</button>
+              <div class="wheel-editor-placeholder">
+                <p>Wheel editor moved into the wheel page layout.</p>
               </div>
             </section>
 
