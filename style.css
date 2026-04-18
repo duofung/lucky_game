@@ -294,7 +294,6 @@ p {
   align-content: start;
   padding: 16px;
   width: 100%;
-  aspect-ratio: 1 / 1;
   border: 1px solid rgba(188, 153, 127, 0.26);
   border-radius: 22px;
   background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,248,243,0.78));
@@ -324,9 +323,10 @@ p {
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 260px;
-  flex: 1;
-  border-radius: 18px;
+  width: 100px;
+  height: 100px;
+  min-height: 100px;
+  border-radius: 16px;
   background: transparent;
 }
 
@@ -348,8 +348,8 @@ p {
 }
 
 .hub-mini-wheel {
-  width: 108px;
-  height: 108px;
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
   background: conic-gradient(#ffd8a8 0 60deg, #fff0df 60deg 120deg, #ffc786 120deg 180deg, #ffddbc 180deg 240deg, #ffd29f 240deg 300deg, #ffe7d1 300deg 360deg);
   box-shadow: 0 14px 28px rgba(126, 93, 67, 0.08);
@@ -358,15 +358,15 @@ p {
 .hub-mini-wheel::before {
   content: "";
   position: absolute;
-  inset: 32px;
+  inset: 26px;
   border-radius: 50%;
   background: #fff;
   box-shadow: inset 0 0 0 6px rgba(255, 106, 61, 0.08);
 }
 
 .hub-mini-gifts {
-  width: 112px;
-  height: 82px;
+  width: 82px;
+  height: 64px;
   background:
     linear-gradient(90deg, transparent 40%, #ffbc58 40% 48%, transparent 48%),
     linear-gradient(180deg, transparent 24%, #ffbc58 24% 34%, transparent 34%),
@@ -376,15 +376,15 @@ p {
 }
 
 .hub-mini-cylinder {
-  width: 112px;
-  height: 112px;
+  width: 84px;
+  height: 84px;
   border-radius: 50%;
   background: radial-gradient(circle at center, #d8dde0 0 24px, #858f97 25px 48px, #f4f6f7 49px 74px, #8a949c 75px);
 }
 
 .hub-mini-grid {
-  width: 112px;
-  height: 112px;
+  width: 84px;
+  height: 84px;
   border-radius: 20px;
   background:
     linear-gradient(90deg, transparent 31%, #f3d6c7 31% 35%, transparent 35% 65%, #f3d6c7 65% 69%, transparent 69%),
@@ -394,8 +394,8 @@ p {
 }
 
 .hub-mini-slot {
-  width: 120px;
-  height: 108px;
+  width: 84px;
+  height: 76px;
   border-radius: 30px;
   background: linear-gradient(180deg, #f8f1ea 0%, #fffbf8 20%, #ebddd0 56%, #f7eee7 100%);
   box-shadow: inset 0 2px 0 rgba(255,255,255,0.95), 0 12px 26px rgba(126, 93, 67, 0.08);
@@ -404,21 +404,21 @@ p {
 .hub-mini-slot::after {
   content: "";
   position: absolute;
-  inset: 20px 16px;
-  border-radius: 20px;
+  inset: 14px 10px;
+  border-radius: 14px;
   background:
     linear-gradient(90deg, #fff9f1 0 28%, transparent 28% 36%, #fff9f1 36% 64%, transparent 64% 72%, #fff9f1 72% 100%);
   border: 1px solid #eadbcf;
 }
 
 .hub-slot-frame .hub-mini-slot {
-  border: 10px solid #efe3d8;
+  border: 7px solid #efe3d8;
 }
 
 .hub-mini-flipwall {
-  width: 118px;
-  height: 92px;
-  border-radius: 18px;
+  width: 86px;
+  height: 68px;
+  border-radius: 14px;
   background:
     linear-gradient(90deg, transparent 31%, #f3d6c7 31% 35%, transparent 35% 65%, #f3d6c7 65% 69%, transparent 69%),
     linear-gradient(180deg, transparent 31%, #f3d6c7 31% 35%, transparent 35% 65%, #f3d6c7 65% 69%, transparent 69%),
@@ -427,8 +427,8 @@ p {
 }
 
 .hub-mini-timer {
-  width: 110px;
-  height: 110px;
+  width: 84px;
+  height: 84px;
   border-radius: 50%;
   background:
     radial-gradient(circle at center, #fffdf9 0 30px, transparent 31px),
@@ -2701,11 +2701,13 @@ p {
   }
 
   .hub-card {
-    aspect-ratio: auto;
+    padding: 14px;
   }
 
   .hub-card-frame {
-    min-height: 190px;
+    width: 100px;
+    height: 100px;
+    min-height: 100px;
   }
 
   .topbar,
