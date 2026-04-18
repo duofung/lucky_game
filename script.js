@@ -720,7 +720,7 @@ function spinSlotMachine() {
   const outcome = pickWeightedSlotReward();
   slotCurrentReward = outcome;
   const sequences = outcome.combo.map((key, index) => buildSlotSequence(key, index));
-  const itemHeight = 108;
+  const itemHeight = 112;
 
   slotTracks.forEach((track, index) => {
     if (!track) return;

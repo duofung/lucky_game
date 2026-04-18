@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>幸运轮盘</title>
-    <link rel="stylesheet" href="./style.css?v=20260418c" />
+    <link rel="stylesheet" href="./style.css?v=20260418e" />
   </head>
   <body>
     <div class="page-shell">
@@ -225,7 +225,6 @@
             <section class="slot-stage glass-panel activity-panel" data-panel="pachinko">
               <div class="panel-header panel-header-inline">
                 <div class="section-label" data-i18n="slotPreview">老虎机现场</div>
-                <button id="slotSpinButton" class="primary-button" data-i18n="slotSpinNow">开始摇奖</button>
               </div>
 
               <div class="slot-stage-shell">
@@ -236,25 +235,40 @@
                   </div>
 
                   <div class="slot-machine-shell">
-                    <div class="slot-reels">
-                      <div class="slot-reel">
-                        <div class="slot-window">
-                          <div id="slotTrack0" class="slot-track" data-reel="0"></div>
-                        </div>
-                      </div>
-                      <div class="slot-reel">
-                        <div class="slot-window">
-                          <div id="slotTrack1" class="slot-track" data-reel="1"></div>
-                        </div>
-                      </div>
-                      <div class="slot-reel">
-                        <div class="slot-window">
-                          <div id="slotTrack2" class="slot-track" data-reel="2"></div>
-                        </div>
+                    <div class="slot-machine-marquee">
+                      <div class="slot-marquee-cap"></div>
+                      <div class="slot-marquee-pill">
+                        <span data-i18n="slotPreview">老虎机现场</span>
+                        <strong data-i18n="slotSpinNow">开始摇奖</strong>
                       </div>
                     </div>
-                    <span class="slot-side-accent slot-side-left"></span>
-                    <span class="slot-side-accent slot-side-right"></span>
+
+                    <div class="slot-machine-body">
+                      <button id="slotSpinButton" class="slot-launch-button" data-i18n="slotSpinNow">开始摇奖</button>
+
+                      <div class="slot-reels">
+                        <div class="slot-reel">
+                          <div class="slot-window">
+                            <div id="slotTrack0" class="slot-track" data-reel="0"></div>
+                          </div>
+                        </div>
+                        <div class="slot-reel">
+                          <div class="slot-window">
+                            <div id="slotTrack1" class="slot-track" data-reel="1"></div>
+                          </div>
+                        </div>
+                        <div class="slot-reel">
+                          <div class="slot-window">
+                            <div id="slotTrack2" class="slot-track" data-reel="2"></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <span class="slot-side-accent slot-side-left"></span>
+                      <span class="slot-side-accent slot-side-right"></span>
+                    </div>
+
+                    <div class="slot-payout-plate">View Payouts</div>
                   </div>
                 </div>
 
@@ -547,6 +561,6 @@
       </div>
     </template>
 
-    <script src="./script.js?v=20260418d"></script>
+    <script src="./script.js?v=20260418e"></script>
   </body>
 </html>
