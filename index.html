@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>幸运轮盘</title>
-    <link rel="stylesheet" href="./style.css?v=20260418e" />
+    <link rel="stylesheet" href="./style.css?v=20260419a" />
   </head>
   <body>
     <div class="page-shell">
@@ -229,62 +229,107 @@
 
               <div class="slot-stage-shell">
                 <div class="slot-machine">
-                  <div class="slot-headline">
-                    <span data-i18n="slotStatusLabel">当前状态</span>
-                    <strong id="slotStatusText" data-i18n="slotStatusIdle">拉下摇杆，开始这一轮惊喜揭晓</strong>
-                  </div>
-
                   <div class="slot-machine-shell">
-                    <div class="slot-machine-marquee">
-                      <div class="slot-marquee-cap"></div>
-                      <div class="slot-marquee-pill">
-                        <span data-i18n="slotPreview">老虎机现场</span>
-                        <strong data-i18n="slotSpinNow">开始摇奖</strong>
-                      </div>
-                    </div>
-
-                    <div class="slot-machine-body">
-                      <button id="slotSpinButton" class="slot-launch-button" data-i18n="slotSpinNow">开始摇奖</button>
-
-                      <div class="slot-reels">
-                        <div class="slot-reel">
-                          <div class="slot-window">
-                            <div id="slotTrack0" class="slot-track" data-reel="0"></div>
-                          </div>
+                    <div class="slot-machine-cabinet">
+                      <div class="slot-machine-marquee">
+                        <div class="slot-marquee-lights">
+                          <span></span>
+                          <span></span>
+                          <span></span>
                         </div>
-                        <div class="slot-reel">
-                          <div class="slot-window">
-                            <div id="slotTrack1" class="slot-track" data-reel="1"></div>
-                          </div>
-                        </div>
-                        <div class="slot-reel">
-                          <div class="slot-window">
-                            <div id="slotTrack2" class="slot-track" data-reel="2"></div>
-                          </div>
+                        <div class="slot-marquee-screen">
+                          <small>Premium Event Slot</small>
+                          <strong>Lucky 777</strong>
                         </div>
                       </div>
 
-                      <span class="slot-side-accent slot-side-left"></span>
-                      <span class="slot-side-accent slot-side-right"></span>
+                      <div class="slot-machine-main">
+                        <div class="slot-machine-panel">
+                          <div class="slot-light-row" aria-hidden="true">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                          </div>
+
+                          <div class="slot-window-frame">
+                            <div class="slot-reels">
+                              <div class="slot-reel">
+                                <div class="slot-window">
+                                  <div id="slotTrack0" class="slot-track" data-reel="0"></div>
+                                </div>
+                              </div>
+                              <div class="slot-reel">
+                                <div class="slot-window">
+                                  <div id="slotTrack1" class="slot-track" data-reel="1"></div>
+                                </div>
+                              </div>
+                              <div class="slot-reel">
+                                <div class="slot-window">
+                                  <div id="slotTrack2" class="slot-track" data-reel="2"></div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <span class="slot-side-accent slot-side-left"></span>
+                            <span class="slot-side-accent slot-side-right"></span>
+                          </div>
+
+                          <div class="slot-bottom-controls">
+                            <div class="slot-dashboard">
+                              <article class="slot-meter">
+                                <span data-i18n="slotCurrentTier">当前档位</span>
+                                <strong id="slotTierValue">柔光参与礼</strong>
+                              </article>
+                              <article class="slot-meter">
+                                <span data-i18n="slotCurrentReward">礼品内容</span>
+                                <strong id="slotRewardValue">品牌贴纸</strong>
+                              </article>
+                              <article class="slot-meter">
+                                <span data-i18n="slotCurrentChance">参考几率</span>
+                                <strong id="slotChanceValue">34.0%</strong>
+                              </article>
+                            </div>
+
+                            <button id="slotSpinButton" class="slot-launch-button" data-i18n="slotSpinNow">开始摇奖</button>
+                          </div>
+
+                          <div class="slot-chip-row" aria-hidden="true">
+                            <span class="slot-chip"></span>
+                            <span class="slot-chip"></span>
+                            <span class="slot-chip"></span>
+                            <span class="slot-chip slot-chip-wide"></span>
+                            <span class="slot-chip"></span>
+                            <span class="slot-chip"></span>
+                            <span class="slot-chip"></span>
+                          </div>
+                        </div>
+
+                        <div class="slot-lever-cluster" aria-hidden="true">
+                          <div class="slot-lever-led"><span></span></div>
+                          <div class="slot-lever-track">
+                            <div class="slot-lever-knob"></div>
+                            <div class="slot-lever-base"></div>
+                          </div>
+                          <div class="slot-lever-copy">Pull Lever<br />to Spin</div>
+                        </div>
+                      </div>
                     </div>
 
                     <div class="slot-payout-plate">View Payouts</div>
                   </div>
-                </div>
-
-                <div class="slot-outlook">
-                  <article class="slot-stat-card">
-                    <span data-i18n="slotCurrentTier">当前档位</span>
-                    <strong id="slotTierValue">柔光参与礼</strong>
-                  </article>
-                  <article class="slot-stat-card">
-                    <span data-i18n="slotCurrentReward">礼品内容</span>
-                    <strong id="slotRewardValue">品牌贴纸</strong>
-                  </article>
-                  <article class="slot-stat-card">
-                    <span data-i18n="slotCurrentChance">参考几率</span>
-                    <strong id="slotChanceValue">34.0%</strong>
-                  </article>
+                  <div class="slot-headline">
+                    <span data-i18n="slotStatusLabel">当前状态</span>
+                    <strong id="slotStatusText" data-i18n="slotStatusIdle">拉下摇杆，开始这一轮惊喜揭晓</strong>
+                  </div>
                 </div>
               </div>
             </section>
@@ -561,6 +606,6 @@
       </div>
     </template>
 
-    <script src="./script.js?v=20260418e"></script>
+    <script src="./script.js?v=20260419a"></script>
   </body>
 </html>
