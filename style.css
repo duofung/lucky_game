@@ -282,17 +282,18 @@ p {
 
 .hub-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
   margin-top: 28px;
 }
 
 .hub-card {
   display: grid;
-  gap: 14px;
-  padding: 18px;
+  gap: 10px;
+  align-content: start;
+  padding: 16px;
   border: 1px solid rgba(188, 153, 127, 0.26);
-  border-radius: 28px;
+  border-radius: 22px;
   background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,248,243,0.78));
   text-align: left;
   color: var(--text);
@@ -306,41 +307,32 @@ p {
 }
 
 .hub-card strong {
-  font-size: 1.5rem;
+  font-size: 1.12rem;
+  line-height: 1.25;
 }
 
 .hub-card small {
+  font-size: 0.76rem;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .hub-card-frame {
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 182px;
-  border-radius: 24px;
-  background: linear-gradient(180deg, #fffdf9 0%, #f7eee7 38%, #ebdbce 100%);
-  overflow: hidden;
-}
-
-.hub-card-frame::before {
-  content: "";
-  position: absolute;
-  inset: 18px;
-  border-radius: 20px;
-  border: 1px solid rgba(212, 180, 158, 0.28);
+  min-height: 126px;
+  border-radius: 18px;
+  background: transparent;
 }
 
 .hub-wheel-frame,
 .hub-blindbox-frame,
 .hub-roulette-frame,
 .hub-memory-frame,
-.hub-slot-frame {
-  background:
-    radial-gradient(circle at 50% 20%, rgba(255,255,255,0.9), transparent 55%),
-    linear-gradient(180deg, #fffdf9 0%, #f7eee7 38%, #ebdbce 100%);
-}
+.hub-slot-frame,
+.hub-giftwall-frame,
+.hub-timer-frame { background: transparent; }
 
 .hub-mini-wheel,
 .hub-mini-gifts,
@@ -369,8 +361,8 @@ p {
 }
 
 .hub-mini-gifts {
-  width: 128px;
-  height: 92px;
+  width: 112px;
+  height: 82px;
   background:
     linear-gradient(90deg, transparent 40%, #ffbc58 40% 48%, transparent 48%),
     linear-gradient(180deg, transparent 24%, #ffbc58 24% 34%, transparent 34%),
@@ -380,15 +372,15 @@ p {
 }
 
 .hub-mini-cylinder {
-  width: 132px;
-  height: 132px;
+  width: 112px;
+  height: 112px;
   border-radius: 50%;
   background: radial-gradient(circle at center, #d8dde0 0 24px, #858f97 25px 48px, #f4f6f7 49px 74px, #8a949c 75px);
 }
 
 .hub-mini-grid {
-  width: 132px;
-  height: 132px;
+  width: 112px;
+  height: 112px;
   border-radius: 20px;
   background:
     linear-gradient(90deg, transparent 31%, #f3d6c7 31% 35%, transparent 35% 65%, #f3d6c7 65% 69%, transparent 69%),
@@ -398,8 +390,8 @@ p {
 }
 
 .hub-mini-slot {
-  width: 136px;
-  height: 120px;
+  width: 120px;
+  height: 108px;
   border-radius: 30px;
   background: linear-gradient(180deg, #f8f1ea 0%, #fffbf8 20%, #ebddd0 56%, #f7eee7 100%);
   box-shadow: inset 0 2px 0 rgba(255,255,255,0.95), 0 12px 26px rgba(126, 93, 67, 0.08);
@@ -417,6 +409,48 @@ p {
 
 .hub-slot-frame .hub-mini-slot {
   border: 10px solid #efe3d8;
+}
+
+.hub-mini-flipwall {
+  width: 118px;
+  height: 92px;
+  border-radius: 18px;
+  background:
+    linear-gradient(90deg, transparent 31%, #f3d6c7 31% 35%, transparent 35% 65%, #f3d6c7 65% 69%, transparent 69%),
+    linear-gradient(180deg, transparent 31%, #f3d6c7 31% 35%, transparent 35% 65%, #f3d6c7 65% 69%, transparent 69%),
+    linear-gradient(180deg, #ff8d61 0%, #f24c20 100%);
+  box-shadow: 0 12px 24px rgba(255, 89, 55, 0.14);
+}
+
+.hub-mini-timer {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, #fffdf9 0 30px, transparent 31px),
+    conic-gradient(#efb2a7 0 40deg, #f6d6c8 40deg 130deg, #df9f58 130deg 220deg, #e58f82 220deg 360deg);
+  box-shadow: 0 12px 24px rgba(173, 113, 98, 0.12);
+}
+
+.hub-card-status {
+  justify-self: start;
+  margin-top: 2px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(239, 178, 167, 0.18);
+  color: #c26e61;
+  font-size: 0.7rem;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.hub-card-pending {
+  opacity: 0.92;
+  cursor: default;
+}
+
+.hub-card:disabled {
+  cursor: default;
 }
 
 .playground-shell {
@@ -2577,7 +2611,7 @@ p {
 
 @media (max-width: 1200px) {
   .hub-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .layout,
