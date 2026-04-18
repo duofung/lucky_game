@@ -1,21 +1,21 @@
 :root {
   --side-rail: 320px;
-  --bg: #f5f5f2;
-  --bg-accent: #f0f0ea;
-  --bg-accent-2: #ffffff;
-  --panel: rgba(255, 255, 255, 0.9);
-  --panel-strong: #ffffff;
-  --text: #23211f;
-  --muted: #78716c;
-  --line: rgba(15, 23, 42, 0.08);
-  --primary: #ff5a36;
-  --secondary: #fff0e8;
-  --gold: #ffb347;
-  --mint: #ffe1b8;
-  --shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
-  --surface-1: #f7f4ef;
-  --surface-2: #fff4ee;
-  --surface-3: #ffffff;
+  --bg: #fbf7f2;
+  --bg-accent: #f4ece3;
+  --bg-accent-2: #e7d7ca;
+  --panel: rgba(255, 251, 247, 0.82);
+  --panel-strong: #fffaf5;
+  --text: #5a4336;
+  --muted: #8a6753;
+  --line: rgba(156, 121, 97, 0.16);
+  --primary: #d9776e;
+  --secondary: #f8e6dc;
+  --gold: #df9f58;
+  --mint: #f6d6c8;
+  --shadow: 0 24px 54px rgba(116, 86, 63, 0.11);
+  --surface-1: #fff8f2;
+  --surface-2: #fae7dd;
+  --surface-3: #fffdfa;
 }
 
 * {
@@ -27,16 +27,31 @@ body {
   min-height: 100vh;
   font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   color: var(--text);
-  background: linear-gradient(180deg, #fcfcfb 0%, #f4f2ee 100%);
+  background: radial-gradient(circle at top, var(--bg) 0%, var(--bg-accent) 32%, var(--bg-accent-2) 100%);
 }
 
 body::before,
 body::after {
-  content: none;
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::before {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), transparent 34%, rgba(188, 153, 127, 0.08) 100%);
+}
+
+body::after {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(140, 109, 86, 0.18) 1px, transparent 0) 0 0 / 30px 30px,
+    radial-gradient(circle at 50% 0, rgba(255, 245, 232, 0.92) 0, transparent 65%);
+  opacity: 0.52;
 }
 
 .page-shell {
-  padding: 22px 28px 18px;
+  padding: 26px 30px 22px;
 }
 
 .topbar,
@@ -61,7 +76,7 @@ body::after {
 }
 
 .topbar {
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 }
 
 .brand-block {
@@ -71,7 +86,7 @@ body::after {
 }
 
 .brand-panel {
-  padding: 18px 22px;
+  padding: 22px 24px;
   align-items: center;
   min-width: 460px;
 }
@@ -112,7 +127,7 @@ body::after {
 
 .brand-mark-ring {
   inset: 0;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 84%, white), color-mix(in srgb, var(--gold) 72%, white));
+  background: linear-gradient(135deg, #efb3a7 0%, #e58e83 48%, #d9776e 100%);
   box-shadow: var(--shadow);
   transform: rotate(-10deg);
 }
@@ -135,21 +150,22 @@ body::after {
 .brand-mark-core::before {
   width: 18px;
   height: 18px;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 88%, white), color-mix(in srgb, var(--gold) 76%, white));
-  box-shadow: 0 0 24px color-mix(in srgb, var(--primary) 28%, transparent);
+  background: radial-gradient(circle at 35% 30%, #fff9ec 0%, #ffe4b0 28%, #f6c77b 58%, #de9c45 100%);
+  box-shadow: 0 0 24px rgba(246, 199, 123, 0.28);
 }
 
 .brand-mark-core::after {
   width: 32px;
   height: 32px;
-  border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
+  border: 1px solid rgba(217, 119, 110, 0.18);
 }
 
 .brand-kicker {
   margin-bottom: 8px;
   font-size: 0.7rem;
-  letter-spacing: 0.18em;
-  color: var(--muted);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #ba8a71;
 }
 
 .section-label,
@@ -158,13 +174,13 @@ body::after {
   align-items: center;
   gap: 8px;
   padding: 6px 10px;
-  border-radius: 12px;
+  border-radius: 14px;
   font-size: 10px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  color: color-mix(in srgb, var(--primary) 66%, #8b5e34);
+  background: rgba(255, 251, 247, 0.82);
+  border: 1px solid rgba(226, 197, 178, 0.55);
+  color: #ba7d68;
 }
 
 h1,
@@ -177,7 +193,7 @@ h1 {
   font-family: "PingFang SC", "SF Pro Display", "Helvetica Neue", sans-serif;
   line-height: 1.02;
   letter-spacing: -0.04em;
-  font-weight: 700;
+  font-weight: 800;
   font-size: clamp(2.2rem, 3vw, 3.15rem);
 }
 
@@ -202,36 +218,35 @@ p {
 .lang-toolbar {
   margin-left: auto;
   align-self: flex-start;
-  padding: 4px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.7);
+  padding: 6px;
+  border-radius: 18px;
+  background: rgba(255, 250, 245, 0.72);
   box-shadow:
-    inset 0 0 0 1px rgba(15, 23, 42, 0.05),
-    0 6px 18px rgba(15, 23, 42, 0.03);
+    inset 0 0 0 1px rgba(216, 185, 163, 0.45),
+    0 8px 18px rgba(126, 93, 67, 0.06);
 }
 
 .glass-panel {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.76));
-  border: 1px solid rgba(255, 255, 255, 0.88);
-  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 250, 245, 0.58));
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 32px;
   box-shadow:
-    0 12px 32px rgba(15, 23, 42, 0.045),
-    0 2px 6px rgba(15, 23, 42, 0.025),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    0 18px 44px rgba(126, 93, 67, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(20px) saturate(108%);
 }
 
 .layout {
-  padding: 12px;
-  border-radius: 28px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(248, 250, 252, 0.7));
-  border: 1px solid rgba(255, 255, 255, 0.78);
+  padding: 14px;
+  border-radius: 36px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 248, 242, 0.66));
+  border: 1px solid rgba(255, 255, 255, 0.74);
   box-shadow:
-    0 18px 44px rgba(15, 23, 42, 0.04),
+    0 18px 44px rgba(126, 93, 67, 0.07),
     inset 0 1px 0 rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(22px) saturate(108%);
   align-items: flex-start;
-  gap: 10px;
+  gap: 14px;
 }
 
 .activity-card,
@@ -243,6 +258,67 @@ p {
   cursor: pointer;
   border: 0;
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.ghost-chip,
+.primary-button,
+.secondary-button,
+.ghost-button {
+  border-radius: 18px;
+  font: inherit;
+  font-weight: 700;
+}
+
+.ghost-chip {
+  padding: 10px 14px;
+  color: #8b6956;
+  background: transparent;
+}
+
+.ghost-chip.active {
+  background: linear-gradient(180deg, #efb3a7 0%, #e58e83 45%, #d9776e 100%);
+  color: #fff;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.38),
+    0 8px 18px rgba(173, 113, 98, 0.14);
+}
+
+.primary-button,
+.secondary-button,
+.ghost-button {
+  padding: 12px 18px;
+}
+
+.primary-button {
+  color: #fff8ec;
+  background: linear-gradient(180deg, #efb2a7 0%, #e58f82 48%, #d9786f 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.42),
+    0 10px 22px rgba(173, 113, 98, 0.12);
+}
+
+.secondary-button {
+  color: #7c5a49;
+  background: linear-gradient(180deg, #fffdf9 0%, #f8efe7 38%, #ebdbce 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.95),
+    0 8px 18px rgba(126, 93, 67, 0.08);
+}
+
+.ghost-button {
+  color: #8b6956;
+  background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,248,244,0.7));
+  box-shadow:
+    inset 0 0 0 1px rgba(214, 184, 164, 0.45),
+    0 8px 16px rgba(126, 93, 67, 0.05);
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.ghost-button:hover,
+.remove-button:hover,
+.ghost-chip:hover {
+  transform: translateY(-1px);
 }
 
 .activity-sidebar {
@@ -260,22 +336,24 @@ p {
 
 .activity-nav {
   display: grid;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 12px;
+  margin-top: 14px;
 }
 
 .activity-card {
   width: 100%;
-  padding: 13px 14px;
+  padding: 15px 16px;
   text-align: left;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 12px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.68);
+  gap: 14px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 250, 245, 0.58));
   color: var(--text);
-  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.04);
+  box-shadow:
+    inset 0 0 0 1px rgba(214, 184, 164, 0.4),
+    0 10px 24px rgba(126, 93, 67, 0.03);
 }
 
 .activity-card small,
@@ -289,36 +367,36 @@ p {
 }
 
 .activity-card.active {
-  background: linear-gradient(180deg, #fff6f0, #ffefe5);
+  background: linear-gradient(180deg, #fff9f4, #faeae0);
   transform: translateY(-1px);
   box-shadow:
-    0 10px 24px rgba(15, 23, 42, 0.05),
-    inset 0 0 0 1px rgba(255, 90, 54, 0.2);
+    0 14px 28px rgba(126, 93, 67, 0.08),
+    inset 0 0 0 1px rgba(217, 119, 110, 0.28);
 }
 
 .activity-icon {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
-  border-radius: 10px;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 12%, white), color-mix(in srgb, var(--gold) 14%, white));
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fff8f1 0%, #f8ebdf 100%);
   color: var(--primary);
-  font-size: 1rem;
+  font-size: 1.02rem;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 90, 54, 0.12),
-    0 6px 14px rgba(255, 90, 54, 0.06);
+    inset 0 0 0 1px rgba(220, 190, 170, 0.42),
+    0 6px 14px rgba(126, 93, 67, 0.05);
 }
 
 .hero-panel {
   flex: 1;
   min-width: 0;
-  padding-left: 2px;
+  padding-left: 4px;
 }
 
 .content-grid {
   align-items: stretch;
-  gap: 10px;
+  gap: 14px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) var(--side-rail);
 }
@@ -327,8 +405,9 @@ p {
 .editor-panel,
 .blindbox-stage,
 .roulette-stage,
-.memory-stage {
-  padding: 14px;
+.memory-stage,
+.slot-stage {
+  padding: 18px;
 }
 
 .wheel-stage,
@@ -336,6 +415,7 @@ p {
 .blindbox-stage,
 .roulette-stage,
 .memory-stage,
+.slot-stage,
 .brand-panel {
   background: var(--panel);
 }
@@ -1910,22 +1990,12 @@ p {
 .ghost-chip,
 .secondary-button,
 .ghost-button {
-  padding: 9px 13px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.82);
-  color: var(--text);
-  box-shadow:
-    inset 0 0 0 1px rgba(15, 23, 42, 0.06),
-    0 6px 14px rgba(15, 23, 42, 0.025);
+  padding: 12px 18px;
 }
 
 .ghost-chip.active,
 .primary-button {
-  color: #ffffff;
-  background: linear-gradient(180deg, #ff7a57, #ff5a36);
-  box-shadow:
-    0 14px 28px rgba(255, 90, 54, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  color: #fff8ec;
 }
 
 .primary-button,
@@ -1936,7 +2006,7 @@ p {
 }
 
 .primary-button {
-  padding: 10px 16px;
+  padding: 12px 18px;
 }
 
 .remove-button {
